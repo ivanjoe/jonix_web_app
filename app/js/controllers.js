@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
+angular.module('myApp.controllers', ['ui.bootstrap']).
   controller('MyCtrl1', [function() {
 
   }])
@@ -21,4 +21,28 @@ angular.module('myApp.controllers', []).
   	}
 
   	$scope.reset();
+  }])
+  .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+  	 $scope.today = function() {
+  	 	$scope.message.sentDate = new Date();
+  	 };
+	 $scope.today();
+
+	 $scope.showWeeks = false;
+
+	 $scope.clear = function () {
+	    $scope.message.sentDate = null;
+	 };
+
+	 $scope.open = function() {
+	    $timeout(function() {
+	      $scope.opened = true;
+	    });
+	 };
+
+	 $scope.dateOptions = {
+	 	'year-format': "'yy'",
+	    'starting-day': 1
+	 };
+
   }]);

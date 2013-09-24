@@ -10,8 +10,8 @@ angular.module('myApp.directives', []).
     };
   }]);
 
-/*angular.module('myApp', ['ui.bootstrap']);
-var DatepickerCtrl = function ($scope, $timeout) {
+
+/*var DatepickerCtrl = function ($scope, $timeout) {
   $scope.today = function() {
     $scope.dt = new Date();
   };
