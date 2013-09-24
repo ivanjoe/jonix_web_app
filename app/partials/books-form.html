@@ -1,0 +1,85 @@
+<div class="row-fluid">
+	<p>This is the partial for view 1.</p>
+	{{query}}
+</div>
+<div class="row-fluid" ng-controller="MessageCtrl">
+  <div class="span6">
+    <div class="well">
+      <form class="bs-example form-horizontal simple-form" novalidate>
+        <fieldset>
+          <legend>Header</legend>
+
+          <div class="row-fluid">
+          	<label for="identifier" class="span3">Identifier</label>
+          	<div class="span4">
+              <input type="radio" ng-model="message.sender.identifier" value="id" />id
+              <input type="radio" ng-model="message.sender.identifier" value="name" />name<br />
+            </div>
+          </div>
+
+          <!-- Show Sender name field if name radio button is chosen -->
+          <div class="row-fluid" ng-show="message.sender.identifier == 'name'">
+          	<label for="sender-name" class="span3">Sender's name</label>
+          	<div class="span4">
+              <input type="text" ng-model="message.sender.name" class="form-control" id="sender-name" placeholder="Sender's name">
+            </div>
+          </div>
+
+          <!-- otherwise Id -->
+          <div class="row-fluid" ng-show="message.sender.identifier == 'id'">
+          	<label for="sender-id-type" class="span3">Sender ID type</label>
+            <div class="span4">
+              <input type="text" ng-model="message.sender.idType" class="form-control" id="sender-id-type" placeholder="ID type">
+            </div>
+          </div>
+
+          <div class="row-fluid" ng-show="message.sender.identifier == 'id'">
+          	<label for="sender-id-value" class="span3">Sender ID value</label>
+            <div class="span4">
+              <input type="text" ng-model="message.sender.idValue" class="form-control" id="sender-id-value" placeholder="ID value">
+            </div>
+          </div>
+
+          <hr />
+
+          <!-- <div ng-controller="DatepickerCtrl">
+		    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+		    <div class="form-horizontal">
+		        <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+		        <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
+		        <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
+		        <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+		    </div>
+
+		  </div> -->
+
+          <div class="row-fluid">
+          	<label for="date" class="span3">Date</label>
+          	<div class="span4">
+              <input type="text" ng-model="message.sentDate" class="form-control" id="date" placeholder="23.09.2013">
+              <div class="checkbox">
+              	<label><input type="checkbox" ng-model="showTime">Select time</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-fluid" ng-show="showTime">
+          	<label for="time" class="span3">Time</label>
+            <div class="span4">
+              <input type="text" ng-model="message.sentTime" class="form-control" id="time" placeholder="09:38">
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="span4">
+  	<h3>ONIX Message</h3>
+  		<pre>form = {{ message | json }}
+		</pre>
+  </div>
+
+</div>
