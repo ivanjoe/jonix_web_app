@@ -1,16 +1,16 @@
-<div class="row-fluid">
+<div class="row">
 	{{query}}
 </div>
-<div class="row-fluid" ng-controller="MessageCtrl">
-  <div class="span6">
+<div class="row" ng-controller="MessageCtrl">
+  <div class="span8">
     <div class="well">
       <form name="messageForm">
         <fieldset>
           <legend>Header</legend>
 
-          <div class="row-fluid">
+          <div class="row">
           	<label for="identifier" class="span2">Identifier</label>
-          	<div class="span10">
+          	<div class="span5">
           	  <label class="radio inline">
           	  	<input type="radio" ng-model="message.sender.identifier" value="id" />id
           	  </label>
@@ -21,42 +21,42 @@
           </div>
 
           <!-- Show Sender name field if name radio button is chosen -->
-          <div class="row-fluid" ng-show="message.sender.identifier == 'name'">
+          <div class="row" ng-show="message.sender.identifier == 'name'">
           	<label for="sender-name" class="span2">Sender's name</label>
-          	<div class="span10">
+          	<div class="span5">
               <input type="text" ng-model="message.sender.name" class="form-control" id="sender-name" placeholder="Sender's name">
             </div>
           </div>
 
           <!-- otherwise Id -->
-          <div class="row-fluid" ng-show="message.sender.identifier == 'id'">
+          <div class="row" ng-show="message.sender.identifier == 'id'">
           	<label for="sender-id-type" class="span2">Sender ID type</label>
-            <div class="span10">
+            <div class="span5">
               <input type="text" ng-model="message.sender.idType" class="form-control" id="sender-id-type" placeholder="ID type">
             </div>
           </div>
 
-          <div class="row-fluid" ng-show="message.sender.identifier == 'id'">
+          <div class="row" ng-show="message.sender.identifier == 'id'">
           	<label for="sender-id-value" class="span2">Sender ID value</label>
-            <div class="span10">
+            <div class="span5">
               <input type="text" ng-model="message.sender.idValue" class="form-control" id="sender-id-value" placeholder="ID value">
             </div>
           </div>
 
           <hr />
 
-          <div class="row-fluid">
+          <div class="row">
           	<label for="date-picker" class="span2">Date</label>
-          	<div class="span10">
+          	<div class="span5">
 
-	          <div ng-controller="DatepickerCtrl">
-			    <div class="form-horizontal">
-			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="message.sentDate" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-			        <!-- <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button> -->
-			        <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
-			        <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
-			    </div>
-			  </div>
+  	          <div ng-controller="DatepickerCtrl">
+      			    <div class="form-horizontal">
+      			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="message.sentDate" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+      			        <!-- <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button> -->
+      			        <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
+      			        <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+      			    </div>
+      			  </div>
 
 
               <div class="checkbox">
@@ -65,11 +65,9 @@
             </div>
           </div>
 
-          <div class="row-fluid" ng-show="showTime">
-          	<div class="span2">
-          		<label for="time" class="span2">Time</label>
-          	</div>
-            <div class="span10">
+          <div class="row" ng-show="showTime">
+          	<label for="time" class="span2">Time</label>
+          	<div class="span5">
               <div ng-controller="TimepickerCtrl" class="ng-scope">
               	<div ng-model="message.sentTime" ng-change="changed()" class="well well-small" style="display:inline-block;">
 			    	<timepicker hour-step="1" minute-step="1" show-meridian="false"></timepicker>
@@ -81,16 +79,16 @@
       	  <div ng-repeat="product in message.products">
       	  	<legend>Product</legend>
 
-      	  	<div class="row-fluid">
+      	  	<div class="row">
 	      	  <label for="record-reference" class="span2">Record reference</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<input id="record-reference" type="text" ng-model="product.recordReference" required/>
 	      	  </div>
 	      	</div>
 
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label for="notification-type" class="span2">Notification type</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<select id="notification-type" ng-model="product.notificationType" ng-options="key as value for (key, value) in productNotificationTypeList" required>
 	      	  	  <option value="">Select Notification type</option>
 	      	  	</select>
@@ -98,43 +96,43 @@
 	      	</div>
 
 	      	<!-- TODO: make it from JSON list, List #5 -->
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label for="product-id-type" class="span2">Product ID type</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<select id="product-id-type" ng-model="product.IdType" ng-options="key as value for (key, value) in productIdTypeList" required>
 	      	  	  <option value="">Select ID type</option>
 	      	  	</select>
 	      	  </div>
 	      	</div>
 
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label for="product-id-value" class="span2">Product ID value</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<input id=="product-id-value" type="text" ng-model="product.idValue" required/>
 	      	  </div>
 	      	</div>
 
 	      	<h4>Descriptive details</h4>
 
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label for="product-composition" class="span2">Product Composition</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<input id="product-composition" type="text" ng-model="product.composition" required/>
 	      	  </div>
 	      	</div>
 
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label for="product-form" class="span2">Product Form</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<select id="product-form" ng-model="product.form" ng-options="key as value for (key, value) in productFormList" required>
 	      	  		<option value="">Select Product Form</option>
 	      	  	</select>
 	      	  </div>
 	      	</div>
 
-	      	<div class="row-fluid">
+	      	<div class="row">
 	      	  <label class="span2">Product Title</label>
-	      	  <div class="span10">
+	      	  <div class="span5">
 	      	  	<input type="text" ng-model="product.title" required/>
 	      	  </div>
 	      	</div>
