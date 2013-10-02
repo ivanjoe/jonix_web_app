@@ -1,6 +1,6 @@
 # jOnix Web Application
 
-This project is an application to create, send, read, edit, update ONIX messages. The main aim is to create a tool to utilize the ONIX data model and create valid ONIX messaging for correpondence. The application validates the document as they are typed, so the user can follow how the final resulting ONIX message will look like.
+This project is an application to create, send, read, edit, update [ONIX messages](http://www.editeur.org/8/ONIX/). The main aim is to create a tool to utilize the ONIX data model and create valid ONIX messaging for correpondence. The application validates the document as they are typed, so the user can follow how the final resulting ONIX message will look like.
 
 ## Underlying tools
 
