@@ -149,62 +149,62 @@
           <div class="row">
             <label class="span2">Language Role</label>
             <div class="span5">
-              <select type="text" ng-model="product.descriptiveDetail.language.languageRole" ng-options="key as value for (key, value) in productLanguageRoleList" required/>
+              <select ng-model="product.descriptiveDetail.language.languageRole" ng-options="key as value for (key, value) in productLanguageRoleList" required/>
                 <option value="">...language role</option>
               </select>
-              <span ng-controller="TypeaheadCtrl">
-                <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode" typeahead="lang for lang in productLanguageCodeList | filter:$viewValue | limitTo:8" typeahead-editable='false'>
+              <span ng-controller="TypeheadCtrl">
+                <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode" typeahead="lang for lang in productLanguageCodeList | filter:$viewValue | limitTo:8" typeahead-editable='false'/>
               </span>
               <span>[more...]</span>
-              <!-- <input type="text" ng-model="product.descriptiveDetail.language.languageCode" typehead="value for value in states | filter:$viewValue | limitTo:8" required/> -->
             </div>
           </div>
 
           <h4>Publishing details</h4>
 
           <div class="row">
-            <label class="span2">Publisher Publishing Role</label>
+            <label class="span2">Publisher</label>
             <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.publisher.publishingRole" required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <label class="span2">Publisher Publishing Name</label>
-            <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.publisher.publishinName" required/>
+              <select ng-model="product.publishingDetail.publisher.publishingRole" ng-options="key as value for (key, value) in publishingRoleList" class="input-medium" required/>
+                <option value="">...publisher's role</option>
+              </select>
+              <input type="text" ng-model="product.publishingDetail.publisher.publishinName" placeholder="Name" required/>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Country of Publication</label>
-            <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.countryOfPublication" required/>
+            <div class="span5" ng-controller="TypeheadCtrl">
+              <input type="text" ng-model="product.publishingDetail.countryOfPublication" typeahead="country for country in countryList | filter:$viewValue | limitTo:8" typehead-editable='false' class="input-medium" required/>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Publishing Status</label>
             <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.publishingStatus" required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <label class="span2">Publishing Date Role</label>
-            <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.publishingDate.publishingDateRole" required/>
+              <select ng-model="product.publishingDetail.publishingStatus" ng-options="key as value for (key, value) in publishingStatusList" required />
+                <option value="">Select publishing status</option>
+              </select>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Publishing Date</label>
             <div class="span5">
-              <input type="text" ng-model="product.publishingDetail.publishingDate.date" required/>
+              <select ng-model="product.publishingDetail.publishingDate.publishingDateRole" ng-options="key as value for (key, value) in publishingDateRoleList" required/>
+                <option value="">...status</option>
+              </select>
+
+              <div ng-controller="DatepickerCtrl">
+                <div class="form-horizontal">
+                    <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="product.publishingDetail.publishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                    <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
+                    <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+                </div>
+              </div>
             </div>
           </div>
 
-	      	<h4>Product supply</h4>
+          <h4>Product supply</h4>
 
           <div class="row">
             <label class="span2">Supplier</label>
@@ -216,59 +216,49 @@
             </div>
           </div>
 
-          <!-- <div class="row">
-            <label class="span2">Supplier Name</label>
-            <div class="span5">
-
-            </div>
-          </div> -->
-
           <div class="row">
             <label class="span2">Product Availability</label>
-            <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability" required/>
+            <div class="span5" ng-controller="TypeheadCtrl">
+              <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability" typeahead="availability for availability in productAvailabilityList | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
+              <span>[ {{ product.productSupply.supplyDetail.productAvailability }}]</span>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Unpriced Item Type</label>
             <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.unpricedItemType" required/>
+              <select ng-model="product.productSupply.supplyDetail.unpricedItemType" ng-options="key as value for (key, value) in unpricedCodeList">
+                <option value="">...unpriced item type</option>
+              </select>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Price Type</label>
-            <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType" required/>
+            <div class="span5" ng-controller="TypeheadCtrl">
+              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType" typeahead="typ for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
+              <span>[{{ product.productSupply.supplyDetail.price.priceType }}]</span>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Price Amount</label>
             <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceAmount" required/>
+              <input type="text" class="input-small" ng-model="product.productSupply.supplyDetail.price.priceAmount" required/>
+              <span ng-controller="TypeheadCtrl">
+                <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode" typeahead="currency for currency in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="...currency..." required/>
+              </span>
             </div>
           </div>
 
           <div class="row">
             <label class="span2">Price Code Type</label>
             <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType" required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <label class="span2">Price Code</label>
-            <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <label class="span2">Currency Code</label>
-            <div class="span5">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.currencyCode" required/>
+              <select type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType" required/>
+                <option value="01">Proprietary</option>
+                <option value="02">Finnish Pocket Book price code</option>
+              </select>
+              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="...price code..." required/>
             </div>
           </div>
 

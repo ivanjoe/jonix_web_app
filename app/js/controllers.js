@@ -56,10 +56,45 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.productLanguageRoleList = data;
     });
 
+    $scope.publishingRoleList = {};
+    $http.get('assets/lists/list45.json').success(function(data){
+      $scope.publishingRoleList = data;
+    });
+
+    // publishing status
+    $scope.publishingStatusList = {};
+    $http.get('assets/lists/list64.json').success(function(data){
+      $scope.publishingStatusList = data;
+    });
+
+    // publishing date role
+    $scope.publishingDateRoleList = {};
+    $http.get('assets/lists/list163.json').success(function(data){
+      $scope.publishingDateRoleList = data;
+    });
+
     $scope.supplierRoleList = {};
     $http.get('assets/lists/list93.json').success(function(data){
       $scope.supplierRoleList = data;
     });
+
+    // availibility
+    $scope.productAvailabilityCodeList = {};
+    $http.get('assets/lists/list65.json').success(function(data){
+      $scope.productAvailabilityCodeList = data;
+    });
+
+    // upriced item type
+    $scope.unpricedCodeList = {};
+    $http.get('assets/lists/list57.json').success(function(data){
+      $scope.unpricedCodeList = data;
+    });
+
+    // price code type -> in typehead
+
+    // price code
+
+    // currency code
 
   	$scope.addProduct = function() {
   		$scope.message.products.push({type:'', value:''});
@@ -113,11 +148,31 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	$scope.message.sentTime = new Date();
   }])
 
-  .controller('TypeaheadCtrl', ['$scope','$http', function($scope, $http) {
+  .controller('TypeheadCtrl', ['$scope','$http', function($scope, $http) {
     $scope.selected = undefined;
-    //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-    $scope.productLanguageCodeList = {};
+
+    $scope.productLanguageCodeList = [];
     $http.get('assets/lists/list74.json').success(function(data){
       $scope.productLanguageCodeList = data;
+    });
+
+    $scope.countryList = [];
+    $http.get('assets/lists/list91.json').success(function(data){
+      $scope.countryList = data;
+    });
+
+    $scope.productAvailabilityList = [];
+    $http.get('assets/lists/list65_typehead.json').success(function(data){
+      $scope.productAvailabilityList = data;
+    });
+
+    $scope.priceTypes = [];
+    $http.get('assets/lists/list58_typehead.json').success(function(data){
+      $scope.priceTypes = data;
+    });
+
+    $scope.currencies = [];
+    $http.get('assets/lists/list96_typehead.json').success(function(data){
+      $scope.currencies = data;
     });
   }]);
