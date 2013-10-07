@@ -11,6 +11,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   }])
 
   .controller('MessageCtrl', ['$scope','$http', function($scope, $http) {
+    // TODO: move to configurational file
+    var jonix_proxy = "./send.php";
 
   	$scope.master = {
       header: {
@@ -90,13 +92,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.unpricedCodeList = data;
     });
 
-    // price code type -> in typehead
-
-    // price code
-
-    // currency code
-
-  	$scope.addProduct = function() {
+   	$scope.addProduct = function() {
   		$scope.message.products.push({type:'', value:''});
   	}
 
@@ -116,6 +112,21 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	$scope.reset = function () {
   		$scope.message = angular.copy($scope.master);
   	}
+
+    // Send the filled in form
+    // Get the info what is the response from the service
+    $scope.send = function () {
+      $http.post(jonix_proxy, $scope.message,
+       {
+        'Content-Type':'application/xml'
+       }
+      ).success(function(data,status) {
+          console.log(data);
+      })
+      .error(function(data, status){
+        alert('Proxy is down!');
+      });
+    }
 
   	$scope.reset();
   }])
@@ -175,4 +186,19 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $http.get('assets/lists/list96_typehead.json').success(function(data){
       $scope.currencies = data;
     });
+  }])
+
+  .controller('AlertCtrl', ['$scope', function($scope) {
+    $scope.alerts = [
+      { type: 'error', msg: 'Oh snap! Change a few things up and try submitting again.' },
+      { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+    ];
+
+    $scope.addAlert = function() {
+      $scope.alerts.push({msg: "Another alert!"});
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
   }]);

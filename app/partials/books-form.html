@@ -27,7 +27,7 @@
           <!-- <div class="row" ng-switch-when="name"> -->
           	<label for="sender-name" class="span2">Sender's name</label>
           	<div class="span5">
-              <input type="text" ng-model="message.header.sender.senderName" class="form-control" id="sender-name" placeholder="Sender's name">
+              <input type="text" ng-model="message.header.sender.senderName" class="form-control" name="sender-name" id="sender-name" placeholder="Sender's name">
             </div>
           </div>
 
@@ -62,6 +62,7 @@
       			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="message.header.sentDateTime" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
       			        <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
       			        <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+                    <code>{{(message.header.sentDateTime | date:'yyyyMMdd') + (message.header.sentTime | date:'HHmm') }}</code>
       			    </div>
       			  </div>
 
@@ -269,7 +270,7 @@
           <br />
 
           <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
-     	  <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
+     	  <button ng-click="send()" ng-disabled="isSendDisabled()">Send</button>
         </fieldset>
       </form>
     </div>
@@ -277,6 +278,10 @@
 
   <div class="span4">
   	<h3>ONIX Message</h3>
+      <div ng-controller="AlertCtrl">
+        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+        <button class='btn' ng-click="addAlert()">Add Alert</button>
+      </div>
   		<pre>form = {{ message | onixize }}</pre>
       <pre>form = {{ message | json }}</pre>
   </div>
