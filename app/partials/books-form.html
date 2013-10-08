@@ -279,8 +279,7 @@
   <div class="span4">
   	<h3>ONIX Message</h3>
       <div ng-controller="AlertCtrl">
-        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-        <button class='btn' ng-click="addAlert()">Add Alert</button>
+        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
       </div>
   		<pre>form = {{ message | onixize }}</pre>
       <pre>form = {{ message | json }}</pre>

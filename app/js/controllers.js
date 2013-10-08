@@ -9,7 +9,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   .controller('MyCtrl2', [function() {
 
   }])
-
   .controller('MessageCtrl', ['$scope','$http', function($scope, $http) {
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";
@@ -121,38 +120,40 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         'Content-Type':'application/xml'
        }
       ).success(function(data,status) {
-          console.log(data);
+        $scope.$broadcast('answer', [data, status]);
+        console.log(data);
       })
       .error(function(data, status){
+        $scope.$broadcast('answer', [data, status]);
         alert('Proxy is down!');
       });
     }
 
-  	$scope.reset();
+    $scope.reset();
   }])
 
   .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   	 $scope.today = function() {
   	 	$scope.message.header.sentDateTime = new Date();
   	 };
-	 $scope.today();
+  	 $scope.today();
 
-	 $scope.showWeeks = false;
+  	 $scope.showWeeks = false;
 
-	 $scope.clear = function () {
-	    $scope.message.header.sentDateTime = null;
-	 };
+  	 $scope.clear = function () {
+  	    $scope.message.header.sentDateTime = null;
+  	 };
 
-	 $scope.open = function() {
-	    $timeout(function() {
-	      $scope.opened = true;
-	    });
-	 };
+  	 $scope.open = function() {
+  	    $timeout(function() {
+  	      $scope.opened = true;
+  	    });
+  	 };
 
-	 $scope.dateOptions = {
-	 	'year-format': "'yy'",
-	    'starting-day': 1
-	 };
+  	 $scope.dateOptions = {
+  	 	'year-format': "'yy'",
+  	    'starting-day': 1
+  	 };
   }])
 
   .controller('TimepickerCtrl', ['$scope', function($scope) {
@@ -190,13 +191,28 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
   .controller('AlertCtrl', ['$scope', function($scope) {
     $scope.alerts = [
-      { type: 'error', msg: 'Oh snap! Change a few things up and try submitting again.' },
-      { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
     ];
 
-    $scope.addAlert = function() {
-      $scope.alerts.push({msg: "Another alert!"});
-    };
+    $scope.$on('answer', function(answer, data) {
+      console.log(data);
+
+      var alert = {type: 'success', msg: 'I guess everything went fine'};
+      // types: success, info, warning, error
+      // Connection with proxy (send.php) was succesful
+      if(data[1] == 200) {
+        if (data[0].http_code == 406) {
+          alert.type = "warning";
+          alert.msg = '<strong>Backend responded:</strong><br/>' + data[0].result;
+        }
+      } else if (data[1] == 405) {
+        alert.type = "error";
+        alert.msg = "Failed! No connection!";
+      } else {
+        alert.type = "error";
+        alert.msg = "Failed! Something else...";
+      }
+      $scope.alerts.push(alert);
+    });
 
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
