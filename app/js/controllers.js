@@ -199,6 +199,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       var alert = {type: 'success', msg: 'I guess everything went fine'};
       // types: success, info, warning, error
       // Connection with proxy (send.php) was succesful
+      // TODO: prepare for all the HTTP codes
       if(data[1] == 200) {
         if (data[0].http_code == 406) {
           alert.type = "warning";

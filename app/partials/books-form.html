@@ -143,8 +143,9 @@
                 <option value="">...element level</option>
               </select>
               <input type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleText" placeholder="title text" required/>
+              <span>[more...]</span>
 	      	  </div>
-            <span>[more...]</span>
+
 	      	</div>
 
           <div class="row">
@@ -269,8 +270,8 @@
           <a href="" class="btn" ng-click="addProduct()">add more products</a>
           <br />
 
-          <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
-     	  <button ng-click="send()" ng-disabled="isSendDisabled()">Send</button>
+          <button ng-click="reset()" ng-disabled="isUnchanged(message)">Reset</button>
+     	  <button ng-click="send()" ng-disabled="messageForm.$invalid">Send</button>
         </fieldset>
       </form>
     </div>
