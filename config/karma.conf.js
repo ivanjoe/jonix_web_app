@@ -7,7 +7,8 @@ module.exports = function(config){
       'app/lib/angular/angular-*.js',
       'test/lib/angular/angular-mocks.js',
       'app/js/**/*.js',
-      'test/unit/**/*.js'
+      'test/unit/**/*.js',
+      'app/lib/ui.bootstrap/ui-bootstrap-tpls-0.6.0.js'
     ],
 
     autoWatch : true,
@@ -20,7 +21,7 @@ module.exports = function(config){
             'karma-junit-reporter',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
-            'karma-jasmine'       
+            'karma-jasmine'
             ],
 
     junitReporter : {
