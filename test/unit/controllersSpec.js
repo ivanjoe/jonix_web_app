@@ -22,7 +22,7 @@ describe('controllers', function(){
   	it('should should have two alert messages', inject(function($controller) {
   		//spec body
 	    var scope = {};
-	    //var ac = $controller('AlertCtrl', {$scope: scope});
+	    var ac = $controller('AlertCtrl', {$scope: scope});
 	    //expect(scope.alerts.lengths).toEqual(2);
 	}));
 

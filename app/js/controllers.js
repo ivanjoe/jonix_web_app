@@ -9,6 +9,60 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   .controller('MyCtrl2', [function() {
 
   }])
+  .controller('ModalCtrl', ['$scope', '$modal', '$log', '$http', '$route',
+      function($scope, $modal, $log, $http, $route) {
+    $scope.password = "adsd";
+
+    $scope.open = function () {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'partials/loginModal.html',
+        controller: 'ModalInstanceCtrl'
+      });
+
+      modalInstance.result.then(function (enteredText) {
+        // try log in the user
+        $http.post('sessions.php?login=1', {password: enteredText})
+          .success(function(data) {
+            $log.info(data);
+            // Reload the page
+            $route.reload();
+            $log.info('Reload');
+          })
+          .error(function(data){
+            alert("Couldn't log you in!");
+          });
+        $scope.password = enteredText;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    $scope.logout = function() {
+      $http.get('sessions.php?logout=1')
+        .success(function(data) {
+          $log.info(data);
+          // Reload the page
+          $route.reload();
+          $log.info('Reload');
+        })
+        // shouldn't happen
+        .error(function(data){
+          alert("Couldn't log you out!");
+        });
+    };
+  }])
+  .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+    $scope.input = {};
+
+    $scope.ok = function() {
+      $modalInstance.close($scope.input.pass);
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+  }])
   .controller('MessageCtrl', ['$scope','$http', function($scope, $http) {
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";
