@@ -19,50 +19,37 @@
 
 </head>
 <body>
-  <div class="container">
+  <div class="container" ng-controller="MainCtrl">
+    <!-- Navigation bar -->
     <div class="navbar">
       <div class="navbar-inner">
         <a class="brand" href="#">jOnix WebApp</a>
         <ul class="nav">
-          <li class="active"><a href="#/onix-books">ONIX for books</a></li>
-          <li><a href="#/view1">view1</a></li>
+          <li ng-class="getClass('/onix-books')"><a href="#/onix-books">ONIX for books</a></li>
+          <!-- <li><a href="#/view1">view1</a></li>
           <li><a href="#/view2">view2</a></li>
           <li>
             <form class="navbar-form navbar-left">
               <input type="text" class="form-control" placeholder="Search" ng-model="query">
             </form>
-          </li>
-          <li><a href="#/about">About</a></li>
+          </li> -->
+          <li ng-class="getClass('/about')"><a href="#/about">About</a></li>
         </ul>
       </div>
     </div>
-
-    <?php
-      if (isset($_SESSION['demo'])) {
-        if($_SESSION['demo'] == md5(date("Ymd").'UserLoggedIn')) { ?>
+    <!-- Navigation ends -->
 
       <div ng-view></div>
 
-      <div ng-controller="ModalCtrl">
-        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">Logout</button>
-      </div>
-
-    <?php
-        } else {?>
-        <div class="row">
-          <alert class="alert-danger span5">You are trying something!</alert>
-        </div>
-    <?php
-        }
-      } else { ?>
-
-      <div ng-controller="ModalCtrl">
-        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="open()">Login</button>
-      </div>
-
-    <?php } ?>
-
-    <div>Angular seed app: v<span app-version></span></div>
   </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        jOnix Web Application &copy; Metropolia 2013
+      </p>
+    </div>
+  </footer>
+  <!-- Footer ends -->
 </body>
 </html>

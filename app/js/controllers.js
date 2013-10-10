@@ -3,15 +3,27 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['ui.bootstrap']).
-  controller('MyCtrl1', [function() {
+  controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
+    console.log('MainCtrl');
+
+    $scope.getClass = function(path) {
+      if ($location.path().substr(0, path.length) == path) {
+        console.log('no luck');
+        return "active";
+      } else {
+        console.log($location.path());
+        console.log('not here either luck');
+        return "";
+      }
+    }
 
   }])
   .controller('MyCtrl2', [function() {
 
   }])
-  .controller('ModalCtrl', ['$scope', '$modal', '$log', '$http', '$route',
-      function($scope, $modal, $log, $http, $route) {
-    $scope.password = "adsd";
+  .controller('ModalCtrl', ['$scope', '$modal', '$log', '$http',
+      function($scope, $modal, $log, $http) {
+    $scope.password = '';
 
     $scope.open = function () {
 
@@ -25,9 +37,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         $http.post('sessions.php?login=1', {password: enteredText})
           .success(function(data) {
             $log.info(data);
-            // Reload the page
-            $route.reload();
-            $log.info('Reload');
+            if (data.status == 'notLoggedIn') {
+              var modalFailedPass = $modal.open({
+                templateUrl: 'partials/failedLogin.html',
+                controller: 'ModalInstanceCtrl'
+              });
+            } else {
+              // Reload the page
+              location.reload();
+            }
           })
           .error(function(data){
             alert("Couldn't log you in!");
@@ -43,7 +61,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         .success(function(data) {
           $log.info(data);
           // Reload the page
-          $route.reload();
+          location.reload();
           $log.info('Reload');
         })
         // shouldn't happen

@@ -1,6 +1,11 @@
-<div class="row">
-	{{query}}
-</div>
+<?php
+session_start();
+  if (isset($_SESSION['demo'])) {
+    if($_SESSION['demo'] == md5(date("Ymd").'UserLoggedIn')) { ?>
+      <div ng-controller="ModalCtrl">
+        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">Logout</button>
+      </div>
+
 <div class="row" ng-controller="MessageCtrl">
   <div class="span8">
     <div class="well">
@@ -287,3 +292,20 @@
   </div>
 
 </div>
+  <?php
+    } else { ?>
+      <div class="row">
+        <alert class="alert-danger span5">You are trying something!</alert>
+      </div>
+  <?php
+    }
+  } else { ?>
+      <div ng-controller="ModalCtrl">
+        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="open()">Login</button>
+      </div>
+      <div class="row">
+        <div class="span5">
+          <alert class="alert-info">If you want to send ONIX messages, please log in.</alert>
+        </div>
+      </div>
+  <?php } ?>
