@@ -1,0 +1,12 @@
+[
+    {
+        "key":"_Header_",
+        "value":"Header",
+        "description":"Name of the header section in the form"
+    },
+    {
+        "key":"_Identifier_",
+        "value":"Identifier",
+        "description":"In header section, identifier"
+    }
+]

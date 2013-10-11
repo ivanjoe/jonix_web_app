@@ -11,33 +11,31 @@ session_start();
     <div class="well">
       <form name="messageForm">
         <fieldset>
-          <legend>Header</legend>
+          <legend>{{'_Header_' | i18n}}</legend>
 
           <div class="row">
-          	<label for="identifier" class="span2">Identifier</label>
+          	<label for="identifier" class="span2">{{'_Identifier_' | i18n}}</label>
           	<div class="span5">
               <!-- <select ng-model="identifier-selection" ng-options="item for item in ['id','name']"></select> -->
           	  <label class="radio inline">
-          	  	<input type="radio" ng-model="sender.identifier" value="id" />id
+          	  	<input type="radio" ng-model="sender.identifier" value="id" />{{'_id_' | i18n}}
           	  </label>
           	  <label class="radio inline">
-          	    <input type="radio" ng-model="sender.identifier" value="name" />name<br />
+          	    <input type="radio" ng-model="sender.identifier" value="name" />{{'_name_' | i18n}}<br />
           	  </label>
             </div>
           </div>
 
           <!-- Show Sender name field if name radio button is chosen -->
           <div class="row" ng-show="sender.identifier == 'name'">
-          <!-- <div ng-switch class="" on="identifier-selection"> -->
-          <!-- <div class="row" ng-switch-when="name"> -->
-          	<label for="sender-name" class="span2">Sender's name</label>
+          	<label for="sender-name" class="span2">{{'_senderName_' | i18n}}</label>
           	<div class="span5">
               <input type="text" ng-model="message.header.sender.senderName" class="form-control"
-                name="senderName" id="senderName" placeholder="Sender's name"
+                name="senderName" id="senderName" placeholder="{{'_senderName_' | i18n}}"
                   maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/">
                 <p>
                   <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
-                    Only Finnish letters and space please!
+                    {{'_just_letters_' | i18n}}
                   </small>
                 </p>
             </div>
@@ -46,15 +44,15 @@ session_start();
           <!-- otherwise Id -->
           <div class="row" ng-show="sender.identifier == 'id'">
           <!-- <div class="row" ng-switch-when="id"> -->
-          	<label for="sender-id-type" class="span2">Sender ID type</label>
+          	<label for="senderIdType" class="span2">{{'_sender_id_type_' | i18n}}</label>
             <div class="span5">
-              <input type="text" ng-model="message.header.sender.idType" class="form-control" id="sender-id-type" placeholder="ID type">
+              <input type="text" ng-model="message.header.sender.idType" class="form-control" id="senderIdType" placeholder="ID type">
             </div>
           </div>
 
           <div class="row" ng-show="sender.identifier == 'id'">
           <!-- <div class="row" ng-switch-when="id"> -->
-          	<label for="sender-id-value" class="span2">Sender ID value</label>
+          	<label for="senderIdValue" class="span2">{{'_sender_id_value_' | i18n}}</label>
             <div class="span5">
               <input type="text" ng-model="message.header.sender.idValue" class="form-control" id="sender-id-value" placeholder="ID value">
             </div>
@@ -66,26 +64,26 @@ session_start();
           <hr />
 
           <div class="row">
-          	<label for="date-picker" class="span2">Date</label>
+          	<label for="date-picker" class="span2">{{'_Date_' | i18n}}</label>
           	<div class="span5">
 
   	          <div ng-controller="DatepickerCtrl">
       			    <div class="form-horizontal">
       			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="message.header.sentDateTime" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-      			        <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
-      			        <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+      			        <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
+      			        <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
                     <code>{{(message.header.sentDateTime | date:'yyyyMMdd') + (message.header.sentTime | date:'HHmm') }}</code>
       			    </div>
       			  </div>
 
               <div class="checkbox">
-              	<label><input type="checkbox" ng-model="showTime" ng-init="checked=true">Select time</label>
+              	<label><input type="checkbox" ng-model="showTime" ng-init="checked=true">{{'_Select_time_' | i18n}}</label>
               </div>
             </div>
           </div>
 
           <div class="row" ng-show="showTime">
-          	<label for="time" class="span2">Time</label>
+          	<label for="time" class="span2">{{'_Time_' | i18n}}</label>
           	<div class="span5">
               <div ng-controller="TimepickerCtrl" class="ng-scope">
               	<div ng-model="message.header.sentTime" ng-change="changed()" class="well well-small" style="display:inline-block;">
@@ -96,147 +94,148 @@ session_start();
           </div>
 
       	  <div ng-repeat="product in message.products" ng-form="productForm">
-      	  	<legend>Product</legend>
+      	  	<legend>{{'_Product_' | i18n}}</legend>
 
       	  	<div class="row">
-  	      	  <label for="record-reference" class="span2">Record reference</label>
+  	      	  <label for="record-reference" class="span2">{{'_Record_reference_' | i18n}}</label>
   	      	  <div class="span5">
   	      	  	<input id="record-reference" type="text" ng-model="product.recordReference" required/>
   	      	  </div>
   	      	</div>
 
   	      	<div class="row">
-  	      	  <label for="notification-type" class="span2">Notification type</label>
+  	      	  <label for="notification-type" class="span2">{{'_Notification_type_' | i18n}}</label>
   	      	  <div class="span5">
   	      	  	<select id="notification-type" ng-model="product.notificationType" ng-options="key as value for (key, value) in productNotificationTypeList" required>
-  	      	  	  <option value="">Select Notification type</option>
+  	      	  	  <option value="">{{'_Select_notification_type_' | i18n}}</option>
   	      	  	</select>
   	      	  </div>
   	      	</div>
 
   	      	<div class="row">
-  	      	  <label for="product-id-type" class="span2">Product ID type</label>
+  	      	  <label for="product-id-type" class="span2">{{'_Product_ID_type_' | i18n}}</label>
   	      	  <div class="span5">
   	      	  	<select id="product-id-type" ng-model="product.IdType" ng-options="key as value for (key, value) in productIdTypeList" required>
-  	      	  	  <option value="">Select ID type</option>
+  	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
                 <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue" ng-pattern="/^[0-9]{10,13}$/" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
-                    ISBN has to contain either 10 or 13 digits!
+                    {{'_Product_id_should_be_' | i18n}}
                   </small>
                 </p>
   	      	  </div>
   	      	</div>
 
-  	      	<h4>Descriptive details</h4>
+  	      	<h4>{{'_Descriptive_details_' | i18n}}</h4>
 
   	      	<div class="row">
-  	      	  <label for="product-composition" class="span2">Product Composition</label>
+  	      	  <label for="product-composition" class="span2">{{'_Product_composition_' | i18n}}</label>
   	      	  <div class="span5">
   	      	  	<select id="product-composition" ng-model="product.descriptiveDetail.composition" ng-options="key as value for (key, value) in productCompositionList" required>
-                  <option value="">Select Composition</option>
+                  <option value="">{{'_Select_composition_' | i18n}}</option>
                 </select>
   	      	  </div>
   	      	</div>
 
 	      	<div class="row">
-	      	  <label for="product-form" class="span2">Product Form</label>
+	      	  <label for="product-form" class="span2">{{'_Product_form_' | i18n}}</label>
 	      	  <div class="span5">
 	      	  	<select id="product-form" ng-model="product.descriptiveDetail.productForm" ng-options="key as value for (key, value) in productFormList" required>
-	      	  		<option value="">Select Product Form</option>
+	      	  		<option value="">{{'_Select_product_form_' | i18n}}</option>
 	      	  	</select>
 	      	  </div>
 	      	</div>
 
           <!-- TODO: make it multiplicable -->
 	      	<div class="row">
-	      	  <label class="span2">Product Title</label>
+	      	  <label class="span2">{{'_Product_title_' | i18n}}</label>
 	      	  <div class="span5">
 	      	  	<select type="text" ng-model="product.descriptiveDetail.titleDetail.titleType" ng-options="key as value for (key, value) in productTitleTypeList" required/>
-                <option value="">...title type</option>
+                <option value="">{{'_...title_type_' | i18n}}</option>
               </select>
               <select type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleElementLevel" ng-options="key as value for (key,value) in productTitleElementLevelList" required/>
-                <option value="">...element level</option>
+                <option value="">{{'_...element_level_' | i18n}}</option>
               </select>
               <input type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleText" placeholder="title text" required/>
-              <span>[more...]</span>
+              <span>[{{'_more..._' | i18n}}]</span>
 	      	  </div>
 
 	      	</div>
 
           <div class="row">
-            <label class="span2">Language Role</label>
+            <label class="span2">{{'_Language_role_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.descriptiveDetail.language.languageRole" ng-options="key as value for (key, value) in productLanguageRoleList" required/>
-                <option value="">...language role</option>
+                <option value="">{{'_...language_role_' | i18n}}</option>
               </select>
               <span ng-controller="TypeheadCtrl">
                 <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode" typeahead="lang for lang in productLanguageCodeList | filter:$viewValue | limitTo:8" typeahead-editable='false'/>
               </span>
-              <span>[more...]</span>
+              <span>[{{'_more..._' | i18n}}]</span>
             </div>
           </div>
 
-          <h4>Publishing details</h4>
+          <h4>{{'_Publishing_details_' | i18n}}</h4>
 
           <div class="row">
-            <label class="span2">Publisher</label>
+            <label class="span2">{{'_Publisher_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.publishingDetail.publisher.publishingRole" ng-options="key as value for (key, value) in publishingRoleList" class="input-medium" required/>
-                <option value="">...publisher's role</option>
+                <option value="">{{'_...publishers_role_' | i18n}}</option>
               </select>
               <input type="text" ng-model="product.publishingDetail.publisher.publishinName" placeholder="Name" required/>
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Country of Publication</label>
+            <label class="span2">{{'_Country_of_publication_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
               <input type="text" ng-model="product.publishingDetail.countryOfPublication" typeahead="country for country in countryList | filter:$viewValue | limitTo:8" typehead-editable='false' class="input-medium" required/>
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Publishing Status</label>
+            <label class="span2">{{'_Publishing_status_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.publishingDetail.publishingStatus" ng-options="key as value for (key, value) in publishingStatusList" required />
-                <option value="">Select publishing status</option>
+                <option value="">{{'_Select_publishing_status_' | i18n}}</option>
               </select>
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Publishing Date</label>
+            <label class="span2">{{'_Publishing_date_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.publishingDetail.publishingDate.publishingDateRole" ng-options="key as value for (key, value) in publishingDateRoleList" required/>
-                <option value="">...status</option>
+                <option value="">{{'_...status_' | i18n}}</option>
               </select>
 
               <div ng-controller="DatepickerCtrl">
                 <div class="form-horizontal">
-                    <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="product.publishingDetail.publishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                    <button class="btn btn-small btn-inverse" ng-click="today()">Today</button>
-                    <button class="btn btn-small btn-danger" ng-click="clear()">Clear</button>
+                    <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
+                     ng-model="product.publishingDetail.publishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                    <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
+                    <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <h4>Product supply</h4>
+          <h4>{{'_Product_supply_' | i18n}}</h4>
 
           <div class="row">
-            <label class="span2">Supplier</label>
+            <label class="span2">{{'_Supplier_' | i18n}}</label>
             <div class="span5">
               <select id="supplier-role" ng-model="product.productSupply.supplyDetail.supplier.supplierRole" ng-options="key as value for (key, value) in supplierRoleList" required>
-                <option value="">Select Supplier Role</option>
+                <option value="">{{'_Select_supplier_role_' | i18n}}</option>
               </select>
-              <input type="text" ng-model="product.productSupply.supplyDetail.supplier.supplierName" placeholder="Name" required/>
+              <input type="text" ng-model="product.productSupply.supplyDetail.supplier.supplierName" placeholder="{{'_Name_' | i18n}}" required/>
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Product Availability</label>
+            <label class="span2">{{'_Product_availability_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
               <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability" typeahead="availability for availability in productAvailabilityList | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
               <span>[ {{ product.productSupply.supplyDetail.productAvailability }}]</span>
@@ -244,16 +243,16 @@ session_start();
           </div>
 
           <div class="row">
-            <label class="span2">Unpriced Item Type</label>
+            <label class="span2">{{'_Unpriced_item_type_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.productSupply.supplyDetail.unpricedItemType" ng-options="key as value for (key, value) in unpricedCodeList">
-                <option value="">...unpriced item type</option>
+                <option value="">{{'_...unpriced_item_type_' | i18n}}</option>
               </select>
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Price Type</label>
+            <label class="span2">{{'_Price_type_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
               <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType" typeahead="typ for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
               <span>[{{ product.productSupply.supplyDetail.price.priceType }}]</span>
@@ -261,40 +260,40 @@ session_start();
           </div>
 
           <div class="row">
-            <label class="span2">Price Amount</label>
+            <label class="span2">{{'_Price_amount_' | i18n}}</label>
             <div class="span5">
               <input type="text" name="priceAmount" class="input-small"
                ng-pattern="/^(\d{1,5}\.+\d{0,3})$/" ng-model="product.productSupply.supplyDetail.price.priceAmount"
                maxlength="10" required/>
               <span ng-controller="TypeheadCtrl">
-                <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode" typeahead="currency for currency in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="...currency..." required/>
+                <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode" typeahead="currency for currency in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="{{'_...currency_' | i18n}}" required/>
               </span>
                 <small class="text-error" ng-show="productForm.priceAmount.$error.pattern">
-                  Only real numbers please!
+                  {{'_Only_numbers_' | i18n}}
                 </small>
 
             </div>
           </div>
 
           <div class="row">
-            <label class="span2">Price Code Type</label>
+            <label class="span2">{{'_Price_code_type_' | i18n}}</label>
             <div class="span5">
               <select type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType" required/>
-                <option value="01">Proprietary</option>
-                <option value="02">Finnish Pocket Book price code</option>
+                <option value="01">{{'_Proprietary_' | i18n}}</option>
+                <option value="02">{{'_Finnish_price_code_' | i18n}}</option>
               </select>
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="...price code..." required/>
+              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="{{'_...price code_' | i18n}}" required/>
             </div>
           </div>
 
             [ <a href="" ng-click="removeProduct(product)">X</a> ]
           </div>
 
-          <a href="" class="btn" ng-click="addProduct()">add more products</a>
+          <a href="" class="btn" ng-click="addProduct()">{{'_add_more_products_' | i18n}}</a>
           <br />
 
-          <button ng-click="reset()" ng-disabled="isUnchanged(message)">Reset</button>
-     	  <button ng-click="send()" ng-disabled="messageForm.$invalid">Send</button>
+          <button ng-click="reset()" ng-disabled="isUnchanged(message)">{{'_Reset_' | i18n}}</button>
+     	  <button ng-click="send()" ng-disabled="messageForm.$invalid">{{'_Send_' | i18n}}</button>
         </fieldset>
       </form>
     </div>

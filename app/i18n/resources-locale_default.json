@@ -1,0 +1,38 @@
+[
+    {
+        "key":"_Header_",
+        "value":"Lähetystiedot",
+        "description":"Name of the header section in the form"
+    },
+    {
+        "key":"_Identifier_",
+        "value":"Tunniste",
+        "description":"In header section, identifier"
+    },
+    {
+        "key":"_name_",
+        "value":"nimi",
+        "description":"Name of the sender"
+    },
+    {
+        "key":"_id_",
+        "value":"tunnus",
+        "description":"Id radio button label"
+    },
+    {
+        "key":"_senderName_",
+        "value":"Lähettäjän nimi",
+        "description":"Id radio button label"
+    },
+    {
+        "key":"_just_letters_",
+        "value":"Vain suomalainen kirjeitä!",
+        "description":"Just Finnish letter please! -> error text for checking the validity of the name"
+    },
+    {
+        "key":"_Date_",
+        "value":"Päivämäärä",
+        "description":"When the message was sent"
+    }
+
+]
