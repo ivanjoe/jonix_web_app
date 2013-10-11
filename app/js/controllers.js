@@ -4,15 +4,11 @@
 
 angular.module('myApp.controllers', ['ui.bootstrap']).
   controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
-    console.log('MainCtrl');
 
     $scope.getClass = function(path) {
       if ($location.path().substr(0, path.length) == path) {
-        console.log('no luck');
         return "active";
       } else {
-        console.log($location.path());
-        console.log('not here either luck');
         return "";
       }
     }
@@ -261,21 +257,25 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     });
   }])
 
-  .controller('AlertCtrl', ['$scope', function($scope) {
+  .controller('AlertCtrl', ['$scope','$filter', function($scope, $filter) {
     $scope.alerts = [
     ];
 
     $scope.$on('answer', function(answer, data) {
       console.log(data);
 
-      var alert = {type: 'success', msg: 'I guess everything went fine'};
+      var now = $filter('date')(new Date(), 'dd MMMM yyyy h:mm:ss');
+
+      var alert = {type: 'success', msg: 'I guess everything went fine' +
+        '<br/><small>at ' + now + '</small>'};
       // types: success, info, warning, error
       // Connection with proxy (send.php) was succesful
       // TODO: prepare for all the HTTP codes
       if(data[1] == 200) {
         if (data[0].http_code == 406) {
           alert.type = "warning";
-          alert.msg = '<strong>Backend responded:</strong><br/>' + data[0].result;
+          alert.msg = '<strong>Backend responded:</strong><br/>' + data[0].result +
+            '<br/>at <small>' + now + '</small>';
         }
       } else if (data[1] == 405) {
         alert.type = "error";

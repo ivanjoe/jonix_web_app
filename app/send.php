@@ -13,8 +13,13 @@ $data = '<?xml version="1.0"?>
 <ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference">
   <Header>
     <SentDateTime>'.$data->header->sentDateTime.'</SentDateTime>
+    <Sender/>
     </Header>
-  <Product/>
+  <Product>
+  	<RecordReference>wwww.aakjkljklj.com</RecordReference>
+  	<NotificationType>01</NotificationType>
+  	<ProductIdentifier/>
+  </Product>
   </ONIXMessage>';
 
 // Create curl handle

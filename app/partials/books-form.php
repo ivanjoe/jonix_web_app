@@ -88,45 +88,50 @@ session_start();
           	</div>
           </div>
 
-      	  <div ng-repeat="product in message.products">
+      	  <div ng-repeat="product in message.products" ng-form="productForm">
       	  	<legend>Product</legend>
 
       	  	<div class="row">
-	      	  <label for="record-reference" class="span2">Record reference</label>
-	      	  <div class="span5">
-	      	  	<input id="record-reference" type="text" ng-model="product.recordReference" required/>
-	      	  </div>
-	      	</div>
+  	      	  <label for="record-reference" class="span2">Record reference</label>
+  	      	  <div class="span5">
+  	      	  	<input id="record-reference" type="text" ng-model="product.recordReference" required/>
+  	      	  </div>
+  	      	</div>
 
-	      	<div class="row">
-	      	  <label for="notification-type" class="span2">Notification type</label>
-	      	  <div class="span5">
-	      	  	<select id="notification-type" ng-model="product.notificationType" ng-options="key as value for (key, value) in productNotificationTypeList" required>
-	      	  	  <option value="">Select Notification type</option>
-	      	  	</select>
-	      	  </div>
-	      	</div>
+  	      	<div class="row">
+  	      	  <label for="notification-type" class="span2">Notification type</label>
+  	      	  <div class="span5">
+  	      	  	<select id="notification-type" ng-model="product.notificationType" ng-options="key as value for (key, value) in productNotificationTypeList" required>
+  	      	  	  <option value="">Select Notification type</option>
+  	      	  	</select>
+  	      	  </div>
+  	      	</div>
 
-	      	<div class="row">
-	      	  <label for="product-id-type" class="span2">Product ID type</label>
-	      	  <div class="span5">
-	      	  	<select id="product-id-type" ng-model="product.IdType" ng-options="key as value for (key, value) in productIdTypeList" required>
-	      	  	  <option value="">Select ID type</option>
-	      	  	</select>
-              <input id=="product-id-value" type="text" ng-model="product.idValue" required/>
-	      	  </div>
-	      	</div>
+  	      	<div class="row">
+  	      	  <label for="product-id-type" class="span2">Product ID type</label>
+  	      	  <div class="span5">
+  	      	  	<select id="product-id-type" ng-model="product.IdType" ng-options="key as value for (key, value) in productIdTypeList" required>
+  	      	  	  <option value="">Select ID type</option>
+  	      	  	</select>
+                <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue" ng-pattern="/^[0-9]{10,13}$/" required/>
+                <p>
+                  <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
+                    ISBN has to contain either 10 or 13 digits!
+                  </small>
+                </p>
+  	      	  </div>
+  	      	</div>
 
-	      	<h4>Descriptive details</h4>
+  	      	<h4>Descriptive details</h4>
 
-	      	<div class="row">
-	      	  <label for="product-composition" class="span2">Product Composition</label>
-	      	  <div class="span5">
-	      	  	<select id="product-composition" ng-model="product.descriptiveDetail.composition" ng-options="key as value for (key, value) in productCompositionList" required>
-                <option value="">Select Composition</option>
-              </select>
-	      	  </div>
-	      	</div>
+  	      	<div class="row">
+  	      	  <label for="product-composition" class="span2">Product Composition</label>
+  	      	  <div class="span5">
+  	      	  	<select id="product-composition" ng-model="product.descriptiveDetail.composition" ng-options="key as value for (key, value) in productCompositionList" required>
+                  <option value="">Select Composition</option>
+                </select>
+  	      	  </div>
+  	      	</div>
 
 	      	<div class="row">
 	      	  <label for="product-form" class="span2">Product Form</label>
