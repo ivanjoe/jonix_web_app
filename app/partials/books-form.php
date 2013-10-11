@@ -32,7 +32,14 @@ session_start();
           <!-- <div class="row" ng-switch-when="name"> -->
           	<label for="sender-name" class="span2">Sender's name</label>
           	<div class="span5">
-              <input type="text" ng-model="message.header.sender.senderName" class="form-control" name="sender-name" id="sender-name" placeholder="Sender's name">
+              <input type="text" ng-model="message.header.sender.senderName" class="form-control"
+                name="senderName" id="senderName" placeholder="Sender's name"
+                  maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/">
+                <p>
+                  <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
+                    Only Finnish letters and space please!
+                  </small>
+                </p>
             </div>
           </div>
 
@@ -256,10 +263,16 @@ session_start();
           <div class="row">
             <label class="span2">Price Amount</label>
             <div class="span5">
-              <input type="text" class="input-small" ng-model="product.productSupply.supplyDetail.price.priceAmount" required/>
+              <input type="text" name="priceAmount" class="input-small"
+               ng-pattern="/^(\d{1,5}\.+\d{0,3})$/" ng-model="product.productSupply.supplyDetail.price.priceAmount"
+               maxlength="10" required/>
               <span ng-controller="TypeheadCtrl">
                 <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode" typeahead="currency for currency in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="...currency..." required/>
               </span>
+                <small class="text-error" ng-show="productForm.priceAmount.$error.pattern">
+                  Only real numbers please!
+                </small>
+
             </div>
           </div>
 
