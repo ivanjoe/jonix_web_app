@@ -1,5 +1,50 @@
 [
     {
+        "key":"_Login_",
+        "value":"Kirjaudu sisään",
+        "description":"Login"
+    },
+    {
+        "key":"_Logout_",
+        "value":"Kirjaudu ulos",
+        "description":"Logout"
+    },
+    {
+        "key":"_Naughty!!!_",
+        "value":"You are trying something!",
+        "description":"When the login fails because the session varible mismatch"
+    },
+    {
+        "key":"_Wanna_login_",
+        "value":"Jos haluat lähettää ONIX viestejä, kirjaudu sisään.",
+        "description":"Greeting alert when the user is not logged in"
+    },
+    {
+        "key":"_OK_",
+        "value":"OK",
+        "description":"OK"
+    },
+    {
+        "key":"_Cancel_",
+        "value":"Peruutta",
+        "description":"Cancel"
+    },
+    {
+        "key":"_type_pass_",
+        "value":"Kirjoita salasana",
+        "description":"Type in your password"
+    },
+    {
+        "key":"_Login_failed_",
+        "value":"Kirjautuminen epäonnistui",
+        "description":"Login failed"
+    },
+    {
+        "key":"_wrong_pass_",
+        "value":"Väärä salasana on annettu, yritä uudelleen!",
+        "description":"Wrong password was given, please try again!"
+    },
+    {
         "key":"_Header_",
         "value":"Lähetystiedot",
         "description":"Name of the header section in the form"
@@ -31,8 +76,317 @@
     },
     {
         "key":"_Date_",
-        "value":"Päivämäärä",
+        "value":"Viestin lähetysaika",
         "description":"When the message was sent"
+    },
+    {
+        "key":"_sender_id_type_",
+        "value":"Lähettäjän tunnistejärjestelmä",
+        "description":"The type of the identifier of the sender"
+    },
+    {
+        "key":"_ID_type_",
+        "value":"tunnistejärjestelmä",
+        "description":"Place holder for the id type of the sender"
+    },
+    {
+        "key":"_sender_id_value_",
+        "value":"Lähettäjän tunniste",
+        "description":"The value of the id of the sender"
+    },
+    {
+        "key":"_ID_value_",
+        "value":"tunniste",
+        "description":"Placeholder for the value of the id of the sender"
+    },
+    {
+        "key":"_Today_",
+        "value":"Tänään",
+        "description":"Today buttons text"
+    },
+    {
+        "key":"_Clear_",
+        "value":"Tyhjentää",
+        "description":"Clear the value in the date selector"
+    },
+    {
+        "key":"_Select_time_",
+        "value":"Valitse aikaa",
+        "description":"Select time checkbox"
+    },
+    {
+        "key":"_Time_",
+        "value":"Aikaa",
+        "description":"Hour and minute selector"
+    },
+    {
+        "key":"_Product_",
+        "value":"Tuotetietue",
+        "description":"Header: information about the product"
+    },
+    {
+        "key":"_Record_reference_",
+        "value":"Tuotetietueen viite",
+        "description":"The reference number of the product"
+    },
+    {
+        "key":"_Notification_type_",
+        "value":"Ilmoituksen tyyppi",
+        "description":"Notification or update type code"
+    },
+    {
+        "key":"_Select_notification_type_",
+        "value":"Valitse ilmoituksen tyyppin",
+        "description":"Select notification type"
+    },
+    {
+        "key":"_Product_ID_type_",
+        "value":"Tuotteen tunniste",
+        "description":"Product identifier type and code"
+    },
+    {
+        "key":"_Select_ID_type_",
+        "value":"Valitse tyyppin",
+        "description":"Select product identifier type"
+    },
+    {
+        "key":"_Descriptive_details_",
+        "value":"Kuvailutiedot-ryhmä",
+        "description":"Descriptive detail composite"
+    },
+    {
+        "key":"_Product_composition_",
+        "value":"Tuotteen kokoonpano",
+        "description":"Product composition"
+    },
+    {
+        "key":"_Select_composition_",
+        "value":"Valitse kokoonpanon",
+        "description":"Select product composition"
+    },
+    {
+        "key":"_Product_form_",
+        "value":"Tuotemuoto",
+        "description":"Product form"
+    },
+    {
+        "key":"_Select_product_form_",
+        "value":"Valitse tuotemuoton",
+        "description":"Select product form"
+    },
+    {
+        "key":"_Product_title_",
+        "value":"Päänimeke",
+        "description":"Title text"
+    },
+    {
+        "key":"_...title_type_",
+        "value":"...nimekkeen tyyppi",
+        "description":"Title type"
+    },
+    {
+        "key":"_...element_level_",
+        "value":"...nimeketaso",
+        "description":"Title element level"
+    },
+    {
+        "key":"_title_text_",
+        "value":"päänimeke",
+        "description":"Title text"
+    },
+    {
+        "key":"_more..._",
+        "value":"enemmän...",
+        "description":"To add more"
+    },
+    {
+        "key":"_Language_",
+        "value":"Kieli",
+        "description":"Language"
+    },
+    {
+        "key":"_...language_role_",
+        "value":"...kielen rooli",
+        "description":"The role of the language"
+    },
+    {
+        "key":"_Publishing_details_",
+        "value":"Julkaisutiedot",
+        "description":"Publishing details"
+    },
+    {
+        "key":"_Publisher_",
+        "value":"Julkaisija",
+        "description":"Publisher"
+    },
+    {
+        "key":"_Name_",
+        "value":"Nimi",
+        "description":"Name"
+    },
+    {
+        "key":"_...publishers_role_",
+        "value":"...rooli julkaisuprosessissa",
+        "description":"The role in the publsihing process"
+    },
+    {
+        "key":"_Country_of_publication_",
+        "value":"Julkaisumaa",
+        "description":"Country of publication"
+    },
+    {
+        "key":"_Publishing_status_",
+        "value":"Tuotteen tila",
+        "description":"Publishing status"
+    },
+    {
+        "key":"_Select_publishing_status_",
+        "value":"Valitse tilan",
+        "description":"Select publishing status"
+    },
+    {
+        "key":"_Publishing_date_",
+        "value":"Julkaisupäivämäärä",
+        "description":"Publishing date"
+    },
+    {
+        "key":"_...status_",
+        "value":"...tilan",
+        "description":"Oublication date status"
+    },
+    {
+        "key":"_Product_supply_",
+        "value":"Tuotteiden tarjonta",
+        "description":"Product supply"
+    },
+    {
+        "key":"_Supplier_",
+        "value":"Kustantaja",
+        "description":"Publisher"
+    },
+    {
+        "key":"_Select_supplier_role_",
+        "value":"Valitse Kustantajan rooli",
+        "description":"Select supplier's role"
+    },
+    {
+        "key":"_Product_availability_",
+        "value":"Tuotteen saatavuus",
+        "description":"Product availability"
+    },
+    {
+        "key":"_Unpriced_item_type_",
+        "value":"Hinnattoman tuotteen tyyppi",
+        "description":""
+    },
+    {
+        "key":"_Select_unpriced_item_type_",
+        "value":"Valitse tyyppin",
+        "description":"Select unrpiced item type"
+    },
+    {
+        "key":"_Price_type_",
+        "value":"Hintatyyppi",
+        "description":"Price type"
+    },
+    {
+        "key":"_Price_amount_",
+        "value":"Hinta",
+        "description":"Price amount"
+    },
+    {
+        "key":"_...currency_",
+        "value":"...valuutta",
+        "description":""
+    },
+    {
+        "key":"_Price_code_type_",
+        "value":"Hintakoodin tyyppi",
+        "description":"Price code type"
+    },
+    {
+        "key":"_Price_code_",
+        "value":"Hintakoodin tyyppi",
+        "description":"Price code"
+    },
+    {
+        "key":"_add_more_products_",
+        "value":"Lisää tuote",
+        "description":""
+    },
+    {
+        "key":"_Reset_",
+        "value":"Tyhjätä",
+        "description":""
+    },
+    {
+        "key":"_Send_",
+        "value":"Lähettä",
+        "description":""
+    },
+    {
+        "key":"_ONIX_msg_",
+        "value":"ONIX-viesti",
+        "description":"ONIX message"
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
+    },
+    {
+        "key":"__",
+        "value":"",
+        "description":""
     }
-
 ]

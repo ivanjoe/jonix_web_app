@@ -3,7 +3,7 @@ session_start();
   if (isset($_SESSION['demo'])) {
     if($_SESSION['demo'] == md5(date("Ymd").'UserLoggedIn')) { ?>
       <div ng-controller="ModalCtrl">
-        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">Logout</button>
+        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">{{'_Logout_' | i18n}}</button>
       </div>
 
 <div class="row" ng-controller="MessageCtrl">
@@ -46,7 +46,7 @@ session_start();
           <!-- <div class="row" ng-switch-when="id"> -->
           	<label for="senderIdType" class="span2">{{'_sender_id_type_' | i18n}}</label>
             <div class="span5">
-              <input type="text" ng-model="message.header.sender.idType" class="form-control" id="senderIdType" placeholder="ID type">
+              <input type="text" ng-model="message.header.sender.idType" class="form-control" id="senderIdType" placeholder="{{'_ID_type_' | i18n}}">
             </div>
           </div>
 
@@ -54,7 +54,7 @@ session_start();
           <!-- <div class="row" ng-switch-when="id"> -->
           	<label for="senderIdValue" class="span2">{{'_sender_id_value_' | i18n}}</label>
             <div class="span5">
-              <input type="text" ng-model="message.header.sender.idValue" class="form-control" id="sender-id-value" placeholder="ID value">
+              <input type="text" ng-model="message.header.sender.idValue" class="form-control" id="sender-id-value" placeholder="{{'_ID_value_' | i18n}}">
             </div>
           </div>
           <!-- </div> -->
@@ -157,14 +157,14 @@ session_start();
               <select type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleElementLevel" ng-options="key as value for (key,value) in productTitleElementLevelList" required/>
                 <option value="">{{'_...element_level_' | i18n}}</option>
               </select>
-              <input type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleText" placeholder="title text" required/>
+              <input type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleText" placeholder="{{'_title_text_' | i18n}}" required/>
               <span>[{{'_more..._' | i18n}}]</span>
 	      	  </div>
 
 	      	</div>
 
           <div class="row">
-            <label class="span2">{{'_Language_role_' | i18n}}</label>
+            <label class="span2">{{'_Language_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.descriptiveDetail.language.languageRole" ng-options="key as value for (key, value) in productLanguageRoleList" required/>
                 <option value="">{{'_...language_role_' | i18n}}</option>
@@ -184,7 +184,7 @@ session_start();
               <select ng-model="product.publishingDetail.publisher.publishingRole" ng-options="key as value for (key, value) in publishingRoleList" class="input-medium" required/>
                 <option value="">{{'_...publishers_role_' | i18n}}</option>
               </select>
-              <input type="text" ng-model="product.publishingDetail.publisher.publishinName" placeholder="Name" required/>
+              <input type="text" ng-model="product.publishingDetail.publisher.publishinName" placeholder="{{'_Name_' | i18n}}" required/>
             </div>
           </div>
 
@@ -246,7 +246,7 @@ session_start();
             <label class="span2">{{'_Unpriced_item_type_' | i18n}}</label>
             <div class="span5">
               <select ng-model="product.productSupply.supplyDetail.unpricedItemType" ng-options="key as value for (key, value) in unpricedCodeList">
-                <option value="">{{'_...unpriced_item_type_' | i18n}}</option>
+                <option value="">{{'_Select_unpriced_item_type_' | i18n}}</option>
               </select>
             </div>
           </div>
@@ -282,7 +282,7 @@ session_start();
                 <option value="01">{{'_Proprietary_' | i18n}}</option>
                 <option value="02">{{'_Finnish_price_code_' | i18n}}</option>
               </select>
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="{{'_...price code_' | i18n}}" required/>
+              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="{{'_Price_code_' | i18n}}" required/>
             </div>
           </div>
 
@@ -300,7 +300,7 @@ session_start();
   </div>
 
   <div class="span4">
-  	<h3>ONIX Message</h3>
+  	<h3>{{'_ONIX_msg_' | i18n}}</h3>
       <div ng-controller="AlertCtrl">
         <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
       </div>
@@ -312,17 +312,17 @@ session_start();
   <?php
     } else { ?>
       <div class="row">
-        <alert class="alert-danger span5">You are trying something!</alert>
+        <alert class="alert-danger span5">{{'_Naughty!!!_' | i18n}}</alert>
       </div>
   <?php
     }
   } else { ?>
       <div ng-controller="ModalCtrl">
-        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="open()">Login</button>
+        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="open()">{{'_Login_' | i18n}}</button>
       </div>
       <div class="row">
         <div class="span5">
-          <alert class="alert-info">If you want to send ONIX messages, please log in.</alert>
+          <alert class="alert-info">{{'_Wanna_login_' | i18n}}</alert>
         </div>
       </div>
   <?php } ?>
