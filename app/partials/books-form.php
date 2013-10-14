@@ -311,6 +311,9 @@ session_start();
 </div>
   <?php
     } else { ?>
+      <div ng-controller="ModalCtrl">
+        <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">{{'_Logout_' | i18n}}</button>
+      </div>
       <div class="row">
         <alert class="alert-danger span5">{{'_Naughty!!!_' | i18n}}</alert>
       </div>
