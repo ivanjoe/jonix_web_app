@@ -33,6 +33,8 @@ angular.module('localization', [])
                 localize.resourceFileLoaded = true;
                 // broadcast that the file has been loaded
                 $rootScope.$broadcast('localizeResourcesUpdated');
+                console.log(data[0].value);
+                $rootScope.$broadcast('language', data[0].value);
             },
 
             // allows setting of language on the fly
@@ -68,6 +70,7 @@ angular.module('localization', [])
             initLocalizedResources:function () {
                 // build the url to retrieve the localized resource file
                 var url = localize.url || localize.buildUrl();
+
                 // request the resource file
                 $http({ method:"GET", url:url, cache:false }).success(localize.successCallback).error(function () {
                     // the request failed set the url to the default resource file

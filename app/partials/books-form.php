@@ -69,7 +69,10 @@ session_start();
 
   	          <div ng-controller="DatepickerCtrl">
       			    <div class="form-horizontal">
-      			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd" ng-model="message.header.sentDateTime" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+      			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
+                      ng-model="message.header.sentDateTime" is-open="opened" min="minDate"
+                      max="'2015-06-22'" datepicker-options="dateOptions"
+                      date-disabled="disabled(date, mode)" ng-required="true" name="dtPick"/>
       			        <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
       			        <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
                     <code>{{(message.header.sentDateTime | date:'yyyyMMdd') + (message.header.sentTime | date:'HHmm') }}</code>
@@ -106,7 +109,9 @@ session_start();
   	      	<div class="row">
   	      	  <label for="notification-type" class="span2">{{'_Notification_type_' | i18n}}</label>
   	      	  <div class="span5">
-  	      	  	<select id="notification-type" ng-model="product.notificationType" ng-options="key as value for (key, value) in productNotificationTypeList" required>
+  	      	  	<select id="notification-type" ng-model="product.notificationType"
+                  ng-options="key as value for (key, value) in productNotificationTypeList"
+                   required>
   	      	  	  <option value="">{{'_Select_notification_type_' | i18n}}</option>
   	      	  	</select>
   	      	  </div>
@@ -170,8 +175,11 @@ session_start();
                 <option value="">{{'_...language_role_' | i18n}}</option>
               </select>
               <span ng-controller="TypeheadCtrl">
-                <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode" typeahead="lang for lang in productLanguageCodeList | filter:$viewValue | limitTo:8" typeahead-editable='false'/>
+                <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode"
+                  typeahead="lang.code as lang.name for lang in productLanguageCodeList | filter:$viewValue | limitTo:8"
+                  typeahead-editable='false'/>
               </span>
+              <!-- <code ng-model="product.descriptiveDetail.language.languageCode2" ng-init="HUF2">HUF</code> -->
               <span>[{{'_more..._' | i18n}}]</span>
             </div>
           </div>
@@ -191,7 +199,8 @@ session_start();
           <div class="row">
             <label class="span2">{{'_Country_of_publication_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
-              <input type="text" ng-model="product.publishingDetail.countryOfPublication" typeahead="country for country in countryList | filter:$viewValue | limitTo:8" typehead-editable='false' class="input-medium" required/>
+              <input type="text" ng-model="product.publishingDetail.countryOfPublication"
+                  typeahead="country.code as country.name for country in countryList | filter:$viewValue | limitTo:8" typehead-editable='false' class="input-medium" required/>
             </div>
           </div>
 
@@ -237,7 +246,8 @@ session_start();
           <div class="row">
             <label class="span2">{{'_Product_availability_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
-              <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability" typeahead="availability for availability in productAvailabilityList | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
+              <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability"
+                  typeahead="availability.code as availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
               <span>[ {{ product.productSupply.supplyDetail.productAvailability }}]</span>
             </div>
           </div>
@@ -254,7 +264,8 @@ session_start();
           <div class="row">
             <label class="span2">{{'_Price_type_' | i18n}}</label>
             <div class="span5" ng-controller="TypeheadCtrl">
-              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType" typeahead="typ for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
+              <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType"
+                typeahead="typ.code as typ.name for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
               <span>[{{ product.productSupply.supplyDetail.price.priceType }}]</span>
             </div>
           </div>
@@ -263,10 +274,11 @@ session_start();
             <label class="span2">{{'_Price_amount_' | i18n}}</label>
             <div class="span5">
               <input type="text" name="priceAmount" class="input-small"
-               ng-pattern="/^(\d{1,5}\.+\d{0,3})$/" ng-model="product.productSupply.supplyDetail.price.priceAmount"
+               ng-pattern="/^(\d{1,5}(\.\d{0,3}){0,1})$/" ng-model="product.productSupply.supplyDetail.price.priceAmount"
                maxlength="10" required/>
               <span ng-controller="TypeheadCtrl">
-                <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode" typeahead="currency for currency in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="{{'_...currency_' | i18n}}" required/>
+                <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode"
+                  typeahead="curr.code as curr.name for curr in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="{{'_...currency_' | i18n}}" required/>
               </span>
                 <small class="text-error" ng-show="productForm.priceAmount.$error.pattern">
                   {{'_Only_numbers_' | i18n}}
@@ -278,8 +290,9 @@ session_start();
           <div class="row">
             <label class="span2">{{'_Price_code_type_' | i18n}}</label>
             <div class="span5">
-              <select type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType" required/>
-                <option value="01">{{'_Proprietary_' | i18n}}</option>
+              <select type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType"
+                ng-init="product.productSupply.supplyDetail.price.priceCoded.priceCodeType='02'" required/>
+                <option value="01" selected="selected">{{'_Proprietary_' | i18n}}</option>
                 <option value="02">{{'_Finnish_price_code_' | i18n}}</option>
               </select>
               <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="{{'_Price_code_' | i18n}}" required/>
@@ -315,7 +328,7 @@ session_start();
         <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">{{'_Logout_' | i18n}}</button>
       </div>
       <div class="row">
-        <alert class="alert-danger span5">{{'_Naughty!!!_' | i18n}}</alert>
+        <alert class="alert-danger span5" data-i18n="_Naughty!!!_"></alert>
       </div>
   <?php
     }
@@ -325,7 +338,7 @@ session_start();
       </div>
       <div class="row">
         <div class="span5">
-          <alert class="alert-info">{{'_Wanna_login_' | i18n}}</alert>
+          <alert class="alert-info" data-i18n="_Wanna_login_"></alert>
         </div>
       </div>
   <?php } ?>

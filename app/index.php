@@ -19,8 +19,8 @@
   <!-- <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/journal/bootstrap.min.css" rel="stylesheet"/> -->
 
 </head>
-<body>
-  <div class="container" ng-controller="MainCtrl">
+<body ng-controller="MainCtrl">
+  <div class="container">
     <!-- Navigation bar -->
     <div class="navbar">
       <div class="navbar-inner">
@@ -47,7 +47,9 @@
   <footer class="footer">
     <div class="container">
       <p>
-        jOnix Web Application &copy; Metropolia 2013
+        jOnix Web Application &copy; Metropolia 2013<br/>
+        <a href="#" ng-click="setFinnishLanguage()">Suomi</a> |
+        <a href="#" ng-click="setEnglishLanguage()">English</a>
       </p>
     </div>
   </footer>

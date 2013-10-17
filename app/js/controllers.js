@@ -3,7 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['ui.bootstrap']).
-  controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
+  controller('MainCtrl', ['$scope', '$location', 'localize',
+      function($scope, $location, localize) {
 
     $scope.getClass = function(path) {
       if ($location.path().substr(0, path.length) == path) {
@@ -11,7 +12,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       } else {
         return "";
       }
-    }
+    };
+
+    $scope.setFinnishLanguage = function() {
+        localize.setLanguage('default');
+    };
+
+    $scope.setEnglishLanguage = function() {
+        localize.setLanguage('en-UK');
+    };
 
   }])
   .controller('MyCtrl2', [function() {
@@ -77,11 +86,19 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $modalInstance.dismiss('cancel');
     };
   }])
-  .controller('MessageCtrl', ['$scope','$http', function($scope, $http) {
+  .controller('MessageCtrl', ['$scope','$http', 'localize',
+      function($scope, $http, localize) {
+
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";
+    var lang = localize.language;
+    var availableLanguages = ['default', 'en-UK'];
+    // is lang in array?
+    if (availableLanguages.indexOf(localize.language) === -1) {
+      lang = 'default';
+    }
 
-  	$scope.master = {
+    $scope.master = {
       header: {
       },
   		products: [
@@ -89,75 +106,22 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   		]
   	};
 
-  	// Get the list for the forms
+    // Get the lists for the forms
   	$scope.productNotificationTypeList = {};
-  	$http.get('assets/lists/list1.json').success(function(data){
-  		$scope.productNotificationTypeList = data;
+  	$http.get('assets/lists/lists_'+lang+'.json').success(function(data){
+  		$scope.productNotificationTypeList  = data.list1;
+      $scope.productCompositionList       = data.list2;
+      $scope.productFormList              = data.list7;
+      $scope.productIdTypeList            = data.list5;
+      $scope.productTitleTypeList         = data.list15;
+      $scope.productLanguageRoleList      = data.list22;
+      $scope.publishingRoleList           = data.list45;
+      $scope.unpricedCodeList             = data.list57;
+      $scope.publishingStatusList         = data.list64;
+      $scope.supplierRoleList             = data.list93;
+      $scope.productTitleElementLevelList = data.list149;
+      $scope.publishingDateRoleList       = data.list163;
   	});
-
-    $scope.productCompositionList = {};
-    $http.get('assets/lists/list2.json').success(function(data){
-      $scope.productCompositionList = data;
-    });
-
-  	$scope.productIdTypeList = {};
-  	$http.get('assets/lists/list5.json').success(function(data){
-  		$scope.productIdTypeList = data;
-  	});
-
-    $scope.productTitleTypeList = {};
-    $http.get('assets/lists/list15.json').success(function(data){
-      $scope.productTitleTypeList = data;
-    });
-
-    $scope.productTitleElementLevelList = {};
-    $http.get('assets/lists/list149.json').success(function(data){
-      $scope.productTitleElementLevelList = data;
-    });
-
-  	$scope.productFormList = {};
-  	$http.get('assets/lists/list7.json').success(function(data){
-  		$scope.productFormList = data;
-  	});
-
-    $scope.productLanguageRoleList = {};
-    $http.get('assets/lists/list22.json').success(function(data){
-      $scope.productLanguageRoleList = data;
-    });
-
-    $scope.publishingRoleList = {};
-    $http.get('assets/lists/list45.json').success(function(data){
-      $scope.publishingRoleList = data;
-    });
-
-    // publishing status
-    $scope.publishingStatusList = {};
-    $http.get('assets/lists/list64.json').success(function(data){
-      $scope.publishingStatusList = data;
-    });
-
-    // publishing date role
-    $scope.publishingDateRoleList = {};
-    $http.get('assets/lists/list163.json').success(function(data){
-      $scope.publishingDateRoleList = data;
-    });
-
-    $scope.supplierRoleList = {};
-    $http.get('assets/lists/list93.json').success(function(data){
-      $scope.supplierRoleList = data;
-    });
-
-    // availibility
-    $scope.productAvailabilityCodeList = {};
-    $http.get('assets/lists/list65.json').success(function(data){
-      $scope.productAvailabilityCodeList = data;
-    });
-
-    // upriced item type
-    $scope.unpricedCodeList = {};
-    $http.get('assets/lists/list57.json').success(function(data){
-      $scope.unpricedCodeList = data;
-    });
 
    	$scope.addProduct = function() {
   		$scope.message.products.push({type:'', value:''});
@@ -189,7 +153,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
        }
       ).success(function(data,status) {
         $scope.$broadcast('answer', [data, status]);
-        console.log(data);
       })
       .error(function(data, status){
         $scope.$broadcast('answer', [data, status]);
@@ -209,7 +172,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	 $scope.showWeeks = false;
 
   	 $scope.clear = function () {
-  	    $scope.message.header.sentDateTime = null;
+  	    //$scope.message.header.sentDateTime = null;
+        $scope.dtPick = null;
   	 };
 
   	 $scope.open = function() {
@@ -228,33 +192,29 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	$scope.message.sentTime = new Date();
   }])
 
-  .controller('TypeheadCtrl', ['$scope','$http', function($scope, $http) {
+  .controller('TypeheadCtrl', ['$scope','$http','localize',
+      function($scope, $http, localize) {
     $scope.selected = undefined;
 
-    $scope.productLanguageCodeList = [];
-    $http.get('assets/lists/list74.json').success(function(data){
-      $scope.productLanguageCodeList = data;
+    var lang = localize.language;
+    var availableLanguages = ['default', 'en-UK'];
+    // is lang in array?
+    if (availableLanguages.indexOf(localize.language) === -1) {
+      lang = 'default';
+    }
+
+    $http.get('assets/lists/typeheads_'+lang+'.json').success(function(data){
+      $scope.priceTypes              = data.list58;
+      $scope.productAvailabilityList = data.list65;
+      $scope.productLanguageCodeList = data.list74;
+      $scope.countryList             = data.list91;
+      $scope.currencies              = data.list96;
     });
 
-    $scope.countryList = [];
-    $http.get('assets/lists/list91.json').success(function(data){
-      $scope.countryList = data;
-    });
+    $scope.showLanguageCode = function(data) {
+      alert(data);
+    };
 
-    $scope.productAvailabilityList = [];
-    $http.get('assets/lists/list65_typehead.json').success(function(data){
-      $scope.productAvailabilityList = data;
-    });
-
-    $scope.priceTypes = [];
-    $http.get('assets/lists/list58_typehead.json').success(function(data){
-      $scope.priceTypes = data;
-    });
-
-    $scope.currencies = [];
-    $http.get('assets/lists/list96_typehead.json').success(function(data){
-      $scope.currencies = data;
-    });
   }])
 
   .controller('AlertCtrl', ['$scope','$filter', function($scope, $filter) {

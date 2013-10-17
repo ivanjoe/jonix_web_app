@@ -1,5 +1,10 @@
 [
     {
+        "key":"LanguageFileDescriptor",
+        "value":"default",
+        "description":"This is describes what langugage file has been loaded."
+    },
+    {
         "key":"_Login_",
         "value":"Kirjaudu sisään",
         "description":"Login"
@@ -106,7 +111,7 @@
     },
     {
         "key":"_Clear_",
-        "value":"Tyhjentää",
+        "value":"Tyhjennä",
         "description":"Clear the value in the date selector"
     },
     {
@@ -136,7 +141,7 @@
     },
     {
         "key":"_Select_notification_type_",
-        "value":"Valitse ilmoituksen tyyppin",
+        "value":"Valitse ilmoituksen tyyppi",
         "description":"Select notification type"
     },
     {
@@ -146,8 +151,13 @@
     },
     {
         "key":"_Select_ID_type_",
-        "value":"Valitse tyyppin",
+        "value":"Valitse tyyppi",
         "description":"Select product identifier type"
+    },
+    {
+        "key":"_Product_id_should_be_",
+        "value":"The ISBN number should be between 10-13 digits",
+        "description":"Error message for product id (depending on the type)"
     },
     {
         "key":"_Descriptive_details_",
@@ -281,7 +291,7 @@
     },
     {
         "key":"_Select_unpriced_item_type_",
-        "value":"Valitse tyyppin",
+        "value":"Valitse tyyppi",
         "description":"Select unrpiced item type"
     },
     {
@@ -297,12 +307,27 @@
     {
         "key":"_...currency_",
         "value":"...valuutta",
-        "description":""
+        "description":"currency"
+    },
+    {
+        "key":"_Only_numbers_",
+        "value":"Vain numeroa",
+        "description":"Error message for not typing only numbers in"
     },
     {
         "key":"_Price_code_type_",
         "value":"Hintakoodin tyyppi",
         "description":"Price code type"
+    },
+    {
+        "key":"_Proprietary_",
+        "value":"Oma",
+        "description":"The type of the price code: proprietary"
+    },
+    {
+        "key":"_Finnish_price_code_",
+        "value":"Suomen hintaryhmä",
+        "description":"Finnish price code type"
     },
     {
         "key":"_Price_code_",
