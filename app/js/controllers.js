@@ -108,7 +108,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Get the lists for the forms
   	$scope.productNotificationTypeList = {};
-  	$http.get('assets/lists/lists_'+lang+'.json').success(function(data){
+  	$http.get('assets/lists/selects_'+lang+'.json').success(function(data){
   		$scope.productNotificationTypeList  = data.list1;
       $scope.productCompositionList       = data.list2;
       $scope.productFormList              = data.list7;
