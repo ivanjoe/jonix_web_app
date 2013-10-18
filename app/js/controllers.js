@@ -211,6 +211,10 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.currencies              = data.list96;
     });
 
+    $http.get('assets/lists/ysa.json').success(function(data){
+      $scope.keywords = data;
+    });
+
     $scope.showLanguageCode = function(data) {
       alert(data);
     };
