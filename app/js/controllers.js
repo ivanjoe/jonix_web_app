@@ -121,6 +121,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.supplierRoleList             = data.list93;
       $scope.productTitleElementLevelList = data.list149;
       $scope.publishingDateRoleList       = data.list163;
+      //Save the data for later use
+      $scope.lists = data;
   	});
 
    	$scope.addProduct = function() {
@@ -159,6 +161,48 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         alert('Proxy is down!');
       });
     }
+
+    // Changes the available product forms based on the ID type
+    $scope.changeProductForm = function(item) {
+      console.log($scope.productFormList);
+      switch(item)
+      {
+        case "02":
+        case "15":
+          $scope.productFormList = {
+                "00":"Määrittelemätön",
+                "BA":"Kirja",
+                "BB":"Kovakantinen kirja",
+                "BC":"Pehmeäkantinen kirja",
+                "BD":"Irtolehtiä, irtolehtijulkaisu",
+                "BE":"Kierreselkä",
+                "BF":"Lehtivihko, moniste",
+                "BG":"Leather / fine binding",
+                "BH":"Pahvisivuinen kirja",
+                "BI":"Kangaskirja",
+                "BJ":"Bath book",
+                "BK":"Poikkeavan muotoinen kirja",
+                "BL":"Slide bound",
+                "BM":"Big book",
+                "BN":"Part-work (fascículo)",
+                "BO":"Haitarikirja, 'Leporello'",
+                "BP":"'Kylpykirja'",
+                "BZ":"Jokin muu kirjan muoto",
+                "CA":"Kartta",
+                "CB":"Sheet map, folded",
+                "CC":"Sheet map, flat",
+                "CD":"Sheet map, rolled",
+                "CE":"Globe",
+                "CZ":"Other cartographic"
+          };
+          break;
+        case "02":
+          break;
+        default:
+          $scope.productFormList = $scope.lists.list7;
+          break;
+      }
+    };
 
     $scope.reset();
   }])

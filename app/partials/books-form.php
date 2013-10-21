@@ -114,15 +114,19 @@ session_start();
                    required>
   	      	  	  <option value="">{{'_Select_notification_type_' | i18n}}</option>
   	      	  	</select>
+                <code>{{product.notificationType}}</code>
   	      	  </div>
   	      	</div>
 
   	      	<div class="row">
   	      	  <label for="product-id-type" class="span2">{{'_Product_ID_type_' | i18n}}</label>
   	      	  <div class="span5">
-  	      	  	<select id="product-id-type" ng-model="product.IdType" ng-options="key as value for (key, value) in productIdTypeList" required>
+  	      	  	<select id="product-id-type" ng-model="product.IdType"
+                  ng-options="key as value for (key, value) in productIdTypeList" required
+                  ng-change="changeProductForm(product.IdType)">
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
+                <code>{{product.IdType}}</code>
                 <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue" ng-pattern="/^[0-9]{10,13}$/" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
@@ -140,6 +144,7 @@ session_start();
   	      	  	<select id="product-composition" ng-model="product.descriptiveDetail.composition" ng-options="key as value for (key, value) in productCompositionList" required>
                   <option value="">{{'_Select_composition_' | i18n}}</option>
                 </select>
+                <code>{{product.descriptiveDetail.composition}}</code>
   	      	  </div>
   	      	</div>
 
@@ -149,6 +154,7 @@ session_start();
   	      	  	<select id="product-form" ng-model="product.descriptiveDetail.productForm" ng-options="key as value for (key, value) in productFormList" required>
   	      	  		<option value="">{{'_Select_product_form_' | i18n}}</option>
   	      	  	</select>
+                <code>{{product.descriptiveDetail.productForm}}</code>
   	      	  </div>
   	      	</div>
 
@@ -159,9 +165,11 @@ session_start();
   	      	  	<select type="text" ng-model="product.descriptiveDetail.titleDetail.titleType" ng-options="key as value for (key, value) in productTitleTypeList" required/>
                   <option value="">{{'_...title_type_' | i18n}}</option>
                 </select>
+                <code>{{product.descriptiveDetail.titleDetail.titleType}}</code>
                 <select type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleElementLevel" ng-options="key as value for (key,value) in productTitleElementLevelList" required/>
                   <option value="">{{'_...element_level_' | i18n}}</option>
                 </select>
+                <code>{{product.descriptiveDetail.titleDetail.titleElement.titleElementLevel}}</code>
                 <input type="text" ng-model="product.descriptiveDetail.titleDetail.titleElement.titleText" placeholder="{{'_title_text_' | i18n}}" required/>
                 <span>[{{'_more..._' | i18n}}]</span>
   	      	  </div>
@@ -179,6 +187,7 @@ session_start();
                     typeahead-editable='false'/>
                 </span>
                 <!-- <code ng-model="product.descriptiveDetail.language.languageCode2" ng-init="HUF2">HUF</code> -->
+                <code>{{product.descriptiveDetail.language.languageRole}}</code>
                 <span>[{{'_more..._' | i18n}}]</span>
               </div>
             </div>
@@ -201,7 +210,8 @@ session_start();
                 <select ng-model="product.publishingDetail.publisher.publishingRole" ng-options="key as value for (key, value) in publishingRoleList" class="input-medium" required/>
                   <option value="">{{'_...publishers_role_' | i18n}}</option>
                 </select>
-                <input type="text" ng-model="product.publishingDetail.publisher.publishinName" placeholder="{{'_Name_' | i18n}}" required/>
+                <input type="text" ng-model="product.publishingDetail.publisher.publishingName" placeholder="{{'_Name_' | i18n}}" required/>
+                <code>{{ product.publishingDetail.publisher.publishingRole }}</code>
               </div>
             </div>
 
@@ -209,7 +219,9 @@ session_start();
               <label class="span2">{{'_Country_of_publication_' | i18n}}</label>
               <div class="span5" ng-controller="TypeheadCtrl">
                 <input type="text" ng-model="product.publishingDetail.countryOfPublication"
-                    typeahead="country.code as country.name for country in countryList | filter:$viewValue | limitTo:8" typehead-editable='false' class="input-medium" required/>
+                    typeahead="country.code as country.name for country in countryList | filter:$viewValue | limitTo:8"
+                    typehead-editable='false' class="input-medium" typehead-on-select="alert();" required/>
+                <code ng-init="country='Unknown'">{{ country }}</code>
               </div>
             </div>
 
@@ -219,7 +231,9 @@ session_start();
                 <select ng-model="product.publishingDetail.publishingStatus" ng-options="key as value for (key, value) in publishingStatusList" required />
                   <option value="">{{'_Select_publishing_status_' | i18n}}</option>
                 </select>
+                <code>{{ product.publishingDetail.publishingStatus }}</code>
               </div>
+
             </div>
 
             <div class="row">
@@ -228,6 +242,7 @@ session_start();
                 <select ng-model="product.publishingDetail.publishingDate.publishingDateRole" ng-options="key as value for (key, value) in publishingDateRoleList" required/>
                   <option value="">{{'_...status_' | i18n}}</option>
                 </select>
+                <code>{{ product.publishingDetail.publishingDate.publishingDateRole }}</code>
 
                 <div ng-controller="DatepickerCtrl">
                   <div class="form-horizontal">
@@ -248,6 +263,7 @@ session_start();
                 <select id="supplier-role" ng-model="product.productSupply.supplyDetail.supplier.supplierRole" ng-options="key as value for (key, value) in supplierRoleList" required>
                   <option value="">{{'_Select_supplier_role_' | i18n}}</option>
                 </select>
+                <code>{{product.productSupply.supplyDetail.supplier.supplierRole}}</code>
                 <input type="text" ng-model="product.productSupply.supplyDetail.supplier.supplierName" placeholder="{{'_Name_' | i18n}}" required/>
               </div>
             </div>
@@ -256,8 +272,9 @@ session_start();
               <label class="span2">{{'_Product_availability_' | i18n}}</label>
               <div class="span5" ng-controller="TypeheadCtrl">
                 <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability"
-                    typeahead="availability.code as availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
-                <span>[ {{ product.productSupply.supplyDetail.productAvailability }}]</span>
+                    typeahead="availability.code as availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8"
+                    typehead-editable='false' typehead-on-select="susu" required/>
+                <code>{{ product.productSupply.supplyDetail.productAvailability }}</code>
               </div>
             </div>
 
@@ -267,6 +284,7 @@ session_start();
                 <select ng-model="product.productSupply.supplyDetail.unpricedItemType" ng-options="key as value for (key, value) in unpricedCodeList">
                   <option value="">{{'_Select_unpriced_item_type_' | i18n}}</option>
                 </select>
+                <code>{{product.productSupply.supplyDetail.unpricedItemType}}</code>
               </div>
             </div>
 
@@ -275,7 +293,7 @@ session_start();
               <div class="span5" ng-controller="TypeheadCtrl">
                 <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType"
                   typeahead="typ.code as typ.name for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
-                <span>[{{ product.productSupply.supplyDetail.price.priceType }}]</span>
+                <code>{{ product.productSupply.supplyDetail.price.priceType }}</code>
               </div>
             </div>
 
@@ -304,7 +322,10 @@ session_start();
                   <option value="01" selected="selected">{{'_Proprietary_' | i18n}}</option>
                   <option value="02">{{'_Finnish_price_code_' | i18n}}</option>
                 </select>
-                <input type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode" placeholder="{{'_Price_code_' | i18n}}" required/>
+                <input type="text"
+                  ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCode"
+                  placeholder="{{'_Price_code_' | i18n}}" required/>
+                <code>{{product.productSupply.supplyDetail.price.priceCoded.priceCodeType}}</code>
               </div>
             </div>
 
