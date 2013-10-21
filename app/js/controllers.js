@@ -255,10 +255,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.currencies              = data.list96;
     });
 
-    $http.get('assets/lists/ysa.json').success(function(data){
-      $scope.keywords = data;
-    });
-
     $scope.getKeywordsAjax = function(query){
       if (query.length > 2) {
         return $http.get('./query.php?query='+query+'*&lang=fi')
@@ -277,8 +273,24 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     }
 
     $scope.showLanguageCode = function(data) {
-      alert(data);
+      $scope.product.descriptiveDetail.language.languageCode = data.code;
     };
+
+    $scope.showCountryCode = function(data) {
+      $scope.product.publishingDetail.countryOfPublication = data.code;
+    };
+
+    $scope.showAvailabilityCode = function(data) {
+      $scope.product.productSupply.supplyDetail.productAvailability = data.code;
+    }
+
+    $scope.showPriceTypeCode = function(data) {
+      $scope.product.productSupply.supplyDetail.price.priceType = data.code;
+    }
+
+    $scope.showCurrencyCode = function(data) {
+      $scope.product.productSupply.supplyDetail.price.currencyCode = data.code;
+    }
 
   }])
 

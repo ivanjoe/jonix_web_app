@@ -182,12 +182,13 @@ session_start();
                   <option value="">{{'_...language_role_' | i18n}}</option>
                 </select>
                 <span ng-controller="TypeheadCtrl">
-                  <input type="text" class="input-small" ng-model="product.descriptiveDetail.language.languageCode"
-                    typeahead="lang.code as lang.name for lang in productLanguageCodeList | filter:$viewValue | limitTo:8"
-                    typeahead-editable='false'/>
+                  <input type="text" class="input-small" ng-model="language"
+                    typeahead="lang.name for lang in productLanguageCodeList | filter:$viewValue | limitTo:8"
+                    typeahead-editable='false' typeahead-on-select="showLanguageCode($item)" />
                 </span>
                 <!-- <code ng-model="product.descriptiveDetail.language.languageCode2" ng-init="HUF2">HUF</code> -->
                 <code>{{product.descriptiveDetail.language.languageRole}}</code>
+                <code ng-init="product.descriptiveDetail.language.languageCode=''">{{product.descriptiveDetail.language.languageCode}}</code>
                 <span>[{{'_more..._' | i18n}}]</span>
               </div>
             </div>
@@ -197,7 +198,7 @@ session_start();
               <div class="span5">
                 <span ng-controller="TypeheadCtrl">
                   <input type="text"  class="input-small" ng-model="product.descriptiveDetail.subject"
-                    typeahead="keyw.prefLabel for keyw in getKeywordsAjax($viewValue)" typehead-editable='false'
+                    typeahead="keyw.prefLabel for keyw in getKeywordsAjax($viewValue)" typeahead-editable='false'
                     min-length="2"
                     typeahead-on-select="product.subjectContent.push(product.descriptiveDetail.subject); product.descriptiveDetail.subject=null"
                     typeahead-wait-ms=300 />
@@ -224,10 +225,10 @@ session_start();
             <div class="row">
               <label class="span2">{{'_Country_of_publication_' | i18n}}</label>
               <div class="span5" ng-controller="TypeheadCtrl">
-                <input type="text" ng-model="product.publishingDetail.countryOfPublication"
-                    typeahead="country.code as country.name for country in countryList | filter:$viewValue | limitTo:8"
-                    typehead-editable='false' class="input-medium" typehead-on-select="alert();" required/>
-                <code ng-init="country='Unknown'">{{ country }}</code>
+                <input type="text" ng-model="country"
+                    typeahead="country.name for country in countryList | filter:$viewValue | limitTo:8"
+                    typeahead-editable='false' class="input-medium" typeahead-on-select="showCountryCode($item)" required/>
+                <code ng-init="product.publishingDetail.countryOfPublication=''">{{ product.publishingDetail.countryOfPublication }}</code>
               </div>
             </div>
 
@@ -277,10 +278,12 @@ session_start();
             <div class="row">
               <label class="span2">{{'_Product_availability_' | i18n}}</label>
               <div class="span5" ng-controller="TypeheadCtrl">
-                <input type="text" ng-model="product.productSupply.supplyDetail.productAvailability"
-                    typeahead="availability.code as availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8"
-                    typehead-editable='false' typehead-on-select="susu" required/>
-                <code>{{ product.productSupply.supplyDetail.productAvailability }}</code>
+                <input type="text" ng-model="productAvailability"
+                    typeahead="availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8"
+                    typeahead-editable='false' typeahead-on-select="showAvailabilityCode($item)" required/>
+                <code ng-init="product.productSupply.supplyDetail.productAvailability=''">
+                  {{ product.productSupply.supplyDetail.productAvailability }}
+                </code>
               </div>
             </div>
 
@@ -297,9 +300,10 @@ session_start();
             <div class="row">
               <label class="span2">{{'_Price_type_' | i18n}}</label>
               <div class="span5" ng-controller="TypeheadCtrl">
-                <input type="text" ng-model="product.productSupply.supplyDetail.price.priceType"
-                  typeahead="typ.code as typ.name for typ in priceTypes | filter:$viewValue | limitTo:8" typehead-editable='false' required/>
-                <code>{{ product.productSupply.supplyDetail.price.priceType }}</code>
+                <input type="text" ng-model="priceType"
+                  typeahead="typ.name for typ in priceTypes | filter:$viewValue | limitTo:8"
+                  typeahead-editable='false' required typeahead-on-select="showPriceTypeCode($item)" />
+                <code ng-init="product.productSupply.supplyDetail.price.priceType=''">{{ product.productSupply.supplyDetail.price.priceType }}</code>
               </div>
             </div>
 
@@ -310,8 +314,13 @@ session_start();
                  ng-pattern="/^(\d{1,5}(\.\d{0,3}){0,1})$/" ng-model="product.productSupply.supplyDetail.price.priceAmount"
                  maxlength="10" required/>
                 <span ng-controller="TypeheadCtrl">
-                  <input type="text"  class="input-small" ng-model="product.productSupply.supplyDetail.price.currencyCode"
-                    typeahead="curr.code as curr.name for curr in currencies | filter:$viewValue | limitTo:8" typehead-editable='false' placeholder="{{'_...currency_' | i18n}}" required/>
+                  <input type="text"  class="input-small" ng-model="currencyCode"
+                    typeahead="curr.name for curr in currencies | filter:$viewValue | limitTo:8"
+                    typeahead-editable='false' placeholder="{{'_...currency_' | i18n}}" required
+                    typeahead-on-select="showCurrencyCode($item)"/>
+                  <code ng-init="product.productSupply.supplyDetail.price.currencyCode=''">
+                    {{ product.productSupply.supplyDetail.price.currencyCode }}
+                  </code>
                 </span>
                   <small class="text-error" ng-show="productForm.priceAmount.$error.pattern">
                     {{'_Only_numbers_' | i18n}}
