@@ -259,6 +259,23 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.keywords = data;
     });
 
+    $scope.getKeywordsAjax = function(query){
+      if (query.length > 2) {
+        return $http.get('./query.php?query='+query+'*&lang=fi')
+          .then(function(response){
+            return limitToFilter(response.data, 15);
+          });
+      }
+    };
+
+    $scope.availabilityCodeFor = function(item) {
+      $scope.productAvailability = item.code;
+    };
+
+    var limitToFilter = function(data, limit) {
+      return data.results.splice(0,limit);
+    }
+
     $scope.showLanguageCode = function(data) {
       alert(data);
     };

@@ -197,8 +197,14 @@ session_start();
               <div class="span5">
                 <span ng-controller="TypeheadCtrl">
                   <input type="text"  class="input-small" ng-model="product.descriptiveDetail.subject"
-                    typeahead="keyw for keyw in keywords | filter:$viewValue | limitTo:8" typehead-editable='false'/>
-                  </span>
+                    typeahead="keyw.prefLabel for keyw in getKeywordsAjax($viewValue)" typehead-editable='false'
+                    min-length="2"
+                    typeahead-on-select="product.subjectContent.push(product.descriptiveDetail.subject); product.descriptiveDetail.subject=null"
+                    typeahead-wait-ms=300 />
+                </span>
+                <span ng-model="product.subjectContent" ng-init="product.subjectContent=[]"
+                  ng-change="">{{ product.subjectContent }}
+                </span>
               </div>
             </div>
 
