@@ -220,6 +220,16 @@
         "description":"The role of the language"
     },
     {
+        "key":"_Subject_",
+        "value":"Aihealue",
+        "description":"Subject"
+    },
+    {
+        "key":"_...scheme_identifier_",
+        "value":"...luokitusjärjestelmä tai asiasanasto",
+        "description":"Placeholder for scheme identifier"
+    },
+    {
         "key":"_Publishing_details_",
         "value":"Julkaisutiedot",
         "description":"Publishing details"

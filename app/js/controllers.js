@@ -99,12 +99,20 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     }
 
     $scope.master = {
-      header: {
-      },
-  		products: [
-  			{}
-  		]
-  	};
+      header: {},
+      products: [
+        {
+          descriptiveDetail: {
+            subjects: [
+              {
+                subjectSchemeIdentifier:'',
+                subjectHeadingText:''
+              }
+            ]
+          }
+        }
+      ]
+    };
 
     // Get the lists for the forms
   	$scope.productNotificationTypeList = {};
@@ -125,10 +133,23 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.lists = data;
   	});
 
+    // Add a product
    	$scope.addProduct = function() {
-  		$scope.message.products.push({type:'', value:''});
-  	}
+  		$scope.message.products.push(
+        {
+          descriptiveDetail: {
+            subjects: [
+              {
+                subjectSchemeIdentifier:'',
+                subjectHeadingText:''
+              }
+            ]
+          }
+        }
+      );
+  	};
 
+    // Remove a product
   	$scope.removeProduct = function(product) {
   		var products = $scope.message.products;
   		for (var i = 0, ii = products.length; i < ii; i++) {
@@ -136,15 +157,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   				products.splice(i, 1);
   			}
   		}
-  	}
+  	};
 
   	$scope.update = function(message) {
   		$scope.master = angular.copy(message);
-  	}
+  	};
 
   	$scope.reset = function () {
   		$scope.message = angular.copy($scope.master);
-  	}
+  	};
 
     // Send the filled in form
     // Get the info what is the response from the service
@@ -164,7 +185,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Changes the available product forms based on the ID type
     $scope.changeProductForm = function(item) {
-      console.log($scope.productFormList);
+
       switch(item)
       {
         case "02":
@@ -207,6 +228,20 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $scope.reset();
   }])
 
+  .controller('SubjectCtrl', ['$scope', function($scope) {
+
+    // Add more subject field to the form
+    $scope.addSubject = function(productIndex) {
+      $scope.product.descriptiveDetail.subjects.push({});
+    };
+
+    // Remove subjects
+    $scope.removeSubject =  function(i) {
+      $scope.product.descriptiveDetail.subjects.splice(i, 1);
+    }
+
+  }])
+
   .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   	 $scope.today = function() {
   	 	$scope.message.header.sentDateTime = new Date();
@@ -236,7 +271,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	$scope.message.sentTime = new Date();
   }])
 
-  .controller('TypeheadCtrl', ['$scope','$http','localize',
+  .controller('TypeaheadCtrl', ['$scope','$http','localize',
       function($scope, $http, localize) {
     $scope.selected = undefined;
 
@@ -248,6 +283,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     }
 
     $http.get('assets/lists/typeheads_'+lang+'.json').success(function(data){
+      $scope.subjectSchemeIdentifiers= data.list27;
       $scope.priceTypes              = data.list58;
       $scope.productAvailabilityList = data.list65;
       $scope.productLanguageCodeList = data.list74;
@@ -256,7 +292,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     });
 
     $scope.getKeywordsAjax = function(query){
-      if (query.length > 2) {
+      if (query.length > 1) {
         return $http.get('./query.php?query='+query+'*&lang=fi')
           .then(function(response){
             return limitToFilter(response.data, 15);
@@ -270,7 +306,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     var limitToFilter = function(data, limit) {
       return data.results.splice(0,limit);
-    }
+    };
+
+    $scope.showSubjectSchemeIdentifier = function(data) {
+      $scope.subject.subjectSchemeIdentifier = data.code;
+    };
 
     $scope.showLanguageCode = function(data) {
       $scope.product.descriptiveDetail.language.languageCode = data.code;
@@ -299,7 +339,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     ];
 
     $scope.$on('answer', function(answer, data) {
-      console.log(data);
 
       var now = $filter('date')(new Date(), 'dd MMMM yyyy h:mm:ss');
 

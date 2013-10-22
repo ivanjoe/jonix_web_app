@@ -33,7 +33,6 @@ angular.module('localization', [])
                 localize.resourceFileLoaded = true;
                 // broadcast that the file has been loaded
                 $rootScope.$broadcast('localizeResourcesUpdated');
-                console.log(data[0].value);
                 $rootScope.$broadcast('language', data[0].value);
             },
 
