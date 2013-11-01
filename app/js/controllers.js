@@ -322,17 +322,30 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.showSubjectSchemeIdentifier = function(data) {
-      $scope.subject.subjectCode.url = "";
-      $scope.subject.subjectHeading.url = "http://geonames.org/";
-
       $scope.subject.subjectSchemeIdentifier = data.code;
     };
 
-    $scope.showSubjectCode = function(data) {
-      $scope.subject.subjectCode.url = "http://geonames.org/";
-      $scope.subject.subjectHeading.url = "";
+    $scope.showYSALink = function(data) {
+      // Show links for the YSA terms
+      console.log(data);
+      $scope.subject.subjCode.url = "";
+      
+    };
 
-      $scope.subject.subjectCode = data.geonameId;
+    $scope.showSubjectCode = function(data, type) {
+      // Show links for the different subjects
+      switch (type) {
+        case "YSA":
+          $scope.subject.subjCode.url = "http://www.yso.fi/onto/ysa/" + data.localname;
+
+          $scope.subject.subjectCode = data.localname;
+          break;
+        case "Geonames":
+          $scope.subject.subjCode.url = "http://geonames.org/" + data.geonameId;      
+
+          $scope.subject.subjectCode = data.geonameId;
+          break;
+      }      
     };
 
     $scope.showLanguageCode = function(data) {
