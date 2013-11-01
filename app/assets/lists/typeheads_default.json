@@ -1,6 +1,7 @@
 {
 	"list27":[
-		{"code":"64","name":"YSA"}
+		{"code":"64","name":"YSA"},
+		{"code":"86","name":"GeoNames ID"}
 	],
 	"list58":[
 		{"code":"01","name":"Suositushinta, veroton"},

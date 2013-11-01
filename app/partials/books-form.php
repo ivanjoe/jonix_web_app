@@ -192,36 +192,11 @@ session_start();
               </div>
             </div>
 
+            <!-- SUBJECTS -->
             <div class="row"
               ng-repeat="subject in product.descriptiveDetail.subjects"
 
-              ng-controller="SubjectCtrl">
-              <!-- TODO: repeat -->
-              <span class="span2">
-                <label ng-show="$first">{{'_Subject_'| i18n}}</label>
-              </span>
-              <div class="span5">
-
-
-                <span ng-controller="TypeaheadCtrl">
-                  <input type="text" class="input-small" ng-model="subjectSchemeIdentifier"
-                    typeahead="scheme.name for scheme in subjectSchemeIdentifiers | filter:$viewValue | limitTo:8"
-                    typeahead-editable='false' typeahead-on-select="showSubjectSchemeIdentifier($item)"
-                    placeholder="{{'_...scheme_identifier_' | i18n}}" ng-init="subjectSchemeIdentifier=''"/>
-
-                  <input type="text"  class="input-small" ng-model="subject.subjectHeadingText"
-                    typeahead="keyw.prefLabel for keyw in getKeywordsAjax($viewValue)" typeahead-editable='false'
-                    min-length="2"
-                    typeahead-wait-ms=300 />
-                  <code ng-init="subject.subjectSchemeIdentifier=''">
-                    {{ subject.subjectSchemeIdentifier }}
-                  </code>
-                  <code>{{ subject.subjectHeadingText }}</code>
-                </span>
-
-                <a href="" ng-click="addSubject($parent.$parent.$index)">[+]</a>
-                <a href="" ng-click="removeSubject()" ng-show="product.descriptiveDetail.subjects.length > 1">[-]</a>
-              </div>
+              ng-controller="SubjectCtrl" ng-include="'partials/subjects.html'">
             </div>
 
             <h4>{{'_Publishing_details_' | i18n}}</h4>

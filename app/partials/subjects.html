@@ -1,0 +1,38 @@
+<span class="span2">
+  <label ng-show="$first">{{'_Subject_'| i18n}}</label>
+</span>
+<div class="span5">
+
+
+  <span ng-controller="TypeaheadCtrl">
+    <input type="text" class="input-small" ng-model="subjectSchemeIdentifier"
+      typeahead="scheme.name for scheme in subjectSchemeIdentifiers | filter:$viewValue | limitTo:8"
+      typeahead-editable='false' typeahead-on-select="showSubjectSchemeIdentifier($item)"
+      placeholder="{{'_...scheme_identifier_' | i18n}}" ng-init="subjectSchemeIdentifier=''"/>
+
+    <span ng-switch="subjectSchemeIdentifier">
+      <input ng-switch-when="YSA" type="text" class="input-small"
+        ng-model="subject.subjectHeadingText"  style="background-color: #fafad2"
+        typeahead="keyw.prefLabel for keyw in getKeywordsAjax($viewValue, 64)"
+        typeahead-editable='false' min-length="2" typeahead-wait-ms=300 />
+
+      <input ng-switch-when="GeoNames ID" type="text" class="input-small"
+        ng-model="subject.subjectHeadingText" style="background-color: #f0fff0"
+        typeahead="keyw.name for keyw in getKeywordsAjax($viewValue, 86)"
+        typeahead-editable='false' min-length="2" typeahead-wait-ms=300
+        typeahead-on-select="showSubjectCode($item)" />
+    </span>
+    <code ng-init="subject.subjectSchemeIdentifier=''">
+      {{ subject.subjectSchemeIdentifier }}
+    </code>
+    <code ng-model="subject.subjectHeading.url" ng-init="subject.subjectHeading.url=''">
+      <a href="{{ subject.subjectHeading.url }}{{ subject.subjectHeadingText }}" target="_blank">{{ subject.subjectHeadingText }}</a>
+    </code>
+    <code ng-model="subject.subjectCode.url" ng-init="subject.subjectCode.url=''">
+      <a href="{{ subject.subjectCode.url }}{{ subject.subjectCode }}" target="_blank">{{ subject.subjectCode }}</a>
+    </code>
+  </span>
+
+  <a href="" ng-click="addSubject($parent.$parent.$index)">[+]</a>
+  <a href="" ng-click="removeSubject()" ng-show="product.descriptiveDetail.subjects.length > 1">[-]</a>
+</div>

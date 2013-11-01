@@ -4,10 +4,22 @@ $url = 'http://195.148.149.175:8080/jonix/send';
 // Get the JSON data
 $data = $_GET;
 $query = $_GET['query'];
+$schid = $_GET['schid'];
+$url = '';
 
-$url = "http://light.onki.fi/rest/v1/ysa/search?query=".$query."*&lang=fi";
-
-//print_r($data);
+switch ($schid) {
+	// YSA
+	case 64:
+		$url = "http://light.onki.fi/rest/v1/ysa/search?query=".$query."*&lang=fi";
+		break;
+	// GeoNames ID
+	case 86:
+		$url = "http://api.geonames.org/searchJSON?formatted=true&name=".$query."*&maxRows=10&lang=fi&username=almalm&style=short";
+		break;
+	default:
+		# code...
+		break;
+}
 
 // Create curl handle
 $ch = curl_init($url);
@@ -19,13 +31,6 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 // Execute
 $ch_result = curl_exec($ch);
-
-// Check if any error occured
-/*if(!curl_errno($ch))
-{
- $info = curl_getinfo($ch);
- $info['result'] = $ch_result;
-}*/
 
 // Close the connection
 curl_close($ch);

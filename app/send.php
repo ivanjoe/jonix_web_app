@@ -1,5 +1,5 @@
 <?php
-$url = 'http://195.148.149.175:8080/jonix/send';
+$url = 'http://195.148.149.175:8080/jonix/send?key=34042286-16c0-4c77-8968-c7a45f79224a';
 
 // Get the JSON data
 $data = file_get_contents("php://input");

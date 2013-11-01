@@ -291,12 +291,25 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.currencies              = data.list96;
     });
 
-    $scope.getKeywordsAjax = function(query){
+    $scope.getKeywordsAjax = function(query, schemeIdentifier){
       if (query.length > 1) {
-        return $http.get('./query.php?query='+query+'*&lang=fi')
-          .then(function(response){
-            return limitToFilter(response.data, 15);
-          });
+        //TODO: the language code should be sent over
+        switch (schemeIdentifier) {
+          case 64:
+            return $http.get('./query.php?query='+query+'*&lang=fi&schid=64')
+              .then(function(response){
+                return limitToFilter(response.data, 15);
+              });
+            break;
+          case 86:
+            return $http.get('./query.php?query='+query+'*&lang=fi&schid=86')
+              .then(function(response){
+                return response.data.geonames;
+              });
+            break;
+          default:
+            break;
+        }
       }
     };
 
@@ -309,7 +322,17 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.showSubjectSchemeIdentifier = function(data) {
+      $scope.subject.subjectCode.url = "";
+      $scope.subject.subjectHeading.url = "http://geonames.org/";
+
       $scope.subject.subjectSchemeIdentifier = data.code;
+    };
+
+    $scope.showSubjectCode = function(data) {
+      $scope.subject.subjectCode.url = "http://geonames.org/";
+      $scope.subject.subjectHeading.url = "";
+
+      $scope.subject.subjectCode = data.geonameId;
     };
 
     $scope.showLanguageCode = function(data) {
