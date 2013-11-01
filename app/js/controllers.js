@@ -325,13 +325,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.subject.subjectSchemeIdentifier = data.code;
     };
 
-    $scope.showYSALink = function(data) {
-      // Show links for the YSA terms
-      console.log(data);
-      $scope.subject.subjCode.url = "";
-      
-    };
-
     $scope.showSubjectCode = function(data, type) {
       // Show links for the different subjects
       switch (type) {
