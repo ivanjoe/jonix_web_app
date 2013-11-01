@@ -278,6 +278,18 @@ session_start();
             </div>
 
             <div class="row">
+              <label class="span2"></label>
+              <div class="span5" ng-init="priced=0">
+                <label class="radio inline"><input type="radio" ng-model="priced" value=1
+                  ng-change="product.productSupply.supplyDetail.unpricedItemType=null" />{{'_Priced_' | i18n}}
+                </label >
+                <label class="radio inline"><input type="radio" ng-model="priced" value=0
+                  ng-change="product.productSupply.supplyDetail.price={}" />{{'_Unpriced_' | i18n}}
+                </label>  
+              </div>
+            </div>
+
+            <div class="row" ng-hide="priced">
               <label class="span2">{{'_Unpriced_item_type_' | i18n}}</label>
               <div class="span5">
                 <select ng-model="product.productSupply.supplyDetail.unpricedItemType" ng-options="key as value for (key, value) in unpricedCodeList">
@@ -287,7 +299,7 @@ session_start();
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="priced">
               <label class="span2">{{'_Price_type_' | i18n}}</label>
               <div class="span5" ng-controller="TypeaheadCtrl">
                 <input type="text" ng-model="priceType"
@@ -297,7 +309,7 @@ session_start();
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="priced">
               <label class="span2">{{'_Price_amount_' | i18n}}</label>
               <div class="span5">
                 <input type="text" name="priceAmount" class="input-small"
@@ -319,7 +331,7 @@ session_start();
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="priced">
               <label class="span2">{{'_Price_code_type_' | i18n}}</label>
               <div class="span5">
                 <select type="text" ng-model="product.productSupply.supplyDetail.price.priceCoded.priceCodeType"

@@ -295,6 +295,16 @@
         "description":"Product availability"
     },
     {
+        "key":"_Priced_",
+        "value":"Hinnoiteltu",
+        "description":"Peice has been defined"
+    },
+    {
+        "key":"_Unpriced_",
+        "value":"Hinnoitelematon",
+        "description":"Peice has not been defined"
+    },
+    {
         "key":"_Unpriced_item_type_",
         "value":"Hinnattoman tuotteen tyyppi",
         "description":""
