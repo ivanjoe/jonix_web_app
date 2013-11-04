@@ -248,12 +248,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	 };
   	 $scope.today();
 
-  	 $scope.showWeeks = false;
+     $scope.showWeeks = false;
 
   	 $scope.clear = function () {
-  	    //$scope.message.header.sentDateTime = null;
-        $scope.dtPick = null;
+  	    $scope.message.header.sentDateTime = null;
   	 };
+
+     $scope.clear2 = function() {
+      $scope.product.publishingDetail.publishingDate.date = null;
+     }
 
   	 $scope.open = function() {
   	    $timeout(function() {
@@ -334,11 +337,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           $scope.subject.subjectCode = data.localname;
           break;
         case "Geonames":
-          $scope.subject.subjCode.url = "http://geonames.org/" + data.geonameId;      
+          $scope.subject.subjCode.url = "http://geonames.org/" + data.geonameId;
 
           $scope.subject.subjectCode = data.geonameId;
           break;
-      }      
+      }
     };
 
     $scope.showLanguageCode = function(data) {

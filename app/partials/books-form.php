@@ -244,9 +244,9 @@ session_start();
                 <div ng-controller="DatepickerCtrl">
                   <div class="form-horizontal">
                       <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
-                       ng-model="product.publishingDetail.publishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                      <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
-                      <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
+                       ng-model="product.publishingDetail.publishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'"
+                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                      <button class="btn btn-small btn-danger" ng-click="clear2()">{{'_Clear_' | i18n}}</button>
                   </div>
                 </div>
               </div>
@@ -285,7 +285,7 @@ session_start();
                 </label >
                 <label class="radio inline"><input type="radio" ng-model="priced" value=0
                   ng-change="product.productSupply.supplyDetail.price={}" />{{'_Unpriced_' | i18n}}
-                </label>  
+                </label>
               </div>
             </div>
 
