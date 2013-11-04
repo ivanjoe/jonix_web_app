@@ -297,12 +297,12 @@
     {
         "key":"_Priced_",
         "value":"Hinnoiteltu",
-        "description":"Peice has been defined"
+        "description":"Price has been defined"
     },
     {
         "key":"_Unpriced_",
         "value":"Hinnoitelematon",
-        "description":"Peice has not been defined"
+        "description":"Price has not been defined"
     },
     {
         "key":"_Unpriced_item_type_",
