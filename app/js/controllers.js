@@ -86,8 +86,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $modalInstance.dismiss('cancel');
     };
   }])
-  .controller('MessageCtrl', ['$scope','$http', 'localize',
-      function($scope, $http, localize) {
+  .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter',
+      function($scope, $http, localize, $filter) {
 
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";
@@ -132,6 +132,20 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       //Save the data for later use
       $scope.lists = data;
   	});
+
+    $scope.setupDates = function() {
+      var now = $filter('date')(new Date(), 'yyyyMMdd');
+      $scope.message.header.sentTime = '';
+      $scope.message.header.sentDate = now;
+      $scope.message.header.sentDateTime = now;
+    }
+
+    $scope.updateSentDateTime = function() {
+      if (!angular.isDefined($scope.message.header.sentTime)) {
+        $scope.message.header.sentTime = '';
+      }
+      $scope.message.header.sentDateTime = $scope.message.header.sentDate + $scope.message.header.sentTime;
+    }
 
     // Add a product
    	$scope.addProduct = function() {
@@ -244,14 +258,14 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
   .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   	 $scope.today = function() {
-  	 	$scope.message.header.sentDateTime = new Date();
+  	 	$scope.sentDateTime = new Date();
   	 };
   	 $scope.today();
 
      $scope.showWeeks = false;
 
   	 $scope.clear = function () {
-  	    $scope.message.header.sentDateTime = null;
+  	    $scope.sentDateTime = null;
   	 };
 
      $scope.clear2 = function() {
@@ -271,7 +285,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   }])
 
   .controller('TimepickerCtrl', ['$scope', function($scope) {
-  	$scope.message.sentTime = new Date();
+  	$scope.sentTime = new Date();
   }])
 
   .controller('TypeaheadCtrl', ['$scope','$http','localize',

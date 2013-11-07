@@ -63,19 +63,21 @@ session_start();
 
           <hr />
 
-          <div class="row">
+          <!-- TODO: get todays -->
+          <div class="row" ng-init="setupDates()">
           	<label for="date-picker" class="span2">{{'_Date_' | i18n}}</label>
           	<div class="span5">
 
   	          <div ng-controller="DatepickerCtrl">
       			    <div class="form-horizontal">
       			        <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
-                      ng-model="message.header.sentDateTime" is-open="opened" min="minDate"
+                      ng-model="sentDateTime" is-open="opened" min="minDate"
                       max="'2015-06-22'" datepicker-options="dateOptions"
-                      date-disabled="disabled(date, mode)" ng-required="true" name="dtPick"/>
+                      date-disabled="disabled(date, mode)" ng-required="true"
+                      ng-change="message.header.sentDate=(sentDateTime | date:'yyyyMMdd');updateSentDateTime();"/>
       			        <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
       			        <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
-                    <code>{{(message.header.sentDateTime | date:'yyyyMMdd') + (message.header.sentTime | date:'HHmm') }}</code>
+                    <code>{{message.header.sentDate }}{{message.header.sentTime}}</code>
       			    </div>
       			  </div>
 
@@ -89,7 +91,8 @@ session_start();
           	<label for="time" class="span2">{{'_Time_' | i18n}}</label>
           	<div class="span5">
               <div ng-controller="TimepickerCtrl" class="ng-scope">
-              	<div ng-model="message.header.sentTime" ng-change="changed()" class="well well-small" style="display:inline-block;">
+              	<div ng-model="sentTime" ng-change="message.header.sentTime=(sentTime | date:'HHmm');updateSentDateTime();"
+                  class="well well-small" style="display:inline-block;">
 			    	      <timepicker hour-step="1" minute-step="1" show-meridian="false"></timepicker>
 			  	      </div>
               </div>
@@ -365,7 +368,8 @@ session_start();
           <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
         </div>
     		<pre>form = {{ message | onixize }}</pre>
-        <pre>form = {{ message | json }}</pre>
+        Debug: <input type="checkbox" ng-model="debug" />
+        <pre ng-show="debug">{{ message | json }}</pre>
     </div>
 
   </div>

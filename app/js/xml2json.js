@@ -137,7 +137,8 @@ function X2JS() {
 	}
 
 	function startTag(jsonObj, element, attrList, closed) {
-		var resultStr = "<"+ ( (jsonObj!=null && jsonObj.__prefix!=null)? (jsonObj.__prefix+":"):"") + element;
+		var resultStr = "<"+ ( (jsonObj!=null && jsonObj.__prefix!=null)? (jsonObj.__prefix+":"):"") +
+		 element.replace(element[0], element[0].toUpperCase());
 		if(attrList!=null) {
 			for(var aidx = 0; aidx < attrList.length; aidx++) {
 				var attrName = attrList[aidx];
@@ -148,12 +149,13 @@ function X2JS() {
 		if(!closed)
 			resultStr+=">";
 		else
-			resultStr+="/>";
+			resultStr+="/>\n";
 		return resultStr;
 	}
 
 	function endTag(jsonObj,elementName) {
-		return "</"+ (jsonObj.__prefix!=null? (jsonObj.__prefix+":"):"")+elementName+">";
+		return "</"+ (jsonObj.__prefix!=null? (jsonObj.__prefix+":"):"") +
+		elementName.replace(elementName[0], elementName[0].toUpperCase())+">\n";
 	}
 
 	function endsWith(str, suffix) {
@@ -249,6 +251,9 @@ function X2JS() {
 		if(elementsCnt > 0) {
 			for( var it in jsonObj ) {
 
+				if(it =="$$hashKey") {
+					continue;
+				}
 				if(jsonXmlSpecialElem ( jsonObj, it) )
 					continue;
 
