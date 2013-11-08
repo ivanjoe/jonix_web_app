@@ -23,9 +23,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
   }])
+
   .controller('MyCtrl2', [function() {
 
   }])
+
   .controller('ModalCtrl', ['$scope', '$modal', '$log', '$http',
       function($scope, $modal, $log, $http) {
     $scope.password = '';
@@ -75,6 +77,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         });
     };
   }])
+
   .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
     $scope.input = {};
 
@@ -86,6 +89,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $modalInstance.dismiss('cancel');
     };
   }])
+
   .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter',
       function($scope, $http, localize, $filter) {
 
@@ -97,6 +101,12 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     if (availableLanguages.indexOf(localize.language) === -1) {
       lang = 'default';
     }
+
+    $scope.times = {
+      sentDate: {},
+      sentTime: {},
+      publishingDates: []
+    };
 
     $scope.master = {
       header: {},
@@ -135,16 +145,24 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     $scope.setupDates = function() {
       var now = $filter('date')(new Date(), 'yyyyMMdd');
-      $scope.message.header.sentTime = '';
-      $scope.message.header.sentDate = now;
       $scope.message.header.sentDateTime = now;
     }
 
     $scope.updateSentDateTime = function() {
-      if (!angular.isDefined($scope.message.header.sentTime)) {
+      // If the time value has not been set yet
+      if (!angular.isDefined($scope.times.sentTime)) {
         $scope.message.header.sentTime = '';
       }
-      $scope.message.header.sentDateTime = $scope.message.header.sentDate + $scope.message.header.sentTime;
+      // When the time selector is shown, update SentDateTime
+      if ($scope.showTime) {
+        var sentDate = $filter('date')($scope.times.sentDate, 'yyyyMMdd');
+        var sentTime = $filter('date')($scope.times.sentTime, 'HHmm');
+      } else {
+        var sentDate = $filter('date')($scope.times.sentDate, 'yyyyMMdd');
+        var sentTime = '';
+      }
+
+      $scope.message.header.sentDateTime = sentDate + sentTime;
     }
 
     // Add a product
@@ -161,6 +179,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           }
         }
       );
+      $scope.times.publishingDates.push();
   	};
 
     // Remove a product
@@ -258,14 +277,14 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
   .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   	 $scope.today = function() {
-  	 	$scope.sentDateTime = new Date();
+  	 	$scope.times.sentDate = new Date();
   	 };
   	 $scope.today();
 
      $scope.showWeeks = false;
 
   	 $scope.clear = function () {
-  	    $scope.sentDateTime = null;
+  	    $scope.times.sentDate = null;
   	 };
 
      $scope.clear2 = function() {
@@ -285,7 +304,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   }])
 
   .controller('TimepickerCtrl', ['$scope', function($scope) {
-  	$scope.sentTime = new Date();
+  	$scope.times.sentTime = new Date();
   }])
 
   .controller('TypeaheadCtrl', ['$scope','$http','localize',
