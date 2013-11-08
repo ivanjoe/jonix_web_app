@@ -104,8 +104,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     $scope.times = {
       sentDate: {},
-      sentTime: {},
-      publishingDates: []
+      sentTime: {}
     };
 
     $scope.master = {
@@ -179,7 +178,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           }
         }
       );
-      $scope.times.publishingDates.push();
   	};
 
     // Remove a product

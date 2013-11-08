@@ -137,6 +137,7 @@ function X2JS() {
 	}
 
 	function startTag(jsonObj, element, attrList, closed) {
+		// Make the first letter of the tag Capital
 		var resultStr = "<"+ ( (jsonObj!=null && jsonObj.__prefix!=null)? (jsonObj.__prefix+":"):"") +
 		 element.replace(element[0], element[0].toUpperCase());
 		if(attrList!=null) {
@@ -154,6 +155,7 @@ function X2JS() {
 	}
 
 	function endTag(jsonObj,elementName) {
+		// Make the first letter of the tag Capital
 		return "</"+ (jsonObj.__prefix!=null? (jsonObj.__prefix+":"):"") +
 		elementName.replace(elementName[0], elementName[0].toUpperCase())+">\n";
 	}
@@ -219,10 +221,11 @@ function X2JS() {
 		}
 		else
 			if(jsonTxtObj!=null) {
-				if(escapeMode)
+				if(escapeMode) {
 					result+=escapeXmlChars(jsonTxtObj);
-				else
+				}else{
 					result+=jsonTxtObj;
+				}
 			}
 
 		return result;
@@ -274,7 +277,11 @@ function X2JS() {
 						var subObjElementsCnt = jsonXmlElemCount ( subObj );
 						if(subObjElementsCnt > 0 || subObj.__text!=null || subObj.__cdata!=null) {
 							result+=startTag(subObj, it, attrList, false);
-							result+=parseJSONObject(subObj);
+							if(false) {//TODO: innen
+								parseJSONObject.toISOString();
+							} else {
+								result+=parseJSONObject(subObj);
+							}
 							result+=endTag(subObj,it);
 						}
 						else {
