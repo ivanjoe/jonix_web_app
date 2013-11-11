@@ -262,10 +262,26 @@ function X2JS() {
 
 				var subObj = jsonObj[it];
 
-				var attrList = parseJSONAttributes( subObj )
+				var attrList = parseJSONAttributes( subObj );
 
 				if(subObj == null || subObj == undefined) {
-					result+=startTag(subObj, it, attrList, true)
+					result+=startTag(subObj, it, attrList, true);
+				}
+				else if(it=="date"){
+					var y = subObj.getFullYear().toString();
+					var m = subObj.getMonth()+1;
+					if(m < 10) {
+						m = "0" + m.toString();
+					} else {
+						m = m.toString();
+					}
+					var d = subObj.getDate();
+					if(d < 10) {
+						d = "0" + d.toString();
+					} else {
+						d = d.toString();
+					}
+					result+="<Date>"+y+m+d+"</Date>";
 				}
 				else
 				if(subObj instanceof Object) {
@@ -277,11 +293,7 @@ function X2JS() {
 						var subObjElementsCnt = jsonXmlElemCount ( subObj );
 						if(subObjElementsCnt > 0 || subObj.__text!=null || subObj.__cdata!=null) {
 							result+=startTag(subObj, it, attrList, false);
-							if(false) {//TODO: innen
-								parseJSONObject.toISOString();
-							} else {
-								result+=parseJSONObject(subObj);
-							}
+							result+=parseJSONObject(subObj);
 							result+=endTag(subObj,it);
 						}
 						else {
