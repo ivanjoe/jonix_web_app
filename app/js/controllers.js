@@ -132,6 +132,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.productIdTypeList            = data.list5;
       $scope.productTitleTypeList         = data.list15;
       $scope.productLanguageRoleList      = data.list22;
+      $scope.nameCodeTypeList             = data.list44;
       $scope.publishingRoleList           = data.list45;
       $scope.unpricedCodeList             = data.list57;
       $scope.publishingStatusList         = data.list64;
@@ -141,6 +142,32 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       //Save the data for later use
       $scope.lists = data;
   	});
+
+    $scope.senderIDValuePattern = (function() {
+      // http://stackoverflow.com/questions/18900308/angularjs-dynamic-ng-pattern-validation
+      var regexp = /^(.*)$/;
+
+      return {
+        test: function(value) {
+          switch ($scope.message.header.sender.senderIDType)
+          {
+            // Y-tunnus
+            case '15':
+              regexp = /^([0-9]{1,8}--[0-9])$/;
+              break;
+            // ISNI
+            case '16':
+              regexp = /^(\d{16})$/;
+              break;
+            default:
+              regexp = /^(.*)$/;
+              break;
+          };
+
+          return regexp.test(value);
+        }
+      };
+    })();
 
     $scope.setupDates = function() {
       var now = $filter('date')(new Date(), 'yyyyMMdd');
@@ -327,6 +354,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     $scope.getKeywordsAjax = function(query, schemeIdentifier){
       if (query.length > 1) {
+
         //TODO: the language code should be sent over
         switch (schemeIdentifier) {
           case 64:
@@ -343,7 +371,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
             break;
           default:
             break;
-        }
+        };
+
       }
     };
 

@@ -254,7 +254,7 @@ function X2JS() {
 		if(elementsCnt > 0) {
 			for( var it in jsonObj ) {
 
-				if(it =="$$hashKey") {
+				if(it =="$$hashKey" || it =="subjCode") {
 					continue;
 				}
 				if(jsonXmlSpecialElem ( jsonObj, it) )

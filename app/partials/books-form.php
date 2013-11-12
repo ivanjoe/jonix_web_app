@@ -32,12 +32,12 @@ session_start();
           	<div class="span5">
               <input type="text" ng-model="message.header.sender.senderName" class="form-control"
                 name="senderName" id="senderName" placeholder="{{'_senderName_' | i18n}}"
-                  maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/">
-                <p>
-                  <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
-                    {{'_just_letters_' | i18n}}
-                  </small>
-                </p>
+                maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" />
+              <p>
+                <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
+                  {{'_just_letters_' | i18n}}
+                </small>
+              </p>
             </div>
           </div>
 
@@ -46,7 +46,11 @@ session_start();
           <!-- <div class="row" ng-switch-when="id"> -->
           	<label for="senderIdType" class="span2">{{'_sender_id_type_' | i18n}}</label>
             <div class="span5">
-              <input type="text" ng-model="message.header.sender.idType" class="form-control" id="senderIdType" placeholder="{{'_ID_type_' | i18n}}">
+              <select id="product-id-type" ng-model="message.header.sender.senderIDType"
+                  ng-options="key as value for (key, value) in nameCodeTypeList"
+                  ng-init="message.header.sender.senderIDType='15'" required
+                  id="senderIDType">
+              </select>
             </div>
           </div>
 
@@ -54,7 +58,15 @@ session_start();
           <!-- <div class="row" ng-switch-when="id"> -->
           	<label for="senderIdValue" class="span2">{{'_sender_id_value_' | i18n}}</label>
             <div class="span5">
-              <input type="text" ng-model="message.header.sender.idValue" class="form-control" id="sender-id-value" placeholder="{{'_ID_value_' | i18n}}">
+              <!-- Include -->
+              <input type="text" ng-model="message.header.sender.IDValue" class="form-control"
+                id="senderIDValue" name="senderIDValue" placeholder="{{'_ID_value_' | i18n}}"
+                maxlength=30 ng-pattern="senderIDValuePattern" />
+              <p>
+                <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern">
+                  {{'_Y-tunnus_should_be_' | i18n}}
+                </small>
+              </p>
             </div>
           </div>
           <!-- </div> -->
@@ -129,11 +141,12 @@ session_start();
   	      	  <div class="span5">
   	      	  	<select id="product-id-type" ng-model="product.IdType"
                   ng-options="key as value for (key, value) in productIdTypeList" required
-                  ng-change="changeProductForm(product.IdType)">
+                  ng-change="changeProductForm(product.IdType)" ng-init="product.IdType='02'">
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
                 <code>{{product.IdType}}</code>
-                <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue" ng-pattern="/^[0-9]{10,13}$/" required/>
+                <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue"
+                  ng-pattern="/^[0-9]{10,13}$/" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
                     {{'_Product_id_should_be_' | i18n}}
@@ -370,7 +383,9 @@ session_start();
         <div ng-controller="AlertCtrl">
           <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
         </div>
-    		<pre>form = {{ message | onixize }}</pre>
+    		<pre>form = &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;ONIXMessage xmlns="http://ns.editeur.org/onix/3.0/reference" release="3.0"&gt;
+{{ message | onixize }}</pre>
         Debug: <input type="checkbox" ng-model="debug" />
         <pre ng-show="debug">{{times}}
 

@@ -116,12 +116,12 @@
     },
     {
         "key":"_Select_time_",
-        "value":"Valitse aikaa",
+        "value":"Valitse aika",
         "description":"Select time checkbox"
     },
     {
         "key":"_Time_",
-        "value":"Aikaa",
+        "value":"Aika",
         "description":"Hour and minute selector"
     },
     {
@@ -171,7 +171,7 @@
     },
     {
         "key":"_Select_composition_",
-        "value":"Valitse kokoonpanon",
+        "value":"Valitse kokoonpano",
         "description":"Select product composition"
     },
     {
@@ -181,7 +181,7 @@
     },
     {
         "key":"_Select_product_form_",
-        "value":"Valitse tuotemuoton",
+        "value":"Valitse tuotemuoto",
         "description":"Select product form"
     },
     {
@@ -261,7 +261,7 @@
     },
     {
         "key":"_Select_publishing_status_",
-        "value":"Valitse tilan",
+        "value":"Valitse tila",
         "description":"Select publishing status"
     },
     {
@@ -271,7 +271,7 @@
     },
     {
         "key":"_...status_",
-        "value":"...tilan",
+        "value":"...tila",
         "description":"Oublication date status"
     },
     {
@@ -361,13 +361,13 @@
     },
     {
         "key":"_Reset_",
-        "value":"Tyhjätä",
+        "value":"Tyhjennä",
         "description":""
     },
     {
         "key":"_Send_",
-        "value":"Lähettä",
-        "description":""
+        "value":"Lähetä",
+        "description":"Send"
     },
     {
         "key":"_ONIX_msg_",
