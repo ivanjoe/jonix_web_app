@@ -64,7 +64,7 @@ session_start();
                 maxlength=30 ng-pattern="senderIDValuePattern" />
               <p>
                 <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern">
-                  {{'_Y-tunnus_should_be_' | i18n}}
+                  {{'_Tunnus_should_be_' | i18n}}
                 </small>
               </p>
             </div>

@@ -153,7 +153,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           {
             // Y-tunnus
             case '15':
-              regexp = /^([0-9]{1,8}--[0-9])$/;
+              regexp = /^(\d{7}-\d)$/;
               break;
             // ISNI
             case '16':
