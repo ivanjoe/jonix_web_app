@@ -229,7 +229,7 @@ session_start();
 
             <!-- SUBJECTS -->
             <div class="row"
-              ng-repeat="subject in product.descriptiveDetail.subjects"
+              ng-repeat="subjectItem in product.descriptiveDetail.subject"
 
               ng-controller="SubjectCtrl" ng-include="'partials/subjects.html'">
             </div>

@@ -112,7 +112,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       products: [
         {
           descriptiveDetail: {
-            subjects: [
+            subject: [
               {
                 subjectSchemeIdentifier:'',
                 subjectHeadingText:''
@@ -192,7 +192,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
             // ISBN-10
             case '02':
               regexp = /^(\d{10})$/
-              break;            
+              break;
             // LCCN
             case '13':
               regexp = /^(\d{2,4}-{0,1}\d{6})$/;
@@ -204,7 +204,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
             default:
               break;
           }
-          
+
           return regexp.test(value);
         }
 
@@ -239,7 +239,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   		$scope.message.products.push(
         {
           descriptiveDetail: {
-            subjects: [
+            subject: [
               {
                 subjectSchemeIdentifier:'',
                 subjectHeadingText:''
@@ -333,12 +333,12 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Add more subject field to the form
     $scope.addSubject = function(productIndex) {
-      $scope.product.descriptiveDetail.subjects.push({});
+      $scope.product.descriptiveDetail.subject.push({});
     };
 
     // Remove subjects
     $scope.removeSubject =  function(i) {
-      $scope.product.descriptiveDetail.subjects.splice(i, 1);
+      $scope.product.descriptiveDetail.subject.splice(i, 1);
     }
 
   }])
@@ -428,21 +428,21 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.showSubjectSchemeIdentifier = function(data) {
-      $scope.subject.subjectSchemeIdentifier = data.code;
+      $scope.subjectItem.subjectSchemeIdentifier = data.code;
     };
 
     $scope.showSubjectCode = function(data, type) {
       // Show links for the different subjects
       switch (type) {
         case "YSA":
-          $scope.subject.subjCode.url = "http://www.yso.fi/onto/ysa/" + data.localname;
+          $scope.subjectItem.subjCode.url = "http://www.yso.fi/onto/ysa/" + data.localname;
 
-          $scope.subject.subjectCode = data.localname;
+          $scope.subjectItem.subjectCode = data.localname;
           break;
         case "Geonames":
-          $scope.subject.subjCode.url = "http://geonames.org/" + data.geonameId;
+          $scope.subjectItem.subjCode.url = "http://geonames.org/" + data.geonameId;
 
-          $scope.subject.subjectCode = data.geonameId;
+          $scope.subjectItem.subjectCode = data.geonameId;
           break;
       }
     };
