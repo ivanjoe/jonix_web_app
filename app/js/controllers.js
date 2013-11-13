@@ -151,6 +151,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         test: function(value) {
           switch ($scope.message.header.sender.senderIDType)
           {
+            //TODO: add the other expressions from List44
+            // GLN
+            case '06':
+              regexp = /^(\d{13})$/;
+              break;
+            // SAN
+            case '07':
+              regexp = /^(\d{7})$/;
+              break;
             // Y-tunnus
             case '15':
               regexp = /^(\d{7}-\d)$/;
@@ -158,6 +167,10 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
             // ISNI
             case '16':
               regexp = /^(\d{16})$/;
+              break;
+            // LCCN
+            case '18':
+              regexp = /^(\d{2,4}-{0,1}\d{6})$/;
               break;
             default:
               regexp = /^(.*)$/;
@@ -167,6 +180,21 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           return regexp.test(value);
         }
       };
+    })();
+
+    $scope.productIdValuePattern = (function(i) {
+      var regexp = /^(.*)$/;
+
+      return {
+        test: function(value) {
+          console.log("jhjk");
+          console.log($scope.$parent);
+          //switch($scope.message.products)
+          // /^[0-9]{10,13}$/
+        }
+
+      };
+
     })();
 
     $scope.setupDates = function() {

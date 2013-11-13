@@ -90,6 +90,31 @@
         "description":"The type of the identifier of the sender"
     },
     {
+        "key":"_GLN_format_",
+        "value":"Formatti: 13 numeroa",
+        "description":"Formatt: 13 digits"
+    },
+    {
+        "key":"_SAN_format_",
+        "value":"Formatti: 7 numeroa",
+        "description":"Format: 7 digits"
+    },
+    {
+        "key":"_Y-tunnus_format_",
+        "value":"Formatti: XXXXXXX-X",
+        "description":"Format: XXXXXXX-X"
+    },
+    {
+        "key":"_ISNI_format_",
+        "value":"Formatti: 16 numeroa",
+        "description":"Format: 16 digits"
+    },
+    {
+        "key":"_LCCN_format_",
+        "value":"Formatti: (XX)XX(-)XXXXXX",
+        "description":"Format: (XX)XX(-)XXXXXX"
+    },
+    {
         "key":"_ID_type_",
         "value":"tunnistejärjestelmä",
         "description":"Place holder for the id type of the sender"

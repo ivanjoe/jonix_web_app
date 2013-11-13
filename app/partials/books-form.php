@@ -46,11 +46,21 @@ session_start();
           <!-- <div class="row" ng-switch-when="id"> -->
           	<label for="senderIdType" class="span2">{{'_sender_id_type_' | i18n}}</label>
             <div class="span5">
-              <select id="product-id-type" ng-model="message.header.sender.senderIDType"
+              <select id="senderIdType" ng-model="message.header.sender.senderIDType"
                   ng-options="key as value for (key, value) in nameCodeTypeList"
                   ng-init="message.header.sender.senderIDType='15'" required
                   id="senderIDType">
               </select>
+              <small ng-show="message.header.sender.senderIDType=='06'">
+                {{ '_GLN_format_' | i18n }}</small>
+              <small ng-show="message.header.sender.senderIDType=='07'">
+                {{ '_SAN_format_' | i18n }}</small>
+              <small ng-show="message.header.sender.senderIDType=='15'">
+                {{ '_Y-tunnus_format_' | i18n }}</small>
+              <small ng-show="message.header.sender.senderIDType=='16'">
+                {{ '_ISNI_format_' | i18n }}</small>
+              <small ng-show="message.header.sender.senderIDType=='18'">
+                {{ '_LCCN_format_' | i18n }}</small>
             </div>
           </div>
 
@@ -137,19 +147,19 @@ session_start();
   	      	</div>
 
   	      	<div class="row">
-  	      	  <label for="product-id-type" class="span2">{{'_Product_ID_type_' | i18n}}</label>
+  	      	  <label for="productIdType" class="span2">{{'_Product_ID_type_' | i18n}}</label>
   	      	  <div class="span5">
-  	      	  	<select id="product-id-type" ng-model="product.IdType"
+  	      	  	<select id="productIdType" name="productIdType" ng-model="product.IdType"
                   ng-options="key as value for (key, value) in productIdTypeList" required
                   ng-change="changeProductForm(product.IdType)" ng-init="product.IdType='02'">
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
                 <code>{{product.IdType}}</code>
                 <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue"
-                  ng-pattern="/^[0-9]{10,13}$/" required/>
+                  ng-pattern="productIdValuePattern" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
-                    {{'_Product_id_should_be_' | i18n}}
+                    {{'_Tunnus_should_be_' | i18n}}
                   </small>
                 </p>
   	      	  </div>
