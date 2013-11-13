@@ -182,20 +182,35 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       };
     })();
 
-    $scope.productIdValuePattern = (function(i) {
+    $scope.productIdValuePattern = (function(index) {
       var regexp = /^(.*)$/;
 
       return {
         test: function(value) {
-          console.log("jhjk");
-          console.log($scope.$parent);
-          //switch($scope.message.products)
-          // /^[0-9]{10,13}$/
+          switch($scope.message.products[index].IdType)
+          {
+            // ISBN-10
+            case '02':
+              regexp = /^(\d{10})$/
+              break;            
+            // LCCN
+            case '13':
+              regexp = /^(\d{2,4}-{0,1}\d{6})$/;
+              break;
+            // ISBN-13
+            case '15':
+              regexp = /^(\d{13})$/
+              break;
+            default:
+              break;
+          }
+          
+          return regexp.test(value);
         }
 
       };
 
-    })();
+    });
 
     $scope.setupDates = function() {
       var now = $filter('date')(new Date(), 'yyyyMMdd');

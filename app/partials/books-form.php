@@ -155,8 +155,14 @@ session_start();
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
                 <code>{{product.IdType}}</code>
+                <small ng-show="product.IdType=='02'">
+                  {{ '_ISBN-10_format_' | i18n }}</small>
+                <small ng-show="product.IdType=='13'">
+                  {{ '_LCCN_format_' | i18n }}</small>
+                <small ng-show="product.IdType=='15'">
+                  {{ '_ISBN-13_format_' | i18n }}</small>
                 <input name="productIdValue" id="productIdValue" type="text" ng-model="product.idValue"
-                  ng-pattern="productIdValuePattern" required/>
+                  ng-pattern="productIdValuePattern($index)" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
                     {{'_Tunnus_should_be_' | i18n}}
