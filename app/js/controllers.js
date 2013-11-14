@@ -109,7 +109,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     $scope.master = {
       header: {},
-      products: [
+      product: [
         {
           descriptiveDetail: {
             subject: [
@@ -187,7 +187,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
       return {
         test: function(value) {
-          switch($scope.message.products[index].IdType)
+          switch($scope.message.product[index].IdType)
           {
             // ISBN-10
             case '02':
@@ -236,7 +236,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Add a product
    	$scope.addProduct = function() {
-  		$scope.message.products.push(
+  		$scope.message.product.push(
         {
           descriptiveDetail: {
             subject: [
@@ -251,10 +251,10 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	};
 
     // Remove a product
-  	$scope.removeProduct = function(product) {
-  		var products = $scope.message.products;
+  	$scope.removeProduct = function(productItem) {
+  		var products = $scope.message.product;
   		for (var i = 0, ii = products.length; i < ii; i++) {
-  			if (product === products[i]) {
+  			if (productItem === products[i]) {
   				products.splice(i, 1);
   			}
   		}
@@ -333,12 +333,12 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Add more subject field to the form
     $scope.addSubject = function(productIndex) {
-      $scope.product.descriptiveDetail.subject.push({});
+      $scope.productItem.descriptiveDetail.subject.push({});
     };
 
     // Remove subjects
     $scope.removeSubject =  function(i) {
-      $scope.product.descriptiveDetail.subject.splice(i, 1);
+      $scope.productItem.descriptiveDetail.subject.splice(i, 1);
     }
 
   }])
@@ -356,7 +356,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   	 };
 
      $scope.clear2 = function() {
-      $scope.product.publishingDetail.publishingDate.date = null;
+      $scope.productItem.publishingDetail.publishingDate.date = null;
      }
 
   	 $scope.open = function() {
@@ -448,23 +448,23 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.showLanguageCode = function(data) {
-      $scope.product.descriptiveDetail.language.languageCode = data.code;
+      $scope.productItem.descriptiveDetail.language.languageCode = data.code;
     };
 
     $scope.showCountryCode = function(data) {
-      $scope.product.publishingDetail.countryOfPublication = data.code;
+      $scope.productItem.publishingDetail.countryOfPublication = data.code;
     };
 
     $scope.showAvailabilityCode = function(data) {
-      $scope.product.productSupply.supplyDetail.productAvailability = data.code;
+      $scope.productItem.productSupply.supplyDetail.productAvailability = data.code;
     }
 
     $scope.showPriceTypeCode = function(data) {
-      $scope.product.productSupply.supplyDetail.price.priceType = data.code;
+      $scope.productItem.productSupply.supplyDetail.price.priceType = data.code;
     }
 
     $scope.showCurrencyCode = function(data) {
-      $scope.product.productSupply.supplyDetail.price.currencyCode = data.code;
+      $scope.productItem.productSupply.supplyDetail.price.currencyCode = data.code;
     }
 
   }])
