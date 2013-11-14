@@ -332,7 +332,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   .controller('SubjectCtrl', ['$scope', function($scope) {
 
     // Add more subject field to the form
-    $scope.addSubject = function(productIndex) {
+    $scope.addSubject = function() {
       $scope.productItem.descriptiveDetail.subject.push({});
     };
 
