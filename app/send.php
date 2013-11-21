@@ -1,34 +1,52 @@
 <?php
-$url = 'http://195.148.149.175:8080/jonix/send?key=34042286-16c0-4c77-8968-c7a45f79224a';
+// function definition to convert array to xml
+function array_to_xml($info, $xml) {
+  foreach ($info as $key => $value) {
+    if(is_array($value)) {
+      if(!is_numeric($key)) {
+        $subnode = $xml->addChild(ucfirst($key));
+        array_to_xml($value, $subnode);
+      } else {
+        // v1
+        $subnode = $xml->addChild(ucfirst("item$key"));
+        array_to_xml($value, $subnode);
+        // v2
+        // TODO: escape case for numerical arrays
+        /*$keys = array_keys($value);
+        $subnode = $xml->addChild(ucfirst($keys[0]));
+        array_to_xml($value[$key], $subnode);*/
+      }
+    } else {
+      $xml->addChild(ucfirst($key), "$value");
+    }
+  }
+}
+
+$url = 'http://glassfish.spagu.metropolia.fi/jonix/send?key=d5c54443-530d-40c0-89f9-0bcbc8cfb298';
 
 // Get the JSON data
 $data = file_get_contents("php://input");
-$data = json_decode($data);
+$data = json_decode($data, true);
 
+// ONIX message string
+$onix = '';
 
-// TODO: Transcode it to XML
+// Transcode it to XML
+$xml = new SimpleXMLElement('<ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference"></ONIXMessage>');
+
+// Function call to convert array to XML
+array_to_xml($data, $xml);
+
+// Passing on the generated XML
+$onix = $xml->asXML();
+
 // TODO: Send to server, get respond
-
-$xml_head = '<?xml version="1.0"?>
-<ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference">';
-$data = $xml_head .
-  '<Header>
-    <SentDateTime>'.$data->header->sentDateTime.'</SentDateTime>
-    <Sender/>
-  </Header>
-  <Product>
-  	<RecordReference>wwww.aakjkljklj.com</RecordReference>
-  	<NotificationType>01</NotificationType>
-  	<ProductIdentifier/>
-  </Product>
-  </ONIXMessage>';
-
 // Create curl handle
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $onix);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
@@ -36,18 +54,19 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $ch_result = curl_exec($ch);
 
 // Check if any error occured
-if(!curl_errno($ch))
+if(curl_errno($ch))
 {
- $info = curl_getinfo($ch);
- $info['result'] = $ch_result;
-
- //echo 'Took ' . $info['total_time'] . ' seconds to send a request to ' . $info['url'] . "<br/>";
- //echo 'Status code:' . $info['http_code'] . "<br/>";
+  $info = new StdClass();
+  $info->result = curl_error($ch);
+  $info->http_code = 404;
+  $info->onix = $onix;
+} else {
+  $info = curl_getinfo($ch);
+  $info['result'] = $ch_result;
 }
 
 // Close the connection
 curl_close($ch);
-$info['trallala'] = $data;
 
 // Return some status messages
 echo json_encode($info);

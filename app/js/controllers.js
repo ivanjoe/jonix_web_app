@@ -484,7 +484,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       // Connection with proxy (send.php) was succesful
       // TODO: prepare for all the HTTP codes
       if(data[1] == 200) {
-        if (data[0].http_code == 406) {
+        if (data[0].http_code == 406 || data[0].http_code == 404) {
           alert.type = "warning";
           alert.msg = '<strong>Backend responded:</strong><br/>' + data[0].result +
             '<br/>at <small>' + now + '</small>';
