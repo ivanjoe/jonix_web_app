@@ -62,9 +62,6 @@ describe('controllers', function(){
       expect(scope.message.product.length).toBe(2);
     });
 
-    /*it('should add subjects to the product', function() {
-      scope.
-    })*/
   });
 
   describe('SubjectCtrl', function() {

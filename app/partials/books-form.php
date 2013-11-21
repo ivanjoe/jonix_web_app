@@ -218,7 +218,7 @@ session_start();
                 <select ng-model="productItem.descriptiveDetail.language.languageRole" ng-options="key as value for (key, value) in productLanguageRoleList" required/>
                   <option value="">{{'_...language_role_' | i18n}}</option>
                 </select>
-                <span ng-controller="TypeaheadCtrl">
+                <span ng-controller="TypeaheadCtrl" id="languageTypeahead">
                   <input type="text" class="input-small" ng-model="language"
                     typeahead="lang.name for lang in productLanguageCodeList | filter:$viewValue | limitTo:8"
                     typeahead-editable='false' typeahead-on-select="showLanguageCode($item)" />
@@ -251,7 +251,7 @@ session_start();
 
             <div class="row">
               <label class="span2">{{'_Country_of_publication_' | i18n}}</label>
-              <div class="span5" ng-controller="TypeaheadCtrl">
+              <div class="span5" ng-controller="TypeaheadCtrl" id="countryTypeahead">
                 <input type="text" ng-model="country"
                     typeahead="country.name for country in countryList | filter:$viewValue | limitTo:8"
                     typeahead-editable='false' class="input-medium" typeahead-on-select="showCountryCode($item)" required/>
@@ -304,7 +304,7 @@ session_start();
 
             <div class="row">
               <label class="span2">{{'_Product_availability_' | i18n}}</label>
-              <div class="span5" ng-controller="TypeaheadCtrl">
+              <div class="span5" ng-controller="TypeaheadCtrl" id="availabilityTypeahead">
                 <input type="text" ng-model="productAvailability"
                     typeahead="availability.name for availability in productAvailabilityList | filter:$viewValue | limitTo:8"
                     typeahead-editable='false' typeahead-on-select="showAvailabilityCode($item)" required/>
@@ -338,7 +338,7 @@ session_start();
 
             <div class="row" ng-show="priced">
               <label class="span2">{{'_Price_type_' | i18n}}</label>
-              <div class="span5" ng-controller="TypeaheadCtrl">
+              <div class="span5" ng-controller="TypeaheadCtrl" id="priceTypeTypeahead">
                 <input type="text" ng-model="priceType"
                   typeahead="typ.name for typ in priceTypes | filter:$viewValue | limitTo:8"
                   typeahead-editable='false' required typeahead-on-select="showPriceTypeCode($item)" />
@@ -352,7 +352,7 @@ session_start();
                 <input type="text" name="priceAmount" class="input-small"
                  ng-pattern="/^(\d{1,5}(\.\d{0,3}){0,1})$/" ng-model="productItem.productSupply.supplyDetail.price.priceAmount"
                  maxlength="10" required/>
-                <span ng-controller="TypeaheadCtrl">
+                <span ng-controller="TypeaheadCtrl" id="currencyTypeahead">
                   <input type="text"  class="input-small" ng-model="currencyCode"
                     typeahead="curr.name for curr in currencies | filter:$viewValue | limitTo:8"
                     typeahead-editable='false' placeholder="{{'_...currency_' | i18n}}" required

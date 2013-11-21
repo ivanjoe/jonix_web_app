@@ -9,12 +9,13 @@ $data = json_decode($data);
 // TODO: Transcode it to XML
 // TODO: Send to server, get respond
 
-$data = '<?xml version="1.0"?>
-<ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference">
-  <Header>
+$xml_head = '<?xml version="1.0"?>
+<ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference">';
+$data = $xml_head .
+  '<Header>
     <SentDateTime>'.$data->header->sentDateTime.'</SentDateTime>
     <Sender/>
-    </Header>
+  </Header>
   <Product>
   	<RecordReference>wwww.aakjkljklj.com</RecordReference>
   	<NotificationType>01</NotificationType>
@@ -46,6 +47,7 @@ if(!curl_errno($ch))
 
 // Close the connection
 curl_close($ch);
+$info['trallala'] = $data;
 
 // Return some status messages
 echo json_encode($info);

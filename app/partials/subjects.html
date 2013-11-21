@@ -4,7 +4,7 @@
 <div class="span5">
 
 
-  <span ng-controller="TypeaheadCtrl">
+  <span ng-controller="TypeaheadCtrl" id="subjectSchemeTypeahead">
     <input type="text" class="input-small" ng-model="subjectSchemeIdentifier"
       typeahead="scheme.name for scheme in subjectSchemeIdentifiers | filter:$viewValue | limitTo:8"
       typeahead-editable='false' typeahead-on-select="showSubjectSchemeIdentifier($item)"

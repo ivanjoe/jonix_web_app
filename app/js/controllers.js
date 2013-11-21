@@ -474,6 +474,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     ];
 
     $scope.$on('answer', function(answer, data) {
+      console.log(data);
 
       var now = $filter('date')(new Date(), 'dd MMMM yyyy h:mm:ss');
 
@@ -487,6 +488,9 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           alert.type = "warning";
           alert.msg = '<strong>Backend responded:</strong><br/>' + data[0].result +
             '<br/>at <small>' + now + '</small>';
+        } else if (data[0].http_code == 401) {
+          alert.type = "warning";
+          alert.msg = 'Failed! Unauthorized message!<br/>at <small>' + now + '</small>';
         }
       } else if (data[1] == 405) {
         alert.type = "error";
