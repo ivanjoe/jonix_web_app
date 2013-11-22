@@ -90,254 +90,319 @@
         "description":"The type of the identifier of the sender"
     },
     {
+        "key":"_GLN_format_",
+        "value":"Format: 13 digits",
+        "description":"Formatt: 13 digits"
+    },
+    {
+        "key":"_SAN_format_",
+        "value":"Format: 7 digits",
+        "description":"Format: 7 digits"
+    },
+    {
+        "key":"_Y-tunnus_format_",
+        "value":"Format: XXXXXXX-X",
+        "description":"Format: XXXXXXX-X"
+    },
+    {
+        "key":"_ISNI_format_",
+        "value":"Format: 16 digits",
+        "description":"Format: 16 digits"
+    },
+    {
+        "key":"_LCCN_format_",
+        "value":"Format: (XX)XX(-)XXXXXX",
+        "description":"Format: (XX)XX(-)XXXXXX"
+    },
+    {
         "key":"_ID_type_",
         "value":"sender's id type",
         "description":"Place holder for the id type of the sender"
     },
     {
         "key":"_sender_id_value_",
-        "value":"Lähettäjän tunniste",
+        "value":"Sender's ID",
         "description":"The value of the id of the sender"
     },
     {
         "key":"_ID_value_",
-        "value":"tunniste",
+        "value":"ID",
         "description":"Placeholder for the value of the id of the sender"
     },
     {
         "key":"_Today_",
-        "value":"Tänään",
+        "value":"Today",
         "description":"Today buttons text"
     },
     {
         "key":"_Clear_",
-        "value":"Tyhjennä",
+        "value":"Clear",
         "description":"Clear the value in the date selector"
     },
     {
         "key":"_Select_time_",
-        "value":"Valitse aikaa",
+        "value":"Select time",
         "description":"Select time checkbox"
     },
     {
         "key":"_Time_",
-        "value":"Aikaa",
+        "value":"Time",
         "description":"Hour and minute selector"
     },
     {
         "key":"_Product_",
-        "value":"Tuotetietue",
+        "value":"Product",
         "description":"Header: information about the product"
     },
     {
         "key":"_Record_reference_",
-        "value":"Tuotetietueen viite",
+        "value":"Record reference",
         "description":"The reference number of the product"
     },
     {
         "key":"_Notification_type_",
-        "value":"Ilmoituksen tyyppi",
+        "value":"Notification type",
         "description":"Notification or update type code"
     },
     {
         "key":"_Select_notification_type_",
-        "value":"Valitse ilmoituksen tyyppi",
+        "value":"Select notification type",
         "description":"Select notification type"
     },
     {
         "key":"_Product_ID_type_",
-        "value":"Tuotteen tunniste",
+        "value":"Product ID",
         "description":"Product identifier type and code"
     },
     {
         "key":"_Select_ID_type_",
-        "value":"Valitse tyyppi",
+        "value":"Select ID type",
         "description":"Select product identifier type"
     },
     {
+        "key":"_Product_id_should_be_",
+        "value":"The ISBN number should be between 10-13 digits",
+        "description":"Error message for product id (depending on the type)"
+    },
+    {
         "key":"_Descriptive_details_",
-        "value":"Kuvailutiedot-ryhmä",
+        "value":"Descriptive details composite",
         "description":"Descriptive detail composite"
     },
     {
         "key":"_Product_composition_",
-        "value":"Tuotteen kokoonpano",
+        "value":"Product composition",
         "description":"Product composition"
     },
     {
         "key":"_Select_composition_",
-        "value":"Valitse kokoonpanon",
+        "value":"Select composition",
         "description":"Select product composition"
     },
     {
         "key":"_Product_form_",
-        "value":"Tuotemuoto",
+        "value":"Product form",
         "description":"Product form"
     },
     {
         "key":"_Select_product_form_",
-        "value":"Valitse tuotemuoton",
+        "value":"Select product form",
         "description":"Select product form"
     },
     {
         "key":"_Product_title_",
-        "value":"Päänimeke",
+        "value":"Product title",
         "description":"Title text"
     },
     {
         "key":"_...title_type_",
-        "value":"...nimekkeen tyyppi",
+        "value":"...title type",
         "description":"Title type"
     },
     {
         "key":"_...element_level_",
-        "value":"...nimeketaso",
+        "value":"...element level",
         "description":"Title element level"
     },
     {
         "key":"_title_text_",
-        "value":"päänimeke",
+        "value":"title text",
         "description":"Title text"
     },
     {
         "key":"_more..._",
-        "value":"enemmän...",
+        "value":"more...",
         "description":"To add more"
     },
     {
         "key":"_Language_",
-        "value":"Kieli",
+        "value":"Language",
         "description":"Language"
     },
     {
         "key":"_...language_role_",
-        "value":"...kielen rooli",
+        "value":"...language role",
         "description":"The role of the language"
     },
     {
+        "key":"_Subject_",
+        "value":"Subject",
+        "description":"Subject"
+    },
+    {
+        "key":"_...scheme_identifier_",
+        "value":"...scheme identifier",
+        "description":"Placeholder for scheme identifier"
+    },
+    {
         "key":"_Publishing_details_",
-        "value":"Julkaisutiedot",
+        "value":"Publishing details",
         "description":"Publishing details"
     },
     {
         "key":"_Publisher_",
-        "value":"Julkaisija",
+        "value":"Publisher",
         "description":"Publisher"
     },
     {
         "key":"_Name_",
-        "value":"Nimi",
+        "value":"Name",
         "description":"Name"
     },
     {
         "key":"_...publishers_role_",
-        "value":"...rooli julkaisuprosessissa",
+        "value":"...publisher's role",
         "description":"The role in the publsihing process"
     },
     {
         "key":"_Country_of_publication_",
-        "value":"Julkaisumaa",
+        "value":"Country of publication",
         "description":"Country of publication"
     },
     {
         "key":"_Publishing_status_",
-        "value":"Tuotteen tila",
+        "value":"Publishing status",
         "description":"Publishing status"
     },
     {
         "key":"_Select_publishing_status_",
-        "value":"Valitse tilan",
+        "value":"Select publishing status",
         "description":"Select publishing status"
     },
     {
         "key":"_Publishing_date_",
-        "value":"Julkaisupäivämäärä",
+        "value":"Publishing date",
         "description":"Publishing date"
     },
     {
         "key":"_...status_",
-        "value":"...tilan",
+        "value":"...status",
         "description":"Oublication date status"
     },
     {
         "key":"_Product_supply_",
-        "value":"Tuotteiden tarjonta",
+        "value":"Product supply",
         "description":"Product supply"
     },
     {
         "key":"_Supplier_",
-        "value":"Kustantaja",
-        "description":"Publisher"
+        "value":"Supplier",
+        "description":"Supplier"
     },
     {
         "key":"_Select_supplier_role_",
-        "value":"Valitse Kustantajan rooli",
+        "value":"Select supplier's role",
         "description":"Select supplier's role"
     },
     {
         "key":"_Product_availability_",
-        "value":"Tuotteen saatavuus",
+        "value":"Product availability",
         "description":"Product availability"
     },
     {
+        "key":"_Priced_",
+        "value":"Priced",
+        "description":"Price has been defined"
+    },
+    {
+        "key":"_Unpriced_",
+        "value":"Unpriced",
+        "description":"Price has not been defined"
+    },
+    {
         "key":"_Unpriced_item_type_",
-        "value":"Hinnattoman tuotteen tyyppi",
+        "value":"Unpriced item type",
         "description":""
     },
     {
         "key":"_Select_unpriced_item_type_",
-        "value":"Valitse tyyppi",
+        "value":"Select unrpiced item type",
         "description":"Select unrpiced item type"
     },
     {
         "key":"_Price_type_",
-        "value":"Hintatyyppi",
+        "value":"Price type",
         "description":"Price type"
     },
     {
         "key":"_Price_amount_",
-        "value":"Hinta",
+        "value":"Price amount",
         "description":"Price amount"
     },
     {
         "key":"_...currency_",
-        "value":"...valuutta",
-        "description":""
+        "value":"...currency",
+        "description":"currency"
+    },
+    {
+        "key":"_Only_numbers_",
+        "value":"Only numbers please",
+        "description":"Error message for not typing only numbers in"
     },
     {
         "key":"_Price_code_type_",
-        "value":"Hintakoodin tyyppi",
+        "value":"Price code type",
         "description":"Price code type"
     },
     {
+        "key":"_Proprietary_",
+        "value":"Proprietary",
+        "description":"The type of the price code: proprietary"
+    },
+    {
+        "key":"_Finnish_price_code_",
+        "value":"Finnish price code",
+        "description":"Finnish price code type"
+    },
+    {
         "key":"_Price_code_",
-        "value":"Hintakoodin tyyppi",
+        "value":"Price code",
         "description":"Price code"
     },
     {
         "key":"_add_more_products_",
-        "value":"Lisää tuote",
+        "value":"Add more products",
         "description":""
     },
     {
         "key":"_Reset_",
-        "value":"Tyhjätä",
+        "value":"Reset",
         "description":""
     },
     {
         "key":"_Send_",
-        "value":"Lähettä",
+        "value":"Send",
         "description":""
     },
     {
         "key":"_ONIX_msg_",
-        "value":"ONIX-viesti",
+        "value":"ONIX message",
         "description":"ONIX message"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_ISBN-10_format_",
+        "value":"Format: 10 digits",
+        "description":"How the ISBN ID should look like"
     },
     {
         "key":"__",

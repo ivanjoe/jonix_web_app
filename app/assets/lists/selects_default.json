@@ -175,7 +175,7 @@
 		"ZZ":"Other merchandise"
 	},
 	"list15":{
-		"00":"Undefined",
+		"00":"Määrittelemätön",
 		"01":"Tuotteen tai sarjan nimeke",
 		"02":"Sarjan avainnimeke (ISSN)",
 		"03":"Alkuteoksen nimeke",
@@ -201,7 +201,7 @@
 		"09":"Tekstityksen kieli"
 	},
 	"list44":{
-		"01":"Proprietary",
+		"01":"Oma",
 		"03":"DNB publisher identifier",
 		"04":"Börsenverein Verkehrsnummer",
 		"05":"German ISBN Agency publisher identifier",
@@ -275,7 +275,7 @@
 		"Publishers retail price including tax":"42"
 	},
 	"list64":{
-		"00":"Unspecified",
+		"00":"Määrittelemätön",
 		"01":"Ilmestyminen peruuntunut",
 		"02":"Uutuus, ei vielä ilmestynyt",
 		"03":"Ilmestyminen siirtynyt",
@@ -293,7 +293,7 @@
 		"17":"Permanently withdrawn from sale"
 	},
 	"list93":{
-		"00":"Unspecified",
+		"00":"Määrittelemätön",
 		"01":"Kustantaja",
 		"02":"Publisher’s exclusive distributor to retailers",
 		"03":"Publisher’s non-exclusive distributor to retailers",

@@ -181,7 +181,7 @@
     },
     {
         "key":"_Product_id_should_be_",
-        "value":"The ISBN number should be between 10-13 digits",
+        "value":"ISBN-tunnuksen tulisi olla 10-13 merkkiä/numeroa",
         "description":"Error message for product id (depending on the type)"
     },
     {
@@ -307,7 +307,7 @@
     {
         "key":"_Supplier_",
         "value":"Kustantaja",
-        "description":"Publisher"
+        "description":"Supplier"
     },
     {
         "key":"_Select_supplier_role_",
@@ -400,9 +400,9 @@
         "description":"ONIX message"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_ISBN-10_format_",
+        "value":"Formatti: 10 numeroa",
+        "description":"How the ISBN ID should look like"
     },
     {
         "key":"__",
