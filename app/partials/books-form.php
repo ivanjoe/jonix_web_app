@@ -149,19 +149,19 @@ session_start();
   	      	<div class="row">
   	      	  <label for="productIdType" class="span2">{{'_Product_ID_type_' | i18n}}</label>
   	      	  <div class="span5">
-  	      	  	<select id="productIdType" name="productIdType" ng-model="productItem.IdType"
+  	      	  	<select id="productIdType" name="productIdType" ng-model="productItem.productIdentifier.productIDType"
                   ng-options="key as value for (key, value) in productIdTypeList" required
-                  ng-change="changeProductForm(productItem.IdType)" ng-init="productItem.IdType='02'">
+                  ng-change="changeProductForm(productItem.productIdentifier.productIDType)" ng-init="productItem.productIdentifier.productIDType='02'">
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
-                <code>{{productItem.IdType}}</code>
-                <small ng-show="productItem.IdType=='02'">
+                <code>{{productItem.productIdentifier.productIDType}}</code>
+                <small ng-show="productItem.productIdentifier.productIDType=='02'">
                   {{ '_ISBN-10_format_' | i18n }}</small>
-                <small ng-show="productItem.IdType=='13'">
+                <small ng-show="productItem.productIdentifier.productIDType=='13'">
                   {{ '_LCCN_format_' | i18n }}</small>
-                <small ng-show="productItem.IdType=='15'">
+                <small ng-show="productItem.productIdentifier.productIDType=='15'">
                   {{ '_ISBN-13_format_' | i18n }}</small>
-                <input name="productIdValue" id="productIdValue" type="text" ng-model="productItem.idValue"
+                <input name="productIdValue" id="productIdValue" type="text" ng-model="productItem.productIdentifier.IDValue"
                   ng-pattern="productIdValuePattern($index)" required/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">

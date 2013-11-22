@@ -45,8 +45,8 @@ describe('my app', function() {
       input('times.sentDate').enter('2013-12-01');
       input('productItem.recordReference').enter('1234-XYZ-4321');
       select('productItem.notificationType').option('01');
-      select('productItem.IdType').option('02');
-      input('productItem.idValue').enter('1234567890');
+      select('productItem.productIdentifier.productIDType').option('02');
+      input('productItem.productIdentifier.IDValue').enter('1234567890');
       select('productItem.descriptiveDetail.composition').option('10');
       select('productItem.descriptiveDetail.productForm').option('BC');
       select('productItem.descriptiveDetail.titleDetail.titleType').option('03');
@@ -129,11 +129,6 @@ describe('my app', function() {
     });
 
   });
-
-
-
-
-
 
   /*describe('view2', function() {
 

@@ -187,7 +187,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
       return {
         test: function(value) {
-          switch($scope.message.product[index].IdType)
+          switch($scope.message.product[index].productIdentifier.productIDType)
           {
             // ISBN-10
             case '02':

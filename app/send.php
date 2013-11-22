@@ -1,4 +1,8 @@
 <?php
+
+/* Function definition is taken from
+ * http://stackoverflow.com/a/5965940/3021745
+ */
 // function definition to convert array to xml
 function array_to_xml($info, $xml) {
   foreach ($info as $key => $value) {
@@ -7,14 +11,8 @@ function array_to_xml($info, $xml) {
         $subnode = $xml->addChild(ucfirst($key));
         array_to_xml($value, $subnode);
       } else {
-        // v1
-        $subnode = $xml->addChild(ucfirst("item$key"));
+        $subnode = $xml;
         array_to_xml($value, $subnode);
-        // v2
-        // TODO: escape case for numerical arrays
-        /*$keys = array_keys($value);
-        $subnode = $xml->addChild(ucfirst($keys[0]));
-        array_to_xml($value[$key], $subnode);*/
       }
     } else {
       $xml->addChild(ucfirst($key), "$value");
@@ -63,6 +61,7 @@ if(curl_errno($ch))
 } else {
   $info = curl_getinfo($ch);
   $info['result'] = $ch_result;
+  $info['onix'] = $onix;
 }
 
 // Close the connection
