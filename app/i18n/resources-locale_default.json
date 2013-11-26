@@ -90,29 +90,29 @@
         "description":"The type of the identifier of the sender"
     },
     {
-        "key":"_GLN_format_",
+        "key":"_IDType_06_",
         "value":"Formatti: 13 numeroa",
-        "description":"Formatt: 13 digits"
+        "description":"Format: 13 digits, GLN format"
     },
     {
-        "key":"_SAN_format_",
+        "key":"_IDType_07_",
         "value":"Formatti: 7 numeroa",
-        "description":"Format: 7 digits"
+        "description":"Format: 7 digits, SAN format"
     },
     {
-        "key":"_Y-tunnus_format_",
+        "key":"_IDType_15_",
         "value":"Formatti: XXXXXXX-X",
-        "description":"Format: XXXXXXX-X"
+        "description":"Format: XXXXXXX-X, Y-tunnus, Finnish Company register"
     },
     {
-        "key":"_ISNI_format_",
+        "key":"_IDType_16_",
         "value":"Formatti: 16 numeroa",
-        "description":"Format: 16 digits"
+        "description":"Format: 16 digits, ISNI format"
     },
     {
-        "key":"_LCCN_format_",
+        "key":"_IDType_18_",
         "value":"Formatti: (XX)XX(-)XXXXXX",
-        "description":"Format: (XX)XX(-)XXXXXX"
+        "description":"Format: (XX)XX(-)XXXXXX, LCCN format"
     },
     {
         "key":"_ID_type_",
@@ -405,39 +405,39 @@
         "description":"How the ISBN ID should look like"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_",
+        "value":"Vastaanottaja",
+        "description":"Addressee in the header part"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_id_",
+        "value":"Vastaanottajan tunniste",
+        "description":"Addressee ID"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_name_",
+        "value":"Vastaanottajan nimi",
+        "description":"Addressee name"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_sender_",
+        "value":"Lähettäjä",
+        "description":"Sender"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_PIDType_02_",
+        "value":"Formatti: 10 numeroa",
+        "description":"Product ID type format tooltip, ISBN-10"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_PIDType_13_",
+        "value":"Formatti: (XX)XX(-)XXXXXX",
+        "description":"Product ID type format tooltip, LCCN"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_PIDType_15_",
+        "value":"Formatti: 13 numeroa",
+        "description":"Product ID type format tooltip, ISBN-13"
     },
     {
         "key":"__",

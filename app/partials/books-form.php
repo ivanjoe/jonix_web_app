@@ -14,21 +14,34 @@ session_start();
           <legend>{{'_Header_' | i18n}}</legend>
 
           <div class="row">
-          	<label for="identifier" class="span2">{{'_Identifier_' | i18n}}</label>
-          	<div class="span5">
-              <!-- <select ng-model="identifier-selection" ng-options="item for item in ['id','name']"></select> -->
-          	  <label class="radio inline">
-          	  	<input type="radio" ng-model="sender.identifier" value="id" />{{'_id_' | i18n}}
-          	  </label>
-          	  <label class="radio inline">
-          	    <input type="radio" ng-model="sender.identifier" value="name" />{{'_name_' | i18n}}<br />
-          	  </label>
+            <div class="span7">
+              <h4>{{'_sender_' | i18n }}</h4>
             </div>
           </div>
 
-          <!-- Show Sender name field if name radio button is chosen -->
-          <div class="row" ng-show="sender.identifier == 'name'">
-          	<label for="sender-name" class="span2">{{'_senderName_' | i18n}}</label>
+          <div class="row">
+            <label for="senderIdType" class="span2">{{'_sender_id_value_' | i18n}}</label>
+            <div class="span5">
+              <select id="senderIdType" ng-model="message.header.sender.senderIdentifier.senderIDType"
+                  ng-options="key as value for (key, value) in nameCodeTypeList"
+                  ng-init="message.header.sender.senderIdentifier.senderIDType='15'" required
+                  id="senderIDType">
+              </select>
+              <input type="text" ng-model="message.header.sender.senderIdentifier.IDValue" class="form-control"
+                id="senderIDValue" name="senderIDValue" placeholder="{{'_ID_value_' | i18n}}"
+                maxlength=30 ng-pattern="senderIDValuePattern"
+                tooltip="{{('_IDType_' + message.header.sender.senderIdentifier.senderIDType + '_') | i18n}}"
+                tooltip-trigger="focus" tooltip-placement="right" />
+              <p>
+                <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern">
+                  {{'_Tunnus_should_be_' | i18n}}
+                </small>
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="sender-name" class="span2">{{'_senderName_' | i18n}}</label>
           	<div class="span5">
               <input type="text" ng-model="message.header.sender.senderName" class="form-control"
                 name="senderName" id="senderName" placeholder="{{'_senderName_' | i18n}}"
@@ -41,45 +54,41 @@ session_start();
             </div>
           </div>
 
-          <!-- otherwise Id -->
-          <div class="row" ng-show="sender.identifier == 'id'">
-          <!-- <div class="row" ng-switch-when="id"> -->
-          	<label for="senderIdType" class="span2">{{'_sender_id_type_' | i18n}}</label>
-            <div class="span5">
-              <select id="senderIdType" ng-model="message.header.sender.senderIDType"
-                  ng-options="key as value for (key, value) in nameCodeTypeList"
-                  ng-init="message.header.sender.senderIDType='15'" required
-                  id="senderIDType">
-              </select>
-              <small ng-show="message.header.sender.senderIDType=='06'">
-                {{ '_GLN_format_' | i18n }}</small>
-              <small ng-show="message.header.sender.senderIDType=='07'">
-                {{ '_SAN_format_' | i18n }}</small>
-              <small ng-show="message.header.sender.senderIDType=='15'">
-                {{ '_Y-tunnus_format_' | i18n }}</small>
-              <small ng-show="message.header.sender.senderIDType=='16'">
-                {{ '_ISNI_format_' | i18n }}</small>
-              <small ng-show="message.header.sender.senderIDType=='18'">
-                {{ '_LCCN_format_' | i18n }}</small>
+          <hr />
+
+          <div class="row">
+            <div class="span7">
+              <h4>{{'_addressee_' | i18n }}</h4>
             </div>
           </div>
 
-          <div class="row" ng-show="sender.identifier == 'id'">
-          <!-- <div class="row" ng-switch-when="id"> -->
-          	<label for="senderIdValue" class="span2">{{'_sender_id_value_' | i18n}}</label>
+          <div class="row">
+            <label for="addresseeIDType" class="span2">{{'_addressee_id_' | i18n }}</label>
             <div class="span5">
-              <!-- Include -->
-              <input type="text" ng-model="message.header.sender.IDValue" class="form-control"
-                id="senderIDValue" name="senderIDValue" placeholder="{{'_ID_value_' | i18n}}"
-                maxlength=30 ng-pattern="senderIDValuePattern" />
+              <select id="addresseeIDType" ng-model="message.header.addressee.addresseeIdentifier.addresseeIDType"
+                ng-options="key as value for (key, value) in nameCodeTypeList"
+                ng-init="message.header.addressee.addresseeIdentifier.addresseeIDType='15'">
+              </select>
+              <input type="text" ng-model="message.header.addressee.addresseeIdentifier.IDValue"
+                class="form-control" name="addresseeIDValue" placeholder="{{'_ID_value_' | i18n}}"
+                maxlength=30 ng-pattern="addresseeIDValuePattern" id="addresseeIDValue"
+                tooltip="{{('_IDType_' + message.header.addressee.addresseeIdentifier.addresseeIDType + '_') | i18n}}"
+                tooltip-trigger="focus" tooltip-placement="right" />
               <p>
-                <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern">
+                <small class="text-error" ng-show="messageForm.addresseeIDValue.$error.pattern">
                   {{'_Tunnus_should_be_' | i18n}}
                 </small>
               </p>
             </div>
           </div>
-          <!-- </div> -->
+
+          <div class="row">
+            <label for="addresseeName" class="span2">{{'_addressee_name_' | i18n }}</label>
+            <div class="span5">
+              <input type="text" ng-model="message.header.addresseeName" class="form-control"
+                name="addresseeName" />
+            </div>
+          </div>
 
           <!-- Id ends -->
 
@@ -155,14 +164,10 @@ session_start();
   	      	  	  <option value="">{{'_Select_ID_type_' | i18n}}</option>
   	      	  	</select>
                 <code>{{productItem.productIdentifier.productIDType}}</code>
-                <small ng-show="productItem.productIdentifier.productIDType=='02'">
-                  {{ '_ISBN-10_format_' | i18n }}</small>
-                <small ng-show="productItem.productIdentifier.productIDType=='13'">
-                  {{ '_LCCN_format_' | i18n }}</small>
-                <small ng-show="productItem.productIdentifier.productIDType=='15'">
-                  {{ '_ISBN-13_format_' | i18n }}</small>
                 <input name="productIdValue" id="productIdValue" type="text" ng-model="productItem.productIdentifier.IDValue"
-                  ng-pattern="productIdValuePattern($index)" required/>
+                  ng-pattern="productIdValuePattern($index)" required
+                  tooltip="{{('_PIDType_' + productItem.productIdentifier.productIDType + '_') | i18n}}"
+                  tooltip-trigger="focus" tooltip-placement="right"/>
                 <p>
                   <small class="text-error" ng-show="productForm.productIdValue.$error.pattern">
                     {{'_Tunnus_should_be_' | i18n}}

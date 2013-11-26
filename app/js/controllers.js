@@ -143,13 +143,14 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.lists = data;
   	});
 
-    $scope.senderIDValuePattern = (function() {
-      // http://stackoverflow.com/questions/18900308/angularjs-dynamic-ng-pattern-validation
+    var pattern = function(idType, domain) {
       var regexp = /^(.*)$/;
 
-      return {
-        test: function(value) {
-          switch ($scope.message.header.sender.senderIDType)
+      switch (domain)
+      {
+        case 'sender':
+        case 'addressee':
+          switch (idType)
           {
             //TODO: add the other expressions from List44
             // GLN
@@ -176,22 +177,13 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
               regexp = /^(.*)$/;
               break;
           };
-
-          return regexp.test(value);
-        }
-      };
-    })();
-
-    $scope.productIdValuePattern = (function(index) {
-      var regexp = /^(.*)$/;
-
-      return {
-        test: function(value) {
-          switch($scope.message.product[index].productIdentifier.productIDType)
+          break;
+        case 'productId':
+          switch(idType)
           {
             // ISBN-10
             case '02':
-              regexp = /^(\d{10})$/
+              regexp = /^(\d{10})$/;
               break;
             // LCCN
             case '13':
@@ -199,17 +191,48 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
               break;
             // ISBN-13
             case '15':
-              regexp = /^(\d{13})$/
+              regexp = /^(\d{13})$/;
               break;
             default:
               break;
           }
+        default:
+          break;
+      }
+
+      return regexp;
+    };
+
+    $scope.senderIDValuePattern = (function() {
+      // http://stackoverflow.com/questions/18900308/angularjs-dynamic-ng-pattern-validation
+      return {
+        test: function(value) {
+          var regexp = pattern($scope.message.header.sender.senderIdentifier.senderIDType, 'sender');
 
           return regexp.test(value);
         }
-
       };
+    })();
 
+    $scope.addresseeIDValuePattern = (function() {
+      // http://stackoverflow.com/questions/18900308/angularjs-dynamic-ng-pattern-validation
+      return {
+        test: function(value) {
+          var regexp = pattern($scope.message.header.addressee.addresseeIdentifier.addresseeIDType, 'addressee');
+
+          return regexp.test(value);
+        }
+      };
+    })();
+
+    $scope.productIdValuePattern = (function(index) {
+      return {
+        test: function(value) {
+          var regexp = pattern($scope.message.product[index].productIdentifier.productIDType, 'productId');
+
+          return regexp.test(value);
+        }
+      };
     });
 
     $scope.setupDates = function() {

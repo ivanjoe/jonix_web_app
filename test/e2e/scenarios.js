@@ -40,7 +40,6 @@ describe('my app', function() {
 
     it('the send button should be enabled once the form is filled', function() {
       // Fill in the form
-      input('sender.identifier').select('name');
       input('message.header.sender.senderName').enter('Kubinyi');
       input('times.sentDate').enter('2013-12-01');
       input('productItem.recordReference').enter('1234-XYZ-4321');

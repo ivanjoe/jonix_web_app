@@ -405,24 +405,24 @@
         "description":"How the ISBN ID should look like"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_",
+        "value":"Addressee",
+        "description":"Addressee in the header part"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_id_",
+        "value":"Addressee ID",
+        "description":"Addressee ID"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_addressee_name_",
+        "value":"Addressee name",
+        "description":"Addressee name"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_sender_",
+        "value":"Sender",
+        "description":"Sender header"
     },
     {
         "key":"__",
