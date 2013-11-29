@@ -114,6 +114,8 @@ describe('my app', function() {
       input('productItem.productSupply.supplyDetail.price.priceCoded.priceCode')
         .enter('B');
 
+      pause();
+
       expect(element("button[ng-click='send()']").attr('disabled')).not().toBeDefined();
 
       //element('button[ng-click="send()"]').click();
@@ -127,6 +129,22 @@ describe('my app', function() {
       expect(element('button[ng-click="open()"]').text()).toBe('Kirjaudu sisään');
     });
 
+  });
+
+  describe('products', function() {
+
+    describe('edit product', function() {
+      beforeEach(function() {
+        browser().navigateTo('#/products/123456789/edit');
+      });
+
+      it('should render edit product when user navigates to /products/123456789/edit',
+       function () {
+        expect(element('h3:first').text()).
+          toMatch(/Edit 123456789 product/);
+       });
+
+    })
   });
 
   /*describe('view2', function() {

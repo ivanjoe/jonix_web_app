@@ -62,6 +62,10 @@ if(curl_errno($ch))
   $info = curl_getinfo($ch);
   $info['result'] = $ch_result;
   $info['onix'] = $onix;
+  foreach ($data['product'] as $prod) {
+    $info['view_product'][] = "http://glassfish.spagu.metropolia.fi/jonix/products/".
+      $prod['recordReference'];
+  }
 }
 
 // Close the connection

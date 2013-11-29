@@ -41,4 +41,10 @@ angular.module('myApp.filters', []).
 
   		// TODO: trying to find a way to use Node.js module
   	};
-  }]);
+  }]).
+  filter('reverse', [function() {
+    return function(arr) {
+      return arr.slice().reverse();
+    }
+  }])
+;

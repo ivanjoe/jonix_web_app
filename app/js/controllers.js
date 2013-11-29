@@ -501,8 +501,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
       var now = $filter('date')(new Date(), 'dd MMMM yyyy h:mm:ss');
 
-      var alert = {type: 'success', msg: 'I guess everything went fine' +
-        '<br/><small>at ' + now + '</small>'};
+      var alert = {};
+
       // types: success, info, warning, error
       // Connection with proxy (send.php) was succesful
       // TODO: prepare for all the HTTP codes
@@ -514,6 +514,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         } else if (data[0].http_code == 401) {
           alert.type = "warning";
           alert.msg = 'Failed! Unauthorized message!<br/>at <small>' + now + '</small>';
+        } else {
+          alert.type = 'success';
+          alert.msg = 'I guess everything went fine' +
+            '<br/><small>at ' + now + '</small><br/>Edit:<br/>';
+          alert.msg += data[0]['view_product'].join('<br/>');
         }
       } else if (data[1] == 405) {
         alert.type = "error";
@@ -526,6 +531,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     });
 
     $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
+      $scope.alerts.splice(-(index+1), 1);
     };
-  }]);
+  }])
+
+  .controller('ProductCtrl', ['$scope', '$route', function($scope, $route){
+    $scope.product =
+      {
+        id: $route.current.params.id
+      };
+  }])
+
+;

@@ -27,6 +27,7 @@
         <a class="brand" href="#">jOnix WebApp</a>
         <ul class="nav">
           <li ng-class="getClass('/onix-books')"><a href="#/onix-books">ONIX for books</a></li>
+          <li ng-class="getClass('/products')"><a href="#/products">Products</a></li>
           <!-- <li><a href="#/view1">view1</a></li>
           <li><a href="#/view2">view2</a></li>
           <li>

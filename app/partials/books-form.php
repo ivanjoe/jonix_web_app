@@ -404,7 +404,7 @@ session_start();
     <div class="span4">
     	<h3>{{'_ONIX_msg_' | i18n}}</h3>
         <div ng-controller="AlertCtrl">
-          <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
+          <alert ng-repeat="alert in alerts | reverse" type="alert.type" close="closeAlert($index)"><span ng-bind-html-unsafe="alert.msg"></span></alert>
         </div>
     		<pre>form = &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;ONIXMessage xmlns="http://ns.editeur.org/onix/3.0/reference" release="3.0"&gt;
