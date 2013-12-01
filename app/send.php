@@ -62,9 +62,13 @@ if(curl_errno($ch))
   $info = curl_getinfo($ch);
   $info['result'] = $ch_result;
   $info['onix'] = $onix;
+  $urls = explode('/', $_SERVER['REQUEST_URI'], -1);
+  $url = implode('/', $urls);
+  $url = $_SERVER['SERVER_NAME'].$url;
   foreach ($data['product'] as $prod) {
-    $info['view_product'][] = "http://glassfish.spagu.metropolia.fi/jonix/products/".
-      $prod['recordReference'];
+    //$info['view_product'][] = $url."/index.php#/products/".
+    $info['view_product'][] = "#/products/".
+      $prod['recordReference']."/edit";
   }
 }
 

@@ -518,7 +518,9 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           alert.type = 'success';
           alert.msg = 'I guess everything went fine' +
             '<br/><small>at ' + now + '</small><br/>Edit:<br/>';
-          alert.msg += data[0]['view_product'].join('<br/>');
+	  for (var i=0; i < data[0]['view_product'].length; i++) {
+	    alert.msg += "<a href='"+data[0]['view_product'][i]+"' target='_blank'>Product "+i+"</a>";
+	  }
         }
       } else if (data[1] == 405) {
         alert.type = "error";
