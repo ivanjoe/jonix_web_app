@@ -4,14 +4,18 @@
  * http://stackoverflow.com/a/5965940/3021745
  */
 // function definition to convert array to xml
-function array_to_xml($info, $xml) {
+function array_to_xml($info, $xml, $lastkey=null) {
   foreach ($info as $key => $value) {
     if(is_array($value)) {
       if(!is_numeric($key)) {
-        $subnode = $xml->addChild(ucfirst($key));
-        array_to_xml($value, $subnode);
+        if (isset($value[0])) {
+          array_to_xml($value, $xml, $key);
+        } else {
+          $subnode = $xml->addChild(ucfirst($key));
+          array_to_xml($value, $subnode, $key);
+        }
       } else {
-        $subnode = $xml;
+        $subnode = $xml->addChild(ucfirst($lastkey));
         array_to_xml($value, $subnode);
       }
     } else {

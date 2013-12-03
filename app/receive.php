@@ -26,8 +26,8 @@ if(curl_errno($ch))
 } else {
   // Reached the site, return some info
   $info = curl_getinfo($ch);
-  $info['result'] = $ch_result;
-  $info['sg'] = 'Nem';
+  $info['xml'] = $ch_result;
+  $info['result'] = simplexml_load_string($ch_result);
 }
 
 // Close the connection
