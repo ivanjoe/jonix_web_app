@@ -10,7 +10,7 @@ angular.module('myApp.directives', []).
     };
   }]).
 
-  directive('onix', [function($scope, $route, message) {
+  directive('onix', ['message', function($scope, $route, message) {
   	return {
   		restrict:"E",
   		scope: {},
@@ -28,8 +28,8 @@ angular.module('myApp.directives', []).
   							$scope.productId + "' not found";
   						break;
   					default:
-  						$scope.message = data.result;
-  						break;
+              $scope.message = data.result;
+              break;
   				}
 
   			// Connection with receive.php is unsuccessful
@@ -38,8 +38,49 @@ angular.module('myApp.directives', []).
   			});
   		},
   		// It will get from the controller what message it should show
-  		template: '<pre class="well">{{message}}</pre>'
+  		template: '<form class="well form-control">{{message}}</form>'
   	};
+  }]).
+
+  directive('productEdit', ['message', function(message) {
+    return function(scope, elm, attrs) {
+      message.show(scope.product.id).
+        success(function(data) {
+          switch(data.http_code) {
+            case 404:
+              alert('Not found');
+              break;
+            default:
+              var sg = json2form(data.result, '', []);
+              console.log(sg);
+              elm.append(sg);
+              break;
+          }
+        }).
+        error(function(data) {
+
+        });
+    };
   }])
 
-  ;
+;
+
+var json2form = function(obj, str, keys) {
+
+  for(var k in obj) {
+    if(typeof obj[k] === 'object') {
+      //if(Array.isArray(obj[k])) {
+      keys.push(k);
+      str=json2form(obj[k], str, keys);
+      keys.pop();
+    } else {
+      // TODO: Directives
+      str+=(keys.join(',')+'<div class="row"><span class="span'+(keys.length+2)+
+        '">'+k+'</span><span class="span5">'+
+        '<input type="text" ng-model="Product.'+k+'" value="'+
+        obj[k]+'" /></span></div>');
+    }
+  }
+
+  return str;
+};

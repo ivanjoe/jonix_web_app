@@ -26,7 +26,8 @@ if(curl_errno($ch))
   // Reached the site, return some info
   $info = curl_getinfo($ch);
   $info['xml'] = $ch_result;
-  $info['result'] = simplexml_load_string($ch_result);
+  $objects = simplexml_load_string($ch_result);
+  $info['result'] = $objects;
 }
 
 // Close the connection

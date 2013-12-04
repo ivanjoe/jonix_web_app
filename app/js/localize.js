@@ -94,7 +94,11 @@ angular.module('localization', [])
                     )[0];
 
                     // set the result
-                    result = entry.value;
+                    if(entry === undefined) {
+
+                    } else {
+                        result = entry.value;
+                    }
                 } else {
                     result = value;
                 }

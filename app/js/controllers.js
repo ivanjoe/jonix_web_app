@@ -15,11 +15,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.setFinnishLanguage = function() {
-        localize.setLanguage('default');
+      localize.setLanguage('default');
     };
 
     $scope.setEnglishLanguage = function() {
-        localize.setLanguage('en-UK');
+      localize.setLanguage('en-UK');
     };
 
   }])
@@ -90,8 +90,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
   }])
 
-  .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter',
-      function($scope, $http, localize, $filter) {
+  .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter', '$log',
+      function($scope, $http, localize, $filter, $log) {
 
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";
@@ -111,11 +111,11 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       header: {},
       product: [
         {
-          descriptiveDetail: {
-            subject: [
+          DescriptiveDetail: {
+            Subject: [
               {
-                subjectSchemeIdentifier:'',
-                subjectHeadingText:''
+                SubjectSchemeIdentifier:'',
+                SubjectHeadingText:''
               }
             ]
           }
@@ -124,9 +124,9 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     // Get the lists for the forms
-  	$scope.productNotificationTypeList = {};
-  	$http.get('assets/lists/selects_'+lang+'.json').success(function(data){
-  		$scope.productNotificationTypeList  = data.list1;
+    $scope.productNotificationTypeList = {};
+    $http.get('assets/lists/selects_'+lang+'.json').success(function(data){
+      $scope.productNotificationTypeList  = data.list1;
       $scope.productCompositionList       = data.list2;
       $scope.productFormList              = data.list7;
       $scope.productIdTypeList            = data.list5;
@@ -141,7 +141,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.publishingDateRoleList       = data.list163;
       //Save the data for later use
       $scope.lists = data;
-  	});
+    });
 
     var pattern = function(idType, domain) {
       var regexp = /^(.*)$/;
@@ -228,7 +228,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $scope.productIdValuePattern = (function(index) {
       return {
         test: function(value) {
-          var regexp = pattern($scope.message.product[index].productIdentifier.productIDType, 'productId');
+          var regexp = pattern($scope.message.product[index].ProductIdentifier.ProductIDType, 'productId');
 
           return regexp.test(value);
         }
@@ -258,38 +258,69 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     }
 
     // Add a product
-   	$scope.addProduct = function() {
-  		$scope.message.product.push(
+    $scope.addProduct = function() {
+        $scope.message.product.push(
         {
           descriptiveDetail: {
             subject: [
               {
-                subjectSchemeIdentifier:'',
-                subjectHeadingText:''
+                SubjectSchemeIdentifier:'',
+                SubjectHeadingText:''
               }
             ]
           }
         }
       );
-  	};
+    };
 
     // Remove a product
-  	$scope.removeProduct = function(productItem) {
-  		var products = $scope.message.product;
-  		for (var i = 0, ii = products.length; i < ii; i++) {
-  			if (productItem === products[i]) {
-  				products.splice(i, 1);
-  			}
-  		}
-  	};
+    $scope.removeProduct = function(productItem) {
+        var products = $scope.message.product;
+        for (var i = 0, ii = products.length; i < ii; i++) {
+            if (productItem === products[i]) {
+                products.splice(i, 1);
+            }
+        }
+    };
 
-  	$scope.update = function(message) {
-  		$scope.master = angular.copy(message);
-  	};
+    $scope.update = function(message) {
+        $scope.master = angular.copy(message);
+    };
 
-  	$scope.reset = function () {
-  		$scope.message = angular.copy($scope.master);
-  	};
+    $scope.reset = function () {
+        $scope.message = angular.copy($scope.master);
+    };
+
+    $scope.load = function (id, index) {
+      $http.get('./receive.php?rref='+id).
+        success(function(data) {
+          $log.log(data.result);
+          //TODO: fix up incoming data
+          // What should be arrays, what should be empty strings...
+          fixIncomingData(data.result);
+          $scope.message.product[index] = data.result;
+          // Fill in the input fields
+
+          // Price type
+          for (var k in $scope.lists.list58) {
+            if ($scope.lists.list58[k] == data.result.ProductSupply.SupplyDetail.Price.PriceType) {
+              $scope.priceType = k;
+            }
+          }
+          // Product Availability
+          // TODO: lists should come from a service
+          /*$scope.productAvailabilityList = data.list65;
+          $scope.productLanguageCodeList = data.list74;
+          $scope.countryList             = data.list91;
+          $scope.currencies              = data.list96;*/
+
+          for (var k in $scope.lists.list65) {
+            if ($scope.lists.list65[k] == data.result.ProductSupply.SupplyDetail.ProductAvailability) {
+              $scope.productAvailability = k;
+            }
+          }
+        }).error(function(data){});
+    };
 
     // Send the filled in form
     // Get the info what is the response from the service
@@ -356,46 +387,46 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
     // Add more subject field to the form
     $scope.addSubject = function() {
-      $scope.productItem.descriptiveDetail.subject.push({});
+      $scope.productItem.DescriptiveDetail.Subject.push({});
     };
 
     // Remove subjects
     $scope.removeSubject =  function(i) {
-      $scope.productItem.descriptiveDetail.subject.splice(i, 1);
+      $scope.productItem.DescriptiveDetail.Subject.splice(i, 1);
     }
 
   }])
 
   .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
-  	 $scope.today = function() {
-  	 	$scope.times.sentDate = new Date();
-  	 };
-  	 $scope.today();
+     $scope.today = function() {
+        $scope.times.sentDate = new Date();
+     };
+     $scope.today();
 
      $scope.showWeeks = false;
 
-  	 $scope.clear = function () {
-  	    $scope.times.sentDate = null;
-  	 };
+     $scope.clear = function () {
+        $scope.times.sentDate = null;
+     };
 
      $scope.clear2 = function() {
-      $scope.productItem.publishingDetail.publishingDate.date = null;
+      $scope.productItem.PublishingDetail.PublishingDate.date = null;
      }
 
-  	 $scope.open = function() {
-  	    $timeout(function() {
-  	      $scope.opened = true;
-  	    });
-  	 };
+     $scope.open = function() {
+        $timeout(function() {
+          $scope.opened = true;
+        });
+     };
 
-  	 $scope.dateOptions = {
-  	 	'year-format': "'yy'",
-  	    'starting-day': 1
-  	 };
+     $scope.dateOptions = {
+        'year-format': "'yy'",
+        'starting-day': 1
+     };
   }])
 
   .controller('TimepickerCtrl', ['$scope', function($scope) {
-  	$scope.times.sentTime = new Date();
+    $scope.times.sentTime = new Date();
   }])
 
   .controller('TypeaheadCtrl', ['$scope','$http','localize',
@@ -451,7 +482,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     };
 
     $scope.showSubjectSchemeIdentifier = function(data) {
-      $scope.subjectItem.subjectSchemeIdentifier = data.code;
+      $scope.subjectItem.SubjectSchemeIdentifier = data.code;
     };
 
     $scope.showSubjectCode = function(data, type) {
@@ -460,34 +491,34 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         case "YSA":
           $scope.subjectItem.subjCode.url = "http://www.yso.fi/onto/ysa/" + data.localname;
 
-          $scope.subjectItem.subjectCode = data.localname;
+          $scope.subjectItem.SubjectCode = data.localname;
           break;
         case "Geonames":
           $scope.subjectItem.subjCode.url = "http://geonames.org/" + data.geonameId;
 
-          $scope.subjectItem.subjectCode = data.geonameId;
+          $scope.subjectItem.SubjectCode = data.geonameId;
           break;
       }
     };
 
     $scope.showLanguageCode = function(data) {
-      $scope.productItem.descriptiveDetail.language.languageCode = data.code;
+      $scope.productItem.DescriptiveDetail.Language.LanguageCode = data.code;
     };
 
     $scope.showCountryCode = function(data) {
-      $scope.productItem.publishingDetail.countryOfPublication = data.code;
+      $scope.productItem.PublishingDetail.CountryOfPublication = data.code;
     };
 
     $scope.showAvailabilityCode = function(data) {
-      $scope.productItem.productSupply.supplyDetail.productAvailability = data.code;
+      $scope.productItem.ProductSupply.SupplyDetail.ProductAvailability = data.code;
     }
 
     $scope.showPriceTypeCode = function(data) {
-      $scope.productItem.productSupply.supplyDetail.price.priceType = data.code;
+      $scope.productItem.ProductSupply.SupplyDetail.Price.PriceType = data.code;
     }
 
     $scope.showCurrencyCode = function(data) {
-      $scope.productItem.productSupply.supplyDetail.price.currencyCode = data.code;
+      $scope.productItem.ProductSupply.SupplyDetail.Price.CurrencyCode = data.code;
     }
 
   }])
@@ -545,3 +576,41 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
   }])
 
 ;
+
+// This traverses through the JSON and downcases the first letter of the properties
+var propDowncase = function(obj, newObj) {
+
+  for(var k in obj) {
+    var kNew = k.charAt(0).toLowerCase()+k.slice(1);
+
+    if (typeof obj[k] === 'object') {
+      if(Array.isArray(obj[k])) {
+        newObj[kNew] = propDowncase(obj[k], []);
+      } else {
+        newObj[kNew] = propDowncase(obj[k], {});
+      }
+      //newObj[kNew] = obj[k];
+    } else {
+      newObj[kNew] = obj[k];
+    }
+
+  }
+
+  return newObj;
+};
+
+var fixIncomingData = function(product) {
+  // Subject should be an Array
+  if (!Array.isArray(product.DescriptiveDetail.Subject)) {
+    var subject = product.DescriptiveDetail.Subject;
+    product.DescriptiveDetail.Subject = [];
+    product.DescriptiveDetail.Subject.push(subject);
+  }
+  // If there is price, unset unpriced item
+  if (typeof product.ProductSupply.SupplyDetail.Price.PriceType != 'undefined') {
+    if (typeof product.ProductSupply.SupplyDetail.UnpricedItemType == 'object') {
+      delete product.ProductSupply.SupplyDetail.UnpricedItemType;
+    }
+  }
+  return product;
+};
