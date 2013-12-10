@@ -1,13 +1,12 @@
 <?php
-$url = "http://glassfish.spagu.metropolia.fi/jonix/products/";
-
+require('settings.php');
 // Get the params
 $recref = $_GET['rref'];
 
-$url.=$recref;
+$products_url.=$recref;
 
 // Create curl handle
-$ch = curl_init($url);
+$ch = curl_init($products_url);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/json'));
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_GET, 1);
