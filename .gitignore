@@ -2,3 +2,4 @@ logs/*
 !.gitkeep
 .~lock.*
 dev/*
+app/settings.php

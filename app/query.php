@@ -1,6 +1,5 @@
 <?php
-$url = 'http://195.148.149.175:8080/jonix/send';
-
+require('settings.php');
 // Get the JSON data
 $data = $_GET;
 $query = $_GET['query'];
@@ -14,7 +13,7 @@ switch ($schid) {
 		break;
 	// GeoNames ID
 	case 86:
-		$url = "http://api.geonames.org/searchJSON?formatted=true&name=".$query."*&maxRows=10&lang=fi&username=almalm&style=short";
+		$url = "http://api.geonames.org/searchJSON?formatted=true&name=".$query."*&maxRows=10&lang=fi&username=".$geonames_username."&style=short";
 		break;
 	default:
 		# code...

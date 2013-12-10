@@ -1,4 +1,5 @@
 <?php
+require('settings.php');
 
 /* Function definition is taken from
  * http://stackoverflow.com/a/5965940/3021745
@@ -23,8 +24,6 @@ function array_to_xml($info, $xml, $lastkey=null) {
     }
   }
 }
-
-$url = 'http://glassfish.spagu.metropolia.fi/jonix/send?key=d5c54443-530d-40c0-89f9-0bcbc8cfb298';
 
 // Get the JSON data
 $data = file_get_contents("php://input");
