@@ -440,19 +440,19 @@
         "description":"Product ID type format tooltip, ISBN-13"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_Demo_",
+        "value":"Demo",
+        "description":"Button text on the login modal"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_demo_explanation_",
+        "value":"No data is sent over to the backend",
+        "description":"Tooltip explanation for the demo button on the login modal"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_Remove_",
+        "value":"Poista",
+        "description":"Remove a product"
     },
     {
         "key":"__",

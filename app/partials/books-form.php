@@ -387,16 +387,16 @@ session_start();
                 <code>{{productItem.ProductSupply.SupplyDetail.Price.PriceCoded.PriceCodeType}}</code>
               </div>
             </div>
+              <button class="btn btn-small btn-info" ng-click="addProduct()">{{'_add_more_products_' | i18n}}</button>
 
-              [ <a href="" ng-click="removeProduct(productItem)">X</a> ]
-              <input type="text" ng-model="rref"><button ng-click="load(rref, $index)">Load</button>
+              <input type="text" ng-model="rref" style="vertical-align: initial">
+              <button class="btn btn-small btn-success" ng-click="load(rref, $index)">Load</button>
+              <button class="btn btn-small btn-danger pull-right" ng-click="removeProduct(productItem)">{{'_Remove_' | i18n}}</button>
             </div>
 
-            <button ng-click="addProduct()">{{'_add_more_products_' | i18n}}</button>
-            <br />
-
-            <button ng-click="reset()" ng-disabled="isUnchanged(mgsessage)">{{'_Reset_' | i18n}}</button>
-         	  <button ng-click="send()" ng-disabled="messageForm.$invalid">{{'_Send_' | i18n}}</button><br/>
+            <hr/>
+            <button class="btn btn-small btn-inverse" ng-click="reset()" ng-disabled="isUnchanged(mgsessage)">{{'_Reset_' | i18n}}</button>
+         	  <button class="btn btn-small btn-good" ng-click="send()" ng-disabled="messageForm.$invalid">{{'_Send_' | i18n}}</button><br/>
 
           </fieldset>
         </form>
