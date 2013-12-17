@@ -1,5 +1,8 @@
 <?php
-require('settings.php');
+session_start();
+
+$products_url = $_SESSION['products_url'];
+
 // Get the params
 $recref = $_GET['rref'];
 
@@ -34,4 +37,5 @@ if(curl_errno($ch))
 curl_close($ch);
 
 // Return some status messages
+header("Content-Type: application/json");
 echo json_encode($info);

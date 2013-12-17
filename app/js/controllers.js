@@ -43,15 +43,14 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         // try log in the user
         $http.post('sessions.php?login=1', {password: enteredText})
           .success(function(data) {
-            $log.info(data);
-            if (data.status == 'notLoggedIn') {
+            if (data.status === 'loggedIn') {
+              // Reload the page
+              location.reload();
+            } else {
               var modalFailedPass = $modal.open({
                 templateUrl: 'partials/failedLogin.html',
                 controller: 'ModalInstanceCtrl'
               });
-            } else {
-              // Reload the page
-              location.reload();
             }
           })
           .error(function(data){
@@ -66,16 +65,15 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $scope.logout = function() {
       $http.get('sessions.php?logout=1')
         .success(function(data) {
-          $log.info(data);
           // Reload the page
           location.reload();
-          $log.info('Reload');
         })
         // shouldn't happen
         .error(function(data){
           alert("Couldn't log you out!");
         });
     };
+
   }])
 
   .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
@@ -88,10 +86,24 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $scope.cancel = function() {
       $modalInstance.dismiss('cancel');
     };
+
   }])
 
   .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter', '$log',
       function($scope, $http, localize, $filter, $log) {
+
+    $scope.demo = function() {
+      $http.post('sessions.php?login=1', {password: 'nodata'})
+        .success(function(data) {
+          if (data.status === 'loggedIn') {
+            // Reload the page
+            location.reload();
+          }
+        })
+        .error(function(data){
+          alert("Couldn't log you in!");
+        });
+    }
 
     // TODO: move to configurational file
     var jonix_proxy = "./send.php";

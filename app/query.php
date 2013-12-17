@@ -1,10 +1,13 @@
 <?php
-require('settings.php');
+session_start();
+
 // Get the JSON data
 $data = $_GET;
 $query = $_GET['query'];
 $schid = $_GET['schid'];
 $url = '';
+
+$geonames_username = $_SESSION['geonames_username'];
 
 switch ($schid) {
 	// YSA
@@ -35,4 +38,5 @@ $ch_result = curl_exec($ch);
 curl_close($ch);
 
 // Return some status messages
+header("Content-Type: application/json");
 echo $ch_result;

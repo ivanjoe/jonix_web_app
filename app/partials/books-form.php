@@ -6,12 +6,18 @@ session_start();
         <button class="btn" style="position: absolute; top: 8px; right: 10px" ng-click="logout()">{{'_Logout_' | i18n}}</button>
       </div>
 
+
 <div class="row" ng-controller="MessageCtrl">
   <div class="span8">
     <div class="well">
       <form name="messageForm">
         <fieldset>
-          <legend>{{'_Header_' | i18n}}</legend>
+          <legend>
+            {{'_Header_' | i18n}}
+          <?php if ($_SESSION['title'] === 'demo'): ?>
+            <span class="pull-right">DEMO</span>
+          <?php endif; ?>
+          </legend>
 
           <div class="row">
             <div class="span7">
@@ -389,9 +395,13 @@ session_start();
             </div>
               <button class="btn btn-small btn-info" ng-click="addProduct()">{{'_add_more_products_' | i18n}}</button>
 
+            <?php if ($_SESSION['title'] != 'demo'): ?>
               <input type="text" ng-model="rref" style="vertical-align: initial">
               <button class="btn btn-small btn-success" ng-click="load(rref, $index)">Load</button>
-              <button class="btn btn-small btn-danger pull-right" ng-click="removeProduct(productItem)">{{'_Remove_' | i18n}}</button>
+            <?php endif; ?>
+              <button class="btn btn-small btn-danger pull-right" ng-click="removeProduct(productItem)" ng-show="message.product.length > 1">
+                {{'_Remove_' | i18n}}
+              </button>
             </div>
 
             <hr/>
@@ -434,7 +444,14 @@ session_start();
       </div>
       <div class="row">
         <div class="span5">
-          <alert class="alert-info" data-i18n="_Wanna_login_"></alert>
+          <alert class="alert-info" data-i18n="_Wanna_login_">as
+
+          </alert>
+        </div>
+        <div class="span3">
+          <button class="btn btn-primary" ng-click="demo()" tooltip="{{'_demo_explanation_' | i18n}}">
+            {{'_Demo_' | i18n}}
+          </button>
         </div>
       </div>
   <?php } ?>

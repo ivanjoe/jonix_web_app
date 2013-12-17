@@ -1,5 +1,6 @@
 <?php
-require('settings.php');
+session_start();
+$url = $_SESSION['url'];
 
 /* Function definition is taken from
  * http://stackoverflow.com/a/5965940/3021745
@@ -79,4 +80,5 @@ if(curl_errno($ch))
 curl_close($ch);
 
 // Return some status messages
+header("Content-Type: application/json");
 echo json_encode($info);
