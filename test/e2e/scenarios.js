@@ -23,13 +23,16 @@ describe('my app', function() {
     it('should render form when user navigates to /onix-books and logs in', function() {
       sleep(0.5);
 
-      element('button[ng-click="open()"').click();
+      if(element('button[ng-click="open()"').count() == 0) {
+        element('button[ng-click="open()"').click();
 
-      expect(element('div.modal div.modal-header h3').text()).
-        toMatch(/Kirjaudu sisään/);
+        expect(element('div.modal div.modal-header h3').text()).
+          toMatch(/Kirjaudu sisään/);
 
-      input('input.pass').enter('demo');
-      element('button[ng-click="ok()"]').click();
+        input('input.pass').enter('demo');
+
+        element('button[ng-click="ok()"]').click();
+      }
 
       expect(element('[ng-view] > [ng-controller="MessageCtrl"] > div.span8'));
     });
@@ -42,18 +45,18 @@ describe('my app', function() {
       // Fill in the form
       input('message.header.sender.senderName').enter('Kubinyi');
       input('times.sentDate').enter('2013-12-01');
-      input('productItem.recordReference').enter('1234-XYZ-4321');
-      select('productItem.notificationType').option('01');
-      select('productItem.productIdentifier.productIDType').option('02');
-      input('productItem.productIdentifier.IDValue').enter('1234567890');
-      select('productItem.descriptiveDetail.composition').option('10');
-      select('productItem.descriptiveDetail.productForm').option('BC');
-      select('productItem.descriptiveDetail.titleDetail.titleType').option('03');
-      select('productItem.descriptiveDetail.titleDetail.titleElement.titleElementLevel')
+      input('productItem.RecordReference').enter('1234-XYZ-4321');
+      select('productItem.NotificationType').option('01');
+      select('productItem.ProductIdentifier.productIDType').option('02');
+      input('productItem.ProductIdentifier.IDValue').enter('1234567890');
+      select('productItem.DescriptiveDetail.Composition').option('10');
+      select('productItem.DescriptiveDetail.ProductForm').option('BC');
+      select('productItem.DescriptiveDetail.TitleDetail.TitleType').option('03');
+      select('productItem.DescriptiveDetail.TitleDetail.TitleElement.TitleElementLevel')
         .option('03');
-      input('productItem.descriptiveDetail.titleDetail.titleElement.titleText')
+      input('productItem.DescriptiveDetail.TitleDetail.TitleElement.TitleText')
         .enter('No name');
-      select('productItem.descriptiveDetail.language.languageRole')
+      select('productItem.DescriptiveDetail.Language.LanguageRole')
         .option('01');
 
       input('language').enter('unkari'); // Typeahead
@@ -61,15 +64,14 @@ describe('my app', function() {
       element('#languageTypeahead li a').click();
       expect(input('language').val()).toBe('unkari');
 
-
-      input('subjectSchemeIdentifier').enter('YSA'); // Typeahead
+      input('SubjectSchemeIdentifier').enter('YSA'); // Typeahead
       sleep(0.3);
       element("#subjectSchemeTypeahead li a").click();
-      expect(input('subjectSchemeIdentifier').val()).toBe('YSA');
+      expect(input('SubjectSchemeIdentifier').val()).toBe('YSA');
 
-      select('productItem.publishingDetail.publisher.publishingRole')
+      select('productItem.PublishingDetail.Publisher.PublishingRole')
         .option('01');
-      input('productItem.publishingDetail.publisher.publishingName')
+      input('productItem.PublishingDetail.Publisher.PublishingName')
         .enter('Ferenc Joska');
 
       input('country').enter('Hungary'); // Typehead
@@ -77,16 +79,16 @@ describe('my app', function() {
       element("#countryTypeahead li a").click();
       expect(input('language').val()).toBe('unkari');
 
-      select('productItem.publishingDetail.publishingStatus')
+      select('productItem.PublishingDetail.PublishingStatus')
         .option('00');
-      select('productItem.publishingDetail.publishingDate.publishingDateRole')
+      select('productItem.PublishingDetail.PublishingDate.PublishingDateRole')
         .option('01');
 
-      input('productItem.publishingDetail.publishingDate.date')
+      input('productItem.PublishingDetail.PublishingDate.Date')
         .enter('2012-12-24');
-      select('productItem.productSupply.supplyDetail.supplier.supplierRole')
+      select('productItem.ProductSupply.SupplyDetail.Supplier.SupplierRole')
         .option('01');
-      input('productItem.productSupply.supplyDetail.supplier.supplierName')
+      input('productItem.ProductSupply.SupplyDetail.Supplier.SupplierName')
         .enter('Trucker');
 
       input('productAvailability').enter('Saatavana, varastotuote'); // Typehead
@@ -101,8 +103,7 @@ describe('my app', function() {
       element("#priceTypeTypeahead li a").click();
       expect(input('priceType').val()).toBe('Fixed retail price excluding tax');
 
-
-      input('productItem.productSupply.supplyDetail.price.priceAmount')
+      input('productItem.ProductSupply.SupplyDetail.Price.PriceAmount')
         .enter('123');
 
       input('currencyCode').enter('Euro');
@@ -110,8 +111,7 @@ describe('my app', function() {
       element("#currencyTypeahead li a").click();
       expect(input('currencyCode').val()).toBe('Euro');
 
-
-      input('productItem.productSupply.supplyDetail.price.priceCoded.priceCode')
+      input('productItem.ProductSupply.SupplyDetail.Price.PriceCoded.PriceCode')
         .enter('B');
 
       pause();
@@ -135,13 +135,22 @@ describe('my app', function() {
 
     describe('edit product', function() {
       beforeEach(function() {
-        browser().navigateTo('#/products/123456789/edit');
+        element('button[ng-click="open()"').click();
+
+        expect(element('div.modal div.modal-header h3').text()).
+          toMatch(/Kirjaudu sisään/);
+
+        input('input.pass').enter('demo');
+
+        element('button[ng-click="ok()"]').click();
       });
 
-      it('should render edit product when user navigates to /products/123456789/edit',
+      it('should render edit product when user navigates to /products/testi-123/edit',
        function () {
+        browser().navigateTo('#/products/testi-123/edit');
+        sleep(0.5);
         expect(element('h3:first').text()).
-          toMatch(/Edit 123456789 product/);
+          toMatch(/Edit testi-123 product/);
        });
 
     })

@@ -292,7 +292,7 @@ session_start();
                 <div ng-controller="DatepickerCtrl">
                   <div class="form-horizontal">
                       <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
-                       ng-model="productItem.PublishingDetail.PublishingDate.date" is-open="opened" min="minDate" max="'2015-06-22'"
+                       ng-model="productItem.PublishingDetail.PublishingDate.Date" is-open="opened" min="minDate" max="'2015-06-22'"
                        datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                       <button class="btn btn-small btn-danger" ng-click="clear2()">{{'_Clear_' | i18n}}</button>
                   </div>

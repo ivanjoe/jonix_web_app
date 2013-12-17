@@ -422,7 +422,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
      };
 
      $scope.clear2 = function() {
-      $scope.productItem.PublishingDetail.PublishingDate.date = null;
+      $scope.productItem.PublishingDetail.PublishingDate.Date = null;
      }
 
      $scope.open = function() {
