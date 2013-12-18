@@ -26,3 +26,9 @@ Everything else should be omitted.
 
 Angular apps are really just a bunch of static html, css and js files that just need to be hosted
 somewhere, where they can be accessed by browsers.
+
+## Screenshot and link to the demo
+
+![The ONIX form](app/assets/sources/jOnix_WebApp.png)
+
+[jONIX WebApp on Ereading Metropolia](http://ereading.metropolia.fi/jonix_web/)
