@@ -11,6 +11,7 @@ if (isset($_GET['login'])) {
 
 	if ($data->password == 'demo') {
 		$_SESSION['demo'] = md5(date("Ymd").'UserLoggedIn');
+		$_SESSION['last_activity'] = time();
 		// Store in the session the proxies
 		$_SESSION['url'] 				= $url;	// The backend's address
 		$_SESSION['geonames_username'] 	= $geonames_username; // The username for Geonames
@@ -20,6 +21,7 @@ if (isset($_GET['login'])) {
 		$response = json_encode(array('status' => 'loggedIn', 'resp' => 'User is logged in! Yeah!'));
 	} elseif ($data->password == 'nodata') {
 		$_SESSION['demo'] = md5(date("Ymd").'UserLoggedIn');
+		$_SESSION['last_activity'] = time();
 		// Store in the session the proxies
 		$_SESSION['url']				= '';
 		$_SESSION['geonames_username']	= $geonames_username;
@@ -31,6 +33,7 @@ if (isset($_GET['login'])) {
 		$response = json_encode(array('status' => 'notLoggedIn', 'resp' => 'Wrong password! Oh, nay!'));
 	}
 } elseif (isset($_GET['logout'])) {
+	session_unset();
 	session_destroy();
     $response = json_encode(array('status'=>'LoggedOut'));
 }

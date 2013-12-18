@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1200)) {
+  session_unset();
+  session_destroy();
+}
+$_SESSION['last_activity'] = time();
+?>
 <!doctype html>
 <html lang="en" ng-app="myApp">
 <head>
