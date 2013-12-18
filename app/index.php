@@ -22,8 +22,6 @@ $_SESSION['last_activity'] = time();
   <script src="js/xml2json.js"></script>
   <link rel="stylesheet" href="css/app.css"/>
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
-  <!-- <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/journal/bootstrap.min.css" rel="stylesheet"/> -->
 
 </head>
 <body ng-controller="MainCtrl">
@@ -35,13 +33,6 @@ $_SESSION['last_activity'] = time();
         <ul class="nav">
           <li ng-class="getClass('/onix-books')"><a href="#/onix-books">ONIX for books</a></li>
           <li ng-class="getClass('/products')"><a href="#/products">Products</a></li>
-          <!-- <li><a href="#/view1">view1</a></li>
-          <li><a href="#/view2">view2</a></li>
-          <li>
-            <form class="navbar-form navbar-left">
-              <input type="text" class="form-control" placeholder="Search" ng-model="query">
-            </form>
-          </li> -->
           <li ng-class="getClass('/about')"><a href="#/about">About</a></li>
         </ul>
       </div>
