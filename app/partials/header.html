@@ -16,12 +16,7 @@
             id="senderIDValue" name="senderIDValue" placeholder="{{'_ID_value_' | i18n}}"
             maxlength=30 ng-pattern="senderIDValuePattern"
             tooltip="{{('_IDType_' + message.header.sender.senderIdentifier.senderIDType + '_') | i18n}}"
-            tooltip-trigger="focus" tooltip-placement="right" with-error="false"/>
-        <p>
-            <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern"
-                data-i18n="_Tunnus_should_be_">
-            </small>
-        </p>
+            tooltip-trigger="focus" tooltip-placement="right" with-error="_Tunnus_should_be_"/>
     </div>
 </div>
 
@@ -30,12 +25,7 @@
     <div class="span5">
         <input type="text" ng-model="message.header.sender.senderName" class="form-control"
             name="senderName" id="senderName" placeholder="{{'_senderName_' | i18n}}"
-            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" />
-        <p>
-            <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
-                {{'_just_letters_' | i18n}}
-            </small>
-        </p>
+            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" with-error="_just_letters_"/>
     </div>
 </div>
 
@@ -58,12 +48,7 @@
             class="form-control" name="addresseeIDValue" placeholder="{{'_ID_value_' | i18n}}"
             maxlength=30 ng-pattern="addresseeIDValuePattern" id="addresseeIDValue"
             tooltip="{{('_IDType_' + message.header.addressee.addresseeIdentifier.addresseeIDType + '_') | i18n}}"
-            tooltip-trigger="focus" tooltip-placement="right" />
-        <p>
-            <small class="text-error" ng-show="messageForm.addresseeIDValue.$error.pattern">
-                {{'_Tunnus_should_be_' | i18n}}
-            </small>
-        </p>
+            tooltip-trigger="focus" tooltip-placement="right" with-error="_Tunnus_should_be_" />
     </div>
 </div>
 
@@ -72,12 +57,7 @@
     <div class="span5">
         <input type="text" ng-model="message.header.addresseeName" class="form-control"
             name="addresseeName" placeholder="{{'_addressee_name_' | i18n }}"
-            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" />
-        <p>
-            <small class="text-error" ng-show="messageForm.addresseeName.$error.pattern">
-                {{'_just_letters_' | i18n}}
-            </small>
-        </p>
+            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" with-error="_just_letters_" />
     </div>
 </div>
 

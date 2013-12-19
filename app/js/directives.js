@@ -10,6 +10,18 @@ angular.module('myApp.directives', []).
     };
   }]).
 
+  directive('withError', function() {
+    return {
+      compile: function(element, attrs) {
+        var formName = element[0].form.name;
+        var errorTxt = '<p>' +
+          '<small class="text-error" ng-show="'+formName+'.'+attrs.name+'.$error.pattern" ' +
+          'data-i18n="'+attrs.withError+'"></small></p>';
+        element.after(errorTxt);
+      }
+    }
+  }).
+
   directive('onix', ['message', function($scope, $route, message) {
   	return {
   		restrict:"E",
