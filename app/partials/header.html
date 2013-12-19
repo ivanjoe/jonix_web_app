@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="span7">
+        <h4>{{'_sender_' | i18n }}</h4>
+    </div>
+</div>
+
+<div class="row">
+    <label for="senderIdType" class="span2">{{'_sender_id_value_' | i18n}}</label>
+    <div class="span5">
+        <select id="senderIdType" ng-model="message.header.sender.senderIdentifier.senderIDType"
+            ng-options="key as value for (key, value) in nameCodeTypeList"
+            ng-init="message.header.sender.senderIdentifier.senderIDType='15'" required
+            id="senderIDType">
+        </select>
+        <input type="text" ng-model="message.header.sender.senderIdentifier.IDValue" class="form-control"
+            id="senderIDValue" name="senderIDValue" placeholder="{{'_ID_value_' | i18n}}"
+            maxlength=30 ng-pattern="senderIDValuePattern"
+            tooltip="{{('_IDType_' + message.header.sender.senderIdentifier.senderIDType + '_') | i18n}}"
+            tooltip-trigger="focus" tooltip-placement="right" with-error="false"/>
+        <p>
+            <small class="text-error" ng-show="messageForm.senderIDValue.$error.pattern"
+                data-i18n="_Tunnus_should_be_">
+            </small>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <label for="sender-name" class="span2">{{'_senderName_' | i18n}}</label>
+    <div class="span5">
+        <input type="text" ng-model="message.header.sender.senderName" class="form-control"
+            name="senderName" id="senderName" placeholder="{{'_senderName_' | i18n}}"
+            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" />
+        <p>
+            <small class="text-error" ng-show="messageForm.senderName.$error.pattern">
+                {{'_just_letters_' | i18n}}
+            </small>
+        </p>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="span7">
+        <h4>{{'_addressee_' | i18n }}</h4>
+    </div>
+</div>
+
+<div class="row">
+    <label for="addresseeIDType" class="span2">{{'_addressee_id_' | i18n }}</label>
+    <div class="span5">
+        <select id="addresseeIDType" ng-model="message.header.addressee.addresseeIdentifier.addresseeIDType"
+            ng-options="key as value for (key, value) in nameCodeTypeList"
+            ng-init="message.header.addressee.addresseeIdentifier.addresseeIDType='15'">
+        </select>
+        <input type="text" ng-model="message.header.addressee.addresseeIdentifier.IDValue"
+            class="form-control" name="addresseeIDValue" placeholder="{{'_ID_value_' | i18n}}"
+            maxlength=30 ng-pattern="addresseeIDValuePattern" id="addresseeIDValue"
+            tooltip="{{('_IDType_' + message.header.addressee.addresseeIdentifier.addresseeIDType + '_') | i18n}}"
+            tooltip-trigger="focus" tooltip-placement="right" />
+        <p>
+            <small class="text-error" ng-show="messageForm.addresseeIDValue.$error.pattern">
+                {{'_Tunnus_should_be_' | i18n}}
+            </small>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <label for="addresseeName" class="span2">{{'_addressee_name_' | i18n }}</label>
+    <div class="span5">
+        <input type="text" ng-model="message.header.addresseeName" class="form-control"
+            name="addresseeName" placeholder="{{'_addressee_name_' | i18n }}"
+            maxlength=30 ng-pattern="/^([A-Za-zÖöÄäÅå' ]{0,30})$/" />
+        <p>
+            <small class="text-error" ng-show="messageForm.addresseeName.$error.pattern">
+                {{'_just_letters_' | i18n}}
+            </small>
+        </p>
+    </div>
+</div>
+
+<hr />
+
+<div class="row" ng-init="setupDates()">
+    <label for="date-picker" class="span2">{{'_Date_' | i18n}}</label>
+    <div class="span5">
+
+        <div ng-controller="DatepickerCtrl">
+            <div class="form-horizontal">
+                <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
+                    ng-model="times.sentDate" is-open="opened" min="minDate"
+                    max="'2015-06-22'" datepicker-options="dateOptions"
+                    date-disabled="disabled(date, mode)" ng-required="true"
+                    ng-change="updateSentDateTime();"/>
+                <button class="btn btn-small btn-inverse" ng-click="today()">{{'_Today_' | i18n}}</button>
+                <button class="btn btn-small btn-danger" ng-click="clear()">{{'_Clear_' | i18n}}</button>
+                <code>{{message.header.sentDateTime }}</code>
+            </div>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="showTime" ng-init="showTime=false"
+                    ng-change="updateSentDateTime()" />{{'_Select_time_' | i18n}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="showTime">
+    <label for="time" class="span2">{{'_Time_' | i18n}}</label>
+    <div class="span5">
+        <div ng-controller="TimepickerCtrl" class="ng-scope">
+            <div ng-model="times.sentTime" ng-change="updateSentDateTime();"
+                class="well well-small" style="display:inline-block;">
+                <timepicker hour-step="1" minute-step="1" show-meridian="false"></timepicker>
+            </div>
+        </div>
+    </div>
+</div>

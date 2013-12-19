@@ -440,9 +440,9 @@
         "description":"Remove a product"
     },
     {
-        "key":"__",
-        "value":"",
-        "description":""
+        "key":"_Tunnus_should_be_",
+        "value":"The ID should follow the given pattern",
+        "description":"The ID should follow the given pattern"
     },
     {
         "key":"__",
