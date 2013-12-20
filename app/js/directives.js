@@ -13,6 +13,7 @@ angular.module('myApp.directives', []).
   directive('withError', function() {
     return {
       compile: function(element, attrs) {
+        //console.log(element[0].form);
         var formName = element[0].form.name;
         var errorTxt = '<p>' +
           '<small class="text-error" ng-show="'+formName+'.'+attrs.name+'.$error.pattern" ' +
