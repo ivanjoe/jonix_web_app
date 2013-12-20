@@ -23,8 +23,6 @@ session_start();
           <div ng-include="'partials/header.html'">
           </div>
 
-
-
       	  <div ng-repeat="productItem in message.product" ng-form="productForm">
       	  	<legend>{{'_Product_' | i18n}}</legend>
 
@@ -175,14 +173,13 @@ session_start();
                 </select>
                 <code>{{ productItem.PublishingDetail.PublishingDate.PublishingDateRole }}</code>
 
-                <div ng-controller="DatepickerCtrl">
-                  <div class="form-horizontal">
-                      <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
-                       ng-model="productItem.PublishingDetail.PublishingDate.Date" is-open="opened" min="minDate" max="'2015-06-22'"
-                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                      <button class="btn btn-small btn-danger" ng-click="clear2()">{{'_Clear_' | i18n}}</button>
-                  </div>
+                <div class="form-horizontal">
+                    <input type="text" id="date-picker" class="input-small" datepicker-popup="yyyyMMdd"
+                     ng-model="productItem.PublishingDetail.PublishingDate.Date" is-open="opened" min="minDate" max="'2015-06-22'"
+                     datepicker-options="{'starting-day': '1'}" date-disabled="disabled(date, mode)"
+                     ng-required="true" btn-today/>
                 </div>
+
               </div>
             </div>
 

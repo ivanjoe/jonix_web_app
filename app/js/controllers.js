@@ -24,12 +24,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
   }])
 
-  .controller('MyCtrl2', [function() {
-
-  }])
-
-  .controller('ModalCtrl', ['$scope', '$modal', '$log', '$http',
-      function($scope, $modal, $log, $http) {
+  .controller('ModalCtrl', ['$scope', '$modal', '$http',
+      function($scope, $modal, $http) {
     $scope.password = '';
 
     $scope.open = function () {
@@ -58,7 +54,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
           });
         $scope.password = enteredText;
       }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
+        console.log('Modal dismissed at: ' + new Date());
       });
     };
 
@@ -89,8 +85,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
 
   }])
 
-  .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter', '$log',
-      function($scope, $http, localize, $filter, $log) {
+  .controller('MessageCtrl', ['$scope','$http', 'localize', '$filter',
+      function($scope, $http, localize, $filter) {
 
     $scope.demo = function() {
       $http.post('sessions.php?login=1', {password: 'nodata'})
@@ -114,9 +110,12 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       lang = 'default';
     }
 
+    var now = new Date();
+
     $scope.times = {
-      sentDate: {},
-      sentTime: {}
+      sentDate: now,
+      sentTime: now,
+      showTime: false
     };
 
     $scope.master = {
@@ -130,6 +129,8 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
                 SubjectHeadingText:''
               }
             ]
+          },
+          PublishingDetail: {
           }
         }
       ]
@@ -258,7 +259,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
         $scope.message.header.sentTime = '';
       }
       // When the time selector is shown, update SentDateTime
-      if ($scope.showTime) {
+      if ($scope.times.showTime) {
         var sentDate = $filter('date')($scope.times.sentDate, 'yyyyMMdd');
         var sentTime = $filter('date')($scope.times.sentTime, 'HHmm');
       } else {
@@ -306,7 +307,7 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
     $scope.load = function (id, index) {
       $http.get('./receive.php?rref='+id).
         success(function(data) {
-          $log.log(data.result);
+          console.log(data.result);
           //TODO: fix up incoming data
           // What should be arrays, what should be empty strings...
           fixIncomingData(data.result);
@@ -319,12 +320,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
               $scope.priceType = k;
             }
           }
-          // Product Availability
-          // TODO: lists should come from a service
-          /*$scope.productAvailabilityList = data.list65;
-          $scope.productLanguageCodeList = data.list74;
-          $scope.countryList             = data.list91;
-          $scope.currencies              = data.list96;*/
 
           for (var k in $scope.lists.list65) {
             if ($scope.lists.list65[k] == data.result.ProductSupply.SupplyDetail.ProductAvailability) {
@@ -407,38 +402,6 @@ angular.module('myApp.controllers', ['ui.bootstrap']).
       $scope.productItem.DescriptiveDetail.Subject.splice(i, 1);
     }
 
-  }])
-
-  .controller('DatepickerCtrl', ['$scope', '$timeout', function($scope, $timeout) {
-     $scope.today = function() {
-        $scope.times.sentDate = new Date();
-     };
-     $scope.today();
-
-     $scope.showWeeks = false;
-
-     $scope.clear = function () {
-        $scope.times.sentDate = null;
-     };
-
-     $scope.clear2 = function() {
-      $scope.productItem.PublishingDetail.PublishingDate.Date = null;
-     }
-
-     $scope.open = function() {
-        $timeout(function() {
-          $scope.opened = true;
-        });
-     };
-
-     $scope.dateOptions = {
-        'year-format': "'yy'",
-        'starting-day': 1
-     };
-  }])
-
-  .controller('TimepickerCtrl', ['$scope', function($scope) {
-    $scope.times.sentTime = new Date();
   }])
 
   .controller('TypeaheadCtrl', ['$scope','$http','localize',

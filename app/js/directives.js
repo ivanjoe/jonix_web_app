@@ -22,6 +22,18 @@ angular.module('myApp.directives', []).
     }
   }).
 
+  directive('btnToday', function() {
+    return {
+      compile: function(element, attrs) {
+        var td = new Date();
+        td = td.getTime();
+        var btn = ' <button class="btn btn-small btn-inverse" '+
+          ' ng-click="'+attrs.ngModel+'='+td+'">{{\'_Today_\' | i18n}}</button>';
+        element.after(btn);
+      }
+    }
+  }).
+
   directive('onix', ['message', function($scope, $route, message) {
   	return {
   		restrict:"E",
